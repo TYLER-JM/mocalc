@@ -13,7 +13,6 @@ function Root() {
         </ul>
       </nav>
       <main>
-        Main Content, the outlet will go here
         <Outlet />
       </main>
       <footer>footer</footer>
