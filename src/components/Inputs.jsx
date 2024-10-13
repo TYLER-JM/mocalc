@@ -1,6 +1,8 @@
 //TODO: define list of inputs needed in order make calculation
 
-export default function Inputs() {
+export default function Inputs({
+  setSchedule
+}) {
   return (
     <div>
       <label htmlFor="mortgageAmount">
@@ -17,7 +19,7 @@ export default function Inputs() {
       </label>
       <label htmlFor="amortizationPeriod">
         Payment Schedule
-        <select name="paymentSchedule" >
+        <select name="paymentSchedule" onChange={(e) => setSchedule(e.target.value)}>
           <option value="1">Accelerated weekly</option>
           <option value="2">Weekly</option>
           <option value="3">Accelerated Bi-weekly</option>
