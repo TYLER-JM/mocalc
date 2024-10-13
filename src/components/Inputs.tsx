@@ -1,8 +1,31 @@
-//TODO: define list of inputs needed in order make calculation
+import React, { useState } from "react"
+import { getEffectiveRate, toPercentage } from "../utils/calculators"
+
+interface InputProps {
+  setSchedule: (val: string) => number,
+  setRate: (val: number) => number,
+  rate: number
+}
 
 export default function Inputs({
-  setSchedule
-}) {
+  setSchedule,
+  setRate,
+  rate
+}: InputProps) {
+
+  const [interestRate, setInterestRate] = useState<string>('')
+
+  function handleInerestRateInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    setInterestRate(e.target.value)
+
+    if (isNaN(parseFloat(e.target.value))) {
+      console.log('enter a number')
+      return
+    }
+
+    setRate(parseInt(e.target.value) / 100)
+  }
+
   return (
     <div>
       <label htmlFor="mortgageAmount">
@@ -11,7 +34,8 @@ export default function Inputs({
       </label>
       <label htmlFor="interestRate">
         Interest Rate
-        <input type="text" name="interestRate" placeholder="5.5% for example"/>
+        <input value={interestRate} type="text" name="interestRate" placeholder="5.5% for example" onChange={handleInerestRateInputChange}/>
+        <small>Effective Rate: {toPercentage(getEffectiveRate(rate))}</small>
       </label>
       <label htmlFor="amortizationPeriod">
         Amortization Period (years)
