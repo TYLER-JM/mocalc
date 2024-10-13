@@ -1,4 +1,4 @@
-import { getEffectiveRate, toPercentage } from "../utils/calculators"
+import { getEffectiveRate, getRateByFrequency, toPercentage } from "../utils/calculators"
 
 interface OutputProps {
   schedule: number,
@@ -10,13 +10,14 @@ export default function Output({
   rate
 }: OutputProps) {
 
-  const effectiveRate = toPercentage(getEffectiveRate(rate))
+  const effectiveRate = getEffectiveRate(rate)
+  const monthlyRate = getRateByFrequency(effectiveRate, 12)
   return (
     <div>
       <ul>
         <li>Payment amount: {schedule}</li>
-        <li>Effective Rate: {effectiveRate}</li>
-        <li>principal portion of payment</li>
+        <li>Effective Rate: {toPercentage(effectiveRate)}</li>
+        <li>Monthly Rate: {toPercentage(monthlyRate, 4)}</li>
       </ul>
     </div>
   )

@@ -1,29 +1,50 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { getEffectiveRate, toPercentage } from "../utils/calculators"
+import { debounce } from "../utils/debounce"
 
 interface InputProps {
   setSchedule: (val: string) => number,
   setRate: (val: number) => number,
-  rate: number
 }
 
 export default function Inputs({
   setSchedule,
-  setRate,
-  rate
+  setRate
 }: InputProps) {
 
   const [interestRate, setInterestRate] = useState<string>('')
+  const [invalidInterest, setInvalidInterest] = useState<boolean | undefined>(undefined)
+  const [userFeedback, setUserFeedback] = useState<string>('')
 
-  function handleInerestRateInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setInterestRate(e.target.value)
-
-    if (isNaN(parseFloat(e.target.value))) {
-      console.log('enter a number')
+  const debouncedRateUpdate = useCallback(debounce((val: string) => {
+    if (!val) {
+      setUserFeedback('')
+      setInvalidInterest(undefined)
       return
     }
 
-    setRate(parseInt(e.target.value) / 100)
+    if (isNaN(parseFloat(val))) {
+      setInvalidInterest(true)
+      setUserFeedback('Please enter a valid percentage')
+      return
+    }
+
+/*
+  calculating the Effective rate is not required here.
+  I've printed the value here for testing purposes only.
+  -- I really only need to use setRate() to update 'rate' here
+*/
+    const r = parseFloat(val) / 100
+    setRate(r)
+    const effectiveRate = toPercentage(getEffectiveRate(r))
+    setInvalidInterest(false)
+    setUserFeedback(`Effective Rate: ${effectiveRate}`)
+  }, 400), [])
+
+  function handleInerestRateInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    const val = e.target.value
+    setInterestRate(val) 
+    debouncedRateUpdate(val)
   }
 
   return (
@@ -34,8 +55,15 @@ export default function Inputs({
       </label>
       <label htmlFor="interestRate">
         Interest Rate
-        <input value={interestRate} type="text" name="interestRate" placeholder="5.5% for example" onChange={handleInerestRateInputChange}/>
-        <small>Effective Rate: {toPercentage(getEffectiveRate(rate))}</small>
+        <input
+          value={interestRate}
+          aria-invalid={invalidInterest}
+          type="text"
+          name="interestRate"
+          placeholder="5.5% for example"
+          onChange={handleInerestRateInputChange}
+        />
+        <small>{userFeedback}</small>
       </label>
       <label htmlFor="amortizationPeriod">
         Amortization Period (years)
