@@ -5,16 +5,22 @@ import { debounce } from "../utils/debounce"
 interface InputProps {
   setSchedule: (val: string) => number,
   setRate: (val: number) => number,
+  setPrincipal: (val: number) => number
 }
 
 export default function Inputs({
   setSchedule,
-  setRate
+  setRate,
+  setPrincipal
 }: InputProps) {
 
   const [interestRate, setInterestRate] = useState<string>('')
   const [invalidInterest, setInvalidInterest] = useState<boolean | undefined>(undefined)
   const [userFeedback, setUserFeedback] = useState<string>('')
+
+  const [mortgageAmount, setMortgageAmount] = useState<string>('')
+  const [invalidMortgageAmount, setInvalidMortgageAmount] = useState<boolean | undefined>(undefined)
+  const [mortgageAmountFeedback, setMortgageAmountFeedback] = useState<string>('')
 
   const debouncedRateUpdate = useCallback(debounce((val: string) => {
     if (!val) {
@@ -29,11 +35,11 @@ export default function Inputs({
       return
     }
 
-/*
-  calculating the Effective rate is not required here.
-  I've printed the value here for testing purposes only.
-  -- I really only need to use setRate() to update 'rate' here
-*/
+    /*
+      calculating the Effective rate is not required here.
+      I've printed the value here for testing purposes only.
+      -- I really only need to use setRate() to update 'rate' here
+    */
     const r = parseFloat(val) / 100
     setRate(r)
     const effectiveRate = toPercentage(getEffectiveRate(r))
@@ -41,17 +47,48 @@ export default function Inputs({
     setUserFeedback(`Effective Rate: ${effectiveRate}`)
   }, 400), [])
 
-  function handleInerestRateInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  const debouncedPrincipalUpdate = useCallback(debounce((val: string) => {
+    if (!val) {
+      setMortgageAmountFeedback('')
+      setInvalidMortgageAmount(undefined)
+      return
+    }
+
+    const p = parseInt(val)
+    if (isNaN(p)) {
+      setMortgageAmountFeedback('Please Enter a valid number')
+      setInvalidMortgageAmount(true)
+      return
+    }
+
+    setPrincipal(p)
+    setInvalidMortgageAmount(false)
+  }, 400), [])
+
+  function handleInterestRateInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const val = e.target.value
     setInterestRate(val) 
     debouncedRateUpdate(val)
+  }
+
+  function handleMortgageAmountInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    const val = e.target.value
+    setMortgageAmount(val)
+    debouncedPrincipalUpdate(val)
   }
 
   return (
     <div>
       <label htmlFor="mortgageAmount">
         Mortgage Amount
-        <input type="text" name="mortgageAmount" placeholder="1 billion dollars!"/>
+        <input
+          type="text"
+          name="mortgageAmount"
+          placeholder="1 billion dollars!"
+          onChange={handleMortgageAmountInputChange}
+          aria-invalid={invalidMortgageAmount}
+        />
+        <small>{mortgageAmountFeedback}</small>
       </label>
       <label htmlFor="interestRate">
         Interest Rate
@@ -61,7 +98,7 @@ export default function Inputs({
           type="text"
           name="interestRate"
           placeholder="5.5% for example"
-          onChange={handleInerestRateInputChange}
+          onChange={handleInterestRateInputChange}
         />
         <small>{userFeedback}</small>
       </label>
