@@ -3,17 +3,19 @@ import { getEffectiveRate, toPercentage } from "../utils/calculators"
 import { debounce } from "../utils/debounce"
 
 interface InputProps {
-  setSchedule: (val: string) => number,
   setRate: (val: number) => number,
   setPrincipal: (val: number) => number,
-  setAmortization: (val: number) => number
+  setAmortization: (val: number) => number,
+  setPaymentType: (val: string) => void,
+  paymentType: string
 }
 
 export default function Inputs({
-  setSchedule,
   setRate,
   setPrincipal,
-  setAmortization
+  setAmortization,
+  setPaymentType,
+  paymentType
 }: InputProps) {
 
   const [interestRate, setInterestRate] = useState<string>('')
@@ -148,13 +150,13 @@ export default function Inputs({
       </label>
       <label htmlFor="amortizationPeriod">
         Payment Schedule
-        <select name="paymentSchedule" onChange={(e) => setSchedule(e.target.value)}>
-          <option value="1">Accelerated weekly</option>
-          <option value="2">Weekly</option>
-          <option value="3">Accelerated Bi-weekly</option>
-          <option value="4">Bi-weekly (every 2-weeks)</option>
-          <option value="5">Semi-monthly (24 payments a year)</option>
-          <option value="6">Monthly</option>
+        <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value)}>
+          <option value="accelerated_weekly">Accelerated weekly</option>
+          <option value="weekly">Weekly</option>
+          <option value="accelerated_biweekly">Accelerated Bi-weekly</option>
+          <option value="biweekly">Bi-weekly (every 2-weeks)</option>
+          <option value="semimonthly">Semi-monthly (24 payments a year)</option>
+          <option value="monthly">Monthly</option>
         </select>
       </label>
     </div>

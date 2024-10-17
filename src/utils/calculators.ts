@@ -5,6 +5,7 @@ interface PaymentCalculationOptions {
   amortization: number,
   rate: number
 }
+export type PaymentTypes = 'monthly' | 'semimonthly' | 'biweekly' | 'weekly' | 'accelerated_biweekly' | 'accelerated_weekly'
 
 // compoundFreq: Canadian (fixed rate) mortgages compounded semi-annually
 export function getEffectiveRate(rate: number, compoundFreq = 2): number {
@@ -29,6 +30,29 @@ export function toDollars(num: number, decimalPlaces = 2): string {
 // it expects the amortization in months (25 years = 300 months)
 export function getMonthlyPayment(values: PaymentCalculationOptions) {
   const denominator = 1 - (1 / (1 + values.rate) ** values.amortization)
-  const amount = (values.rate * values.principal) / denominator
-  return accounting.formatMoney(amount, {precision: 2})
+  return (values.rate * values.principal) / denominator
+}
+
+export function getPaymentByType(monthlyPayment: number, type: PaymentTypes) {
+  let p;
+  switch (type) {
+    case 'semimonthly':
+    case 'accelerated_biweekly':
+      p = accounting.formatMoney(monthlyPayment / 2, {precision: 2})
+      break;
+    case 'biweekly':
+      p = accounting.formatMoney((monthlyPayment * 12) / 26, {precision: 2})
+      break;
+    case 'weekly':
+      p = accounting.formatMoney((monthlyPayment * 12) / 52, {precision: 2})
+      break;
+    case 'accelerated_weekly':
+      p = accounting.formatMoney(monthlyPayment / 4, {precision: 2})
+      break;
+    default:
+      p = monthlyPayment
+      break;
+  }
+
+  return p
 }
