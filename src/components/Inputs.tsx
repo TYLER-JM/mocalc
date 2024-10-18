@@ -4,27 +4,19 @@ import { debounce } from "../utils/debounce"
 
 interface InputProps {
   setRate: (val: number) => number,
-  setPrincipal: (val: number) => number,
   setAmortization: (val: number) => number,
   setPaymentType: (val: string) => void,
-  paymentType: string
 }
 
 export default function Inputs({
   setRate,
-  setPrincipal,
   setAmortization,
   setPaymentType,
-  paymentType
 }: InputProps) {
 
   const [interestRate, setInterestRate] = useState<string>('')
   const [invalidInterest, setInvalidInterest] = useState<boolean | undefined>(undefined)
   const [userFeedback, setUserFeedback] = useState<string>('')
-
-  const [mortgageAmount, setMortgageAmount] = useState<string>('')
-  const [invalidMortgageAmount, setInvalidMortgageAmount] = useState<boolean | undefined>(undefined)
-  const [mortgageAmountFeedback, setMortgageAmountFeedback] = useState<string>('')
 
   const [amortizationPeriod, setAmortizationPeriod] = useState<string>('')
   const [invalidAmortizationPeriod, setInvalidAmortizationPeriod] = useState<boolean | undefined>(undefined)
@@ -55,24 +47,6 @@ export default function Inputs({
     setUserFeedback(`Effective Rate: ${effectiveRate}`)
   }, 400), [])
 
-  const debouncedPrincipalUpdate = useCallback(debounce((val: string) => {
-    if (!val) {
-      setMortgageAmountFeedback('')
-      setInvalidMortgageAmount(undefined)
-      return
-    }
-
-    const p = parseInt(val)
-    if (isNaN(p)) {
-      setMortgageAmountFeedback('Please Enter a valid number')
-      setInvalidMortgageAmount(true)
-      return
-    }
-
-    setPrincipal(p)
-    setInvalidMortgageAmount(false)
-  }, 400), [])
-
   const debouncedAmortizationUpdate = useCallback(debounce((val: string) => {
     if (!val) {
       setInvalidAmortizationPeriod(undefined)
@@ -98,12 +72,6 @@ export default function Inputs({
     debouncedRateUpdate(val)
   }
 
-  function handleMortgageAmountInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    const val = e.target.value
-    setMortgageAmount(val)
-    debouncedPrincipalUpdate(val)
-  }
-
   function handleAmortizationPeriodInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const val = e.target.value
     setAmortizationPeriod(val)
@@ -112,18 +80,6 @@ export default function Inputs({
 
   return (
     <div>
-      <label htmlFor="mortgageAmount">
-        Mortgage Amount
-        <input
-          type="text"
-          name="mortgageAmount"
-          placeholder="1 billion dollars!"
-          value={mortgageAmount}
-          onChange={handleMortgageAmountInputChange}
-          aria-invalid={invalidMortgageAmount}
-        />
-        <small>{mortgageAmountFeedback}</small>
-      </label>
       <label htmlFor="interestRate">
         Interest Rate
         <input

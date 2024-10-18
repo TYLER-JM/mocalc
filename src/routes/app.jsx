@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Inputs from "../components/Inputs";
+import Input from "../components/Input";
 import Output from "../components/Output";
 
 export default function App() {
@@ -12,10 +13,15 @@ export default function App() {
     <section>
       <Inputs 
         setRate={setRate}
-        setPrincipal={setPrincipal}
         setAmortization={setAmortization}
-        paymentType={paymentType}
         setPaymentType={setPaymentType}
+      />
+      <hr/>
+      <Input 
+        placeholder="total amount you'll be borrowing"
+        setState={setPrincipal}
+        label="Mortgage Amount"
+        inputName="mortgageAmount"
       />
       <Output
         rate={rate}
