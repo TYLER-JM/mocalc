@@ -1,11 +1,11 @@
 import accounting from "accounting"
+import { PaymentSchedules } from "../types/StringTypes"
 
 interface PaymentCalculationOptions {
   principal: number,
   amortization: number,
   rate: number
 }
-export type PaymentTypes = 'monthly' | 'semimonthly' | 'biweekly' | 'weekly' | 'accelerated_biweekly' | 'accelerated_weekly'
 
 // compoundFreq: Canadian (fixed rate) mortgages compounded semi-annually
 export function getEffectiveRate(rate: number, compoundFreq = 2): number {
@@ -33,7 +33,7 @@ export function getMonthlyPayment(values: PaymentCalculationOptions) {
   return (values.rate * values.principal) / denominator
 }
 
-export function getPaymentByType(monthlyPayment: number, type: PaymentTypes) {
+export function getPaymentByType(monthlyPayment: number, type: PaymentSchedules) {
   let p;
   switch (type) {
     case 'semimonthly':

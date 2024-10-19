@@ -1,12 +1,13 @@
 import accounting from "accounting"
-import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, PaymentTypes, toDollars, toPercentage } from "../utils/calculators"
-import { OUTPUT_VALUE_STATUS, OutputValues } from "../types/OutputTypes"
+import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
+import { OutputValues } from "../types/OutputTypes"
+import { PaymentSchedules, STATUSES } from "../types/StringTypes"
 
 interface OutputProps {
   rate: number,
   principal: number,
   amortization: number,
-  paymentType: PaymentTypes
+  paymentType: PaymentSchedules
 }
 
 export default function Output({
@@ -47,10 +48,10 @@ export default function Output({
   
   return (
     <div>
-      {output.status === OUTPUT_VALUE_STATUS.incomplete &&
+      {output.status === STATUSES.incomplete &&
         <p>pending...</p>
       }
-      {output.status === OUTPUT_VALUE_STATUS.complete && 
+      {output.status === STATUSES.complete && 
         <ul>
           <li>Principal: {output.principal}</li>
           <li>Amortization (Years): {output.amortizationPeriod}</li>
