@@ -12,8 +12,6 @@ export default function App() {
   return (
     <section>
       <Inputs 
-        setRate={setRate}
-        setAmortization={setAmortization}
         setPaymentType={setPaymentType}
       />
       <hr/>
@@ -23,8 +21,20 @@ export default function App() {
         label="Mortgage Amount"
         inputName="mortgageAmount"
       />
+      <Input 
+        label="Interest Rate"
+        inputName="interestRate"
+        placeholder="interest rate (in %)"
+        setState={setRate}
+      />
+      <Input 
+        label="Amortization period (in years)"
+        placeholder="25 years"
+        inputName="amortizationPeriod"
+        setState={setAmortization}
+      />
       <Output
-        rate={rate}
+        rate={rate / 100}
         principal={principal}
         amortization={amortization}
         paymentType={paymentType}
