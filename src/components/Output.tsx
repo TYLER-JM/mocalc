@@ -91,11 +91,11 @@ export default function Output({
           <tbody>
             <tr>
               <td>1</td>
-              <td>{mortgagePayment?.startingBalance}</td>
-              <td>{mortgagePayment?.totalPayment}</td>
-              <td>{mortgagePayment?.interestPortion}</td>
-              <td>{mortgagePayment?.principalPortion}</td>
-              <td>{mortgagePayment?.endingBalance}</td>
+              <td>{accounting.formatMoney(mortgagePayment?.startingBalance || 0)}</td>
+              <td>{accounting.formatMoney(mortgagePayment?.totalPayment || 0)}</td>
+              <td>{accounting.formatMoney(mortgagePayment?.interestPortion || 0)}</td>
+              <td>{accounting.formatMoney(mortgagePayment?.principalPortion || 0)}</td>
+              <td>{accounting.formatMoney(mortgagePayment?.endingBalance|| 0)}</td>
             </tr>
           </tbody>
         </table>
