@@ -18,11 +18,11 @@ export type PaymentSchedules =
   export const COMPLETE = 'complete'
   export const LOADING = 'loading'
 
-  export const STATUSES = {
-    incomplete: INCOMPLETE,
-    error: ERROR,
-    complete: COMPLETE,
-    loading: LOADING
+  export const STATUS = {
+    incomplete: INCOMPLETE as OutputValuesStatus,
+    error: ERROR as OutputValuesStatus,
+    complete: COMPLETE as OutputValuesStatus,
+    loading: LOADING as OutputValuesStatus
   }
   export type OutputValuesStatus = typeof INCOMPLETE | typeof ERROR | typeof COMPLETE | typeof LOADING
  

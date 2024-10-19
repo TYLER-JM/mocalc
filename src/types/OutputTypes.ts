@@ -1,4 +1,3 @@
-import accounting from "accounting";
 import { 
   ACCELERATED_BIWEEKLY,
   ACCELERATED_WEEKLY,
@@ -28,21 +27,21 @@ export class MortgagePayment {
     public monthlyPayment: number
   ) {}
 
-  get totalPayment() {
+  get totalPayment(): number {
     let p;
     switch (this.schedule) {
       case SEMIMONTHLY:
       case ACCELERATED_BIWEEKLY:
-        p = accounting.formatMoney(this.monthlyPayment / 2, {precision: 2})
+        p = this.monthlyPayment / 2
         break;
       case BIWEEKLY:
-        p = accounting.formatMoney((this.monthlyPayment * 12) / 26, {precision: 2})
+        p =(this.monthlyPayment * 12) / 26
         break;
       case WEEKLY:
-        p = accounting.formatMoney((this.monthlyPayment * 12) / 52, {precision: 2})
+        p = (this.monthlyPayment * 12) / 52
         break;
       case ACCELERATED_WEEKLY:
-        p = accounting.formatMoney(this.monthlyPayment / 4, {precision: 2})
+        p = this.monthlyPayment / 4
         break;
       default:
         p = this.monthlyPayment
@@ -52,14 +51,14 @@ export class MortgagePayment {
   }
 
   get interestPortion() {
-    return 0
+    return this.interestRate * this.startingBalance
   }
 
-  get principal() {
-    return 0
+  get principalPortion() {
+    return this.totalPayment - this.interestPortion
   }
 
   get endingBalance() {
-    return 0
+    return this.startingBalance - this.principalPortion
   }
 }

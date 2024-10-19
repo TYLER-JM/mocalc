@@ -1,7 +1,7 @@
 import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
-import { OutputValues } from "../types/OutputTypes"
-import { PaymentSchedules, STATUSES } from "../types/StringTypes"
+import { MortgagePayment, OutputValues } from "../types/OutputTypes"
+import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, PaymentSchedules, SEMIMONTHLY, STATUS, WEEKLY } from "../types/StringTypes"
 
 interface OutputProps {
   rate: number,
@@ -18,7 +18,7 @@ export default function Output({
 }: OutputProps) {
 
   const output: OutputValues = {
-    status: 'incomplete',
+    status: STATUS.incomplete,
   }
 
   const effectiveRate = getEffectiveRate(rate)
@@ -30,34 +30,75 @@ export default function Output({
     amortization: amortization * 12 // to get the months
   }
 
-  let monthlyPayment = 0
-  let customPayment = 0
-  let customToString = ''
+  //TODO: move this object to a Type or Class
+  const paymentScheduleFrequencyMap = {
+    [MONTHLY]: 12,
+    [SEMIMONTHLY]: 24,
+    [WEEKLY]: 52,
+    [BIWEEKLY]: 26,
+    [ACCELERATED_WEEKLY]: 52,
+    [ACCELERATED_BIWEEKLY]: 26
+  }
 
+  let mortgagePayment;
   if (paymentValues.amortization > 0) {
+    
+
     let monthlyPayment = getMonthlyPayment(paymentValues)
+    let scheduleRate = getRateByFrequency(effectiveRate, paymentScheduleFrequencyMap[paymentType])
+
+    mortgagePayment = new MortgagePayment(
+      principal,
+      scheduleRate,
+      paymentType,
+      monthlyPayment
+    )
+    
     let customPayment = getPaymentByType(monthlyPayment, paymentType)
     let customToString = accounting.formatMoney(customPayment, {precision: 2})
-    output.status = 'complete'
     output.amortizationPeriod = amortization
     output.payment = customToString
     output.paymentSchedule = paymentType
     output.effectiveRate = toPercentage(effectiveRate, 4)
     output.principal = toDollars(principal, 2)
+    
+    output.status = STATUS.complete
   }
   
   return (
     <div>
-      {output.status === STATUSES.incomplete &&
+      {output.status === STATUS.incomplete &&
         <p>pending...</p>
       }
-      {output.status === STATUSES.complete && 
+      {output.status === STATUS.complete && 
         <ul>
           <li>Principal: {output.principal}</li>
           <li>Amortization (Years): {output.amortizationPeriod}</li>
           <li>Payment Schedule: {output.paymentSchedule}</li>
           <li>Payment: {output.payment}</li>
         </ul>
+      }
+      {output.status === STATUS.complete &&
+        <table>
+          <thead>
+            <th>#</th>
+            <th>Starting Balance</th>
+            <th>Total Payment</th>
+            <th>Interest</th>
+            <th>Principal</th>
+            <th>Ending Balance</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>{mortgagePayment?.startingBalance}</td>
+              <td>{mortgagePayment?.totalPayment}</td>
+              <td>{mortgagePayment?.interestPortion}</td>
+              <td>{mortgagePayment?.principalPortion}</td>
+              <td>{mortgagePayment?.endingBalance}</td>
+            </tr>
+          </tbody>
+        </table>
       }
     </div>
   )
