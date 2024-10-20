@@ -1,13 +1,24 @@
 import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
-import { MortgagePayment, OutputValues } from "../types/OutputTypes"
+import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, PaymentSchedules, SEMIMONTHLY, STATUS, WEEKLY } from "../types/StringTypes"
+import MortgagePaymentTable from "./MortgagePaymentTable"
 
 interface OutputProps {
   rate: number,
   principal: number,
   amortization: number,
   paymentType: PaymentSchedules
+}
+
+    //TODO: move this object to a Type or Class
+export const paymentScheduleFrequencyMap = {
+  [MONTHLY]: 12,
+  [SEMIMONTHLY]: 24,
+  [WEEKLY]: 52,
+  [BIWEEKLY]: 26,
+  [ACCELERATED_WEEKLY]: 52,
+  [ACCELERATED_BIWEEKLY]: 26
 }
 
 export default function Output({
@@ -21,6 +32,8 @@ export default function Output({
     status: STATUS.incomplete,
   }
 
+  let paymentDetails: PaymentDetails | undefined = undefined
+
   const effectiveRate = getEffectiveRate(rate)
   const monthlyRate = getRateByFrequency(effectiveRate, 12)
 
@@ -30,29 +43,17 @@ export default function Output({
     amortization: amortization * 12 // to get the months
   }
 
-  //TODO: move this object to a Type or Class
-  const paymentScheduleFrequencyMap = {
-    [MONTHLY]: 12,
-    [SEMIMONTHLY]: 24,
-    [WEEKLY]: 52,
-    [BIWEEKLY]: 26,
-    [ACCELERATED_WEEKLY]: 52,
-    [ACCELERATED_BIWEEKLY]: 26
-  }
-
-  let mortgagePayment;
-  if (paymentValues.amortization > 0) {
-    
-
+  if (amortization > 0) {
     let monthlyPayment = getMonthlyPayment(paymentValues)
     let scheduleRate = getRateByFrequency(effectiveRate, paymentScheduleFrequencyMap[paymentType])
 
-    mortgagePayment = new MortgagePayment(
+    paymentDetails = {
       principal,
+      schedule: paymentType,
       scheduleRate,
-      paymentType,
-      monthlyPayment
-    )
+      monthlyPayment,
+      termLength: 5 // TODO: make term length another field for the user to set
+    }
     
     let customPayment = getPaymentByType(monthlyPayment, paymentType)
     let customToString = accounting.formatMoney(customPayment, {precision: 2})
@@ -78,28 +79,7 @@ export default function Output({
           <li>Payment: {output.payment}</li>
         </ul>
       }
-      {output.status === STATUS.complete &&
-        <table>
-          <thead>
-            <th>#</th>
-            <th>Starting Balance</th>
-            <th>Total Payment</th>
-            <th>Interest</th>
-            <th>Principal</th>
-            <th>Ending Balance</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>{accounting.formatMoney(mortgagePayment?.startingBalance || 0)}</td>
-              <td>{accounting.formatMoney(mortgagePayment?.totalPayment || 0)}</td>
-              <td>{accounting.formatMoney(mortgagePayment?.interestPortion || 0)}</td>
-              <td>{accounting.formatMoney(mortgagePayment?.principalPortion || 0)}</td>
-              <td>{accounting.formatMoney(mortgagePayment?.endingBalance|| 0)}</td>
-            </tr>
-          </tbody>
-        </table>
-      }
+      {paymentDetails && <MortgagePaymentTable paymentDetails={paymentDetails}/>}
     </div>
   )
 }

@@ -19,6 +19,14 @@ export interface OutputValues {
   payment?: string
 }
 
+export interface PaymentDetails {
+  principal: number,
+  scheduleRate: number,
+  schedule: PaymentSchedules,
+  monthlyPayment: number,
+  termLength: number
+}
+
 export class MortgagePayment {
   constructor(
     public startingBalance: number,
