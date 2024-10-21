@@ -10,35 +10,40 @@ export default function App() {
   const [paymentType, setPaymentType] = useState('monthly')
 
   return (
-    <section>
-      <Inputs 
-        setPaymentType={setPaymentType}
-      />
-      <hr/>
-      <Input 
-        placeholder="total amount you'll be borrowing"
-        setState={setPrincipal}
-        label="Mortgage Amount"
-        inputName="mortgageAmount"
-      />
-      <Input 
-        label="Interest Rate"
-        inputName="interestRate"
-        placeholder="interest rate (in %)"
-        setState={setRate}
-      />
-      <Input 
-        label="Amortization period (in years)"
-        placeholder="25 years"
-        inputName="amortizationPeriod"
-        setState={setAmortization}
-      />
-      <Output
-        rate={rate / 100}
-        principal={principal}
-        amortization={amortization}
-        paymentType={paymentType}
-      />
-    </section>
+    <>
+      <section>
+        <Inputs 
+          setPaymentType={setPaymentType}
+        />
+        <hr/>
+        <Input 
+          placeholder="total amount you'll be borrowing"
+          setState={setPrincipal}
+          label="Mortgage Amount"
+          inputName="mortgageAmount"
+        />
+        <Input 
+          label="Interest Rate"
+          inputName="interestRate"
+          placeholder="interest rate (in %)"
+          setState={setRate}
+        />
+        <Input 
+          label="Amortization period (in years)"
+          placeholder="25 years"
+          inputName="amortizationPeriod"
+          setState={setAmortization}
+        />
+        
+      </section>
+      <section>
+        <Output
+          rate={rate / 100}
+          principal={principal}
+          amortization={amortization}
+          paymentType={paymentType}
+        />
+      </section>
+    </>
   )
 }
