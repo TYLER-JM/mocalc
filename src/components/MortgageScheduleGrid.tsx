@@ -1,6 +1,7 @@
-import { MortgagePayment, PaymentDetails } from "../types/OutputTypes";
+import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/OutputTypes";
 import { paymentScheduleFrequencyMap } from "./Output";
 import accounting from "accounting";
+import MortgageScheduleYear from "./MortgageScheduleYear";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails
@@ -12,7 +13,8 @@ export default function MortgagePaymentGrid({
   let remainingBalance = paymentDetails.principal
 
   const renderRows = () => {
-    const rows = []
+    let payments: ScheduledPayment[] = []
+    const years = []
 
     for (let i = 1; i <= paymentDetails.termLength * paymentScheduleFrequencyMap[paymentDetails.schedule]; i++) {
       const mortgagePayment = new MortgagePayment(
@@ -21,9 +23,10 @@ export default function MortgagePaymentGrid({
         paymentDetails.schedule,
         paymentDetails.monthlyPayment
       )
-      rows.push(
-        
-        <div className="sub-grid" key={mortgagePayment.startingBalance.toString()}>
+
+      payments.push({
+        mortgagePayment,
+        jsx: <div className="sub-grid" key={mortgagePayment.startingBalance.toString()}>
           <span>{i}</span>
           <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
           <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
@@ -31,10 +34,30 @@ export default function MortgagePaymentGrid({
           <span>{accounting.formatMoney(mortgagePayment.principalPortion)}</span>
           <span>{accounting.formatMoney(mortgagePayment.endingBalance)}</span>
         </div>
-      )
+      })
+
+      // payments.push(
+        
+      //   <div className="sub-grid" key={mortgagePayment.startingBalance.toString()}>
+      //     <span>{i}</span>
+      //     <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
+      //     <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
+      //     <span>{accounting.formatMoney(mortgagePayment.interestPortion)}</span>
+      //     <span>{accounting.formatMoney(mortgagePayment.principalPortion)}</span>
+      //     <span>{accounting.formatMoney(mortgagePayment.endingBalance)}</span>
+      //   </div>
+      // )
       remainingBalance = mortgagePayment.endingBalance
+
+      if (i % paymentScheduleFrequencyMap[paymentDetails.schedule] === 0) {
+        years.push(payments)
+        payments = []
+      }
     }
-    return rows
+
+    return years.map((payments, index) => (
+      <MortgageScheduleYear payments={payments} index={index}/>
+    ))
   }
 
   return (
@@ -48,12 +71,7 @@ export default function MortgagePaymentGrid({
         <span>Ending Balance</span>
       </div>
 
-      <div className="row-header t-row">
-        <div className="row-header">Here is some Summary info for Year 1</div>
-      </div>
-      <div className="sub-grid-wrapper">
-        {renderRows()}
-      </div>
+      {renderRows()}
       
     </div>
   )

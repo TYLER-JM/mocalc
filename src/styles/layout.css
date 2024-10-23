@@ -31,3 +31,8 @@
   grid-template-rows: subgrid;
   grid-auto-flow: column;
 }
+
+.collapsed {
+  height: 0;
+  visibility: hidden;
+}

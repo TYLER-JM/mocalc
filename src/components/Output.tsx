@@ -3,7 +3,7 @@ import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequen
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, PaymentSchedules, SEMIMONTHLY, STATUS, WEEKLY } from "../types/StringTypes"
 // import MortgagePaymentTable from "./MortgagePaymentTable"
-import MortgagePaymentGrid from "./MortgagePaymentGrid"
+import MortgageScheduleGrid from "./MortgageScheduleGrid"
 
 interface OutputProps {
   rate: number,
@@ -80,7 +80,7 @@ export default function Output({
           <li>Payment: {output.payment}</li>
         </ul>
       }
-      {paymentDetails && <MortgagePaymentGrid paymentDetails={paymentDetails}/>}
+      {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails}/>}
     </div>
   )
 }
