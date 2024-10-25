@@ -11,8 +11,6 @@
 
 .t-row {
   padding: 5px;
-  background-color: pink;
-  border: red;
 }
 
 .row-header {
@@ -32,6 +30,9 @@
   grid-auto-flow: column;
 }
 
+.col-3 {
+  grid-column: 1 / 4;
+}
 .collapsed {
   height: 0;
   visibility: hidden;

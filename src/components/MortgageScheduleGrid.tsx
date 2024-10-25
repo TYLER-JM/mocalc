@@ -3,6 +3,8 @@ import { paymentScheduleFrequencyMap } from "./Output";
 import accounting from "accounting";
 import MortgageScheduleYear from "./MortgageScheduleYear";
 
+import '../styles/mortgage-schedule.css';
+
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails
 }
@@ -36,17 +38,6 @@ export default function MortgagePaymentGrid({
         </div>
       })
 
-      // payments.push(
-        
-      //   <div className="sub-grid" key={mortgagePayment.startingBalance.toString()}>
-      //     <span>{i}</span>
-      //     <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
-      //     <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
-      //     <span>{accounting.formatMoney(mortgagePayment.interestPortion)}</span>
-      //     <span>{accounting.formatMoney(mortgagePayment.principalPortion)}</span>
-      //     <span>{accounting.formatMoney(mortgagePayment.endingBalance)}</span>
-      //   </div>
-      // )
       remainingBalance = mortgagePayment.endingBalance
 
       if (i % paymentScheduleFrequencyMap[paymentDetails.schedule] === 0) {
@@ -55,14 +46,12 @@ export default function MortgagePaymentGrid({
       }
     }
 
-    return years.map((payments, index) => (
-      <MortgageScheduleYear payments={payments} index={index}/>
-    ))
+    return years.map((payments, index) => <MortgageScheduleYear payments={payments} index={index}/>)
   }
 
   return (
     <div className="mortgage-table">
-      <div className="row-header t-row sub-grid">
+      <div className="mortgage-table-header row-header t-row sub-grid">
         <span>#</span>
         <span>Starting Balance</span>
         <span>Total Payment</span>

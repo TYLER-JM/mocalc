@@ -1,0 +1,21 @@
+:root {
+  --argentinian-blue: #5AA9E6;
+  --aquamarine: #5DFDCB; 
+
+  --charcoal: #383F51;
+  --turquoise: #36d7b7;
+
+  --verdigris: #5FB0B7;
+  --keppel: #5BC8AF;
+}
+
+[data-theme=light],
+:root:not([data-theme=dark]) {
+  --pico-primary: #5AA9E6;
+  --pico-primary-background: #6bb2e9;
+  --pico-primary-underline: #4887b8;
+  --pico-primary-hover: #4887b8;
+  --pico-primary-hover-background: #36658a;
+  --pico-primary-focus: #36658a;
+  --pico-primary-inverse: #fff;
+}

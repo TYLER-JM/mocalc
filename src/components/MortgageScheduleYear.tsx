@@ -16,13 +16,24 @@ export default function MortgageScheduleYear({
   const totalInterest = payments.reduce((total: number, payment: ScheduledPayment): number => {
     return total += payment.mortgagePayment.interestPortion
   }, 0)
+  const totalPrincipal = payments.reduce((total: number, payment: ScheduledPayment): number => {
+    return total += payment.mortgagePayment.principalPortion
+  }, 0)
+  const endingBalance = payments[payments.length - 1].mortgagePayment.endingBalance
 
   //TODO: improve the method of determining the classes dynamically
   return (
     <>
-        <div className="row-header t-row">
-          <div onClick={() => setCollapsed(prev => !prev)} className="row-header">
-            Here is some Summary info for Year {index + 1}: Interest Paid: {accounting.formatMoney(totalInterest)}
+        <div className="row-header t-row sub-grid yearly-summary-header">
+          <div onClick={() => setCollapsed(prev => !prev)} className="row-header sub-grid">
+            <div className="sub-grid">
+              <span className="col-3">
+                Year {index + 1} Summary:
+              </span>
+              <span>{accounting.formatMoney(totalInterest)}</span>
+              <span>{accounting.formatMoney(totalPrincipal)}</span>
+              <span>{accounting.formatMoney(endingBalance)}</span>
+            </div>
           </div>
         </div>
         <div key={Math.random().toString().split('.')[1]} className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>
