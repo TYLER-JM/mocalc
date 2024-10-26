@@ -1,9 +1,9 @@
 import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/OutputTypes";
-import { paymentScheduleFrequencyMap } from "./Output";
 import accounting from "accounting";
 import MortgageScheduleYear from "./MortgageScheduleYear";
 
 import '../styles/mortgage-schedule.css';
+import { paymentScheduleFrequencyMap } from "../utils/helpers";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails
@@ -46,7 +46,7 @@ export default function MortgageScheduleGrid({
       }
     }
 
-    return years.map((payments, index) => <MortgageScheduleYear payments={payments} index={index}/>)
+    return years.map((payments, index) => <MortgageScheduleYear payments={payments} index={index} key={index}/>)
   }
 
   return (

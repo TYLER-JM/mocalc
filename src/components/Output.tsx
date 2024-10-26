@@ -1,8 +1,9 @@
 import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
-import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, PaymentSchedules, SEMIMONTHLY, STATUS, WEEKLY } from "../types/StringTypes"
+import { PaymentSchedules, STATUS } from "../types/StringTypes"
 import MortgageScheduleGrid from "./MortgageScheduleGrid"
+import { paymentScheduleFrequencyMap } from "../utils/helpers"
 
 interface OutputProps {
   rate: number,
@@ -12,15 +13,7 @@ interface OutputProps {
   term: number
 }
 
-    //TODO: move this object to a Type or Class
-export const paymentScheduleFrequencyMap = {
-  [MONTHLY]: 12,
-  [SEMIMONTHLY]: 24,
-  [WEEKLY]: 52,
-  [BIWEEKLY]: 26,
-  [ACCELERATED_WEEKLY]: 52,
-  [ACCELERATED_BIWEEKLY]: 26
-}
+
 
 export default function Output({
   rate,
