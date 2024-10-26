@@ -5,17 +5,19 @@ interface InputProps {
   label: string,
   inputName: string,
   placeholder: string
+  defaultValue?: string,
   setState: (val: number) => void
 }
 export default function Input({
   label,
   inputName,
   placeholder,
+  defaultValue,
   setState
 }: InputProps) {
   const [userFeedback, setUserFeedback] = useState<string>('')
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>(defaultValue || '')
 
   const debounceStateUpdate = useCallback(debounce((val: string) => {
     if (!val) {
@@ -32,6 +34,7 @@ export default function Input({
     }
 
     setState(num)
+    setUserFeedback('')
     setAriaInvalid(false)
   }, 400), [])
 

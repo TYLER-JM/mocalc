@@ -1,5 +1,7 @@
+import { PaymentSchedules } from "../types/StringTypes";
+
 interface InputProps {
-  setPaymentType: (val: string) => void,
+  setPaymentType: (val: PaymentSchedules) => void,
 }
 
 export default function Inputs({
@@ -10,7 +12,7 @@ export default function Inputs({
     <div>
       <label htmlFor="paymentSchedule">
         Payment Schedule
-        <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value)}>
+        <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
           <option value="monthly">Monthly</option>
           <option value="accelerated_weekly">Accelerated weekly</option>
           <option value="weekly">Weekly</option>

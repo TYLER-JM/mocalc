@@ -2,14 +2,14 @@ import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, PaymentSchedules, SEMIMONTHLY, STATUS, WEEKLY } from "../types/StringTypes"
-// import MortgagePaymentTable from "./MortgagePaymentTable"
 import MortgageScheduleGrid from "./MortgageScheduleGrid"
 
 interface OutputProps {
   rate: number,
   principal: number,
   amortization: number,
-  paymentType: PaymentSchedules
+  paymentType: PaymentSchedules,
+  term: number
 }
 
     //TODO: move this object to a Type or Class
@@ -27,6 +27,7 @@ export default function Output({
   principal,
   amortization,
   paymentType,
+  term
 }: OutputProps) {
 
   const output: OutputValues = {
@@ -53,7 +54,7 @@ export default function Output({
       schedule: paymentType,
       scheduleRate,
       monthlyPayment,
-      termLength: 5 // TODO: make term length another field for the user to set
+      termLength: term
     }
     
     let customPayment = getPaymentByType(monthlyPayment, paymentType)

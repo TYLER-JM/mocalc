@@ -2,20 +2,18 @@ import { useState } from "react";
 import Inputs from "../components/Inputs";
 import Input from "../components/Input";
 import Output from "../components/Output";
+import { PaymentSchedules } from "../types/StringTypes";
 
 export default function App() {
   const [rate, setRate] = useState(0)
   const [principal, setPrincipal] = useState(0)
   const [amortization, setAmortization] = useState(0)
-  const [paymentType, setPaymentType] = useState('monthly')
+  const [paymentType, setPaymentType] = useState<PaymentSchedules>('monthly')
+  const [term, setTerm] = useState<number>(5)
 
   return (
     <>
       <section>
-        <Inputs 
-          setPaymentType={setPaymentType}
-        />
-        <hr/>
         <Input 
           placeholder="total amount you'll be borrowing"
           setState={setPrincipal}
@@ -34,7 +32,21 @@ export default function App() {
           inputName="amortizationPeriod"
           setState={setAmortization}
         />
-        
+        <div>
+          <label htmlFor="termLength">
+            Term Length (in years)
+            <select defaultValue={term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+        </div>
+        <Inputs 
+          setPaymentType={setPaymentType}
+        />
       </section>
       <section>
         <Output
@@ -42,6 +54,7 @@ export default function App() {
           principal={principal}
           amortization={amortization}
           paymentType={paymentType}
+          term={term}
         />
       </section>
     </>
