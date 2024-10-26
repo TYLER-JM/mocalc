@@ -1,5 +1,5 @@
 import accounting from "accounting"
-import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toDollars, toPercentage } from "../utils/calculators"
+import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toPercentage } from "../utils/calculators"
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { PaymentSchedules, STATUS } from "../types/StringTypes"
 import MortgageScheduleGrid from "./MortgageScheduleGrid"
@@ -56,7 +56,7 @@ export default function Output({
     output.payment = customToString
     output.paymentSchedule = paymentType
     output.effectiveRate = toPercentage(effectiveRate, 4)
-    output.principal = toDollars(principal, 2)
+    output.principal = accounting.formatMoney(principal)
     
     output.status = STATUS.complete
   }
