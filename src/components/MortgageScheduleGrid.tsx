@@ -9,7 +9,7 @@ interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails
 }
 
-export default function MortgagePaymentGrid({
+export default function MortgageScheduleGrid({
   paymentDetails
 }: MortgagePaymentTableProps) {
   let remainingBalance = paymentDetails.principal
