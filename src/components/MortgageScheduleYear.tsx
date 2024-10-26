@@ -11,7 +11,6 @@ export default function MortgageScheduleYear({
   index
 }: MortgageScheduleYearProps) {
   const [collapsed, setCollapsed] = useState<boolean>(false)
-  //TODO: get total amount of principal paid, 
   //TODO: optional: get total interest paid up to this point
   const totalInterest = payments.reduce((total: number, payment: ScheduledPayment): number => {
     return total += payment.mortgagePayment.interestPortion

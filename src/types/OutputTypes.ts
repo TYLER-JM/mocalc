@@ -13,6 +13,7 @@ export interface OutputValues {
   status: OutputValuesStatus,
   paymentSchedule?: string,
   principal?: string,
+  interestRate?: string,
   effectiveRate?: string,
   monthlyRate?: string,
   amortizationPeriod?: number,

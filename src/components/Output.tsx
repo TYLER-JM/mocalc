@@ -4,6 +4,7 @@ import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { PaymentSchedules, STATUS } from "../types/StringTypes"
 import MortgageScheduleGrid from "./MortgageScheduleGrid"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
+import OutputSummary from "./OutputSummary"
 
 interface OutputProps {
   rate: number,
@@ -55,6 +56,7 @@ export default function Output({
     output.amortizationPeriod = amortization
     output.payment = customToString
     output.paymentSchedule = paymentType
+    output.interestRate = toPercentage(rate, 2)
     output.effectiveRate = toPercentage(effectiveRate, 4)
     output.principal = accounting.formatMoney(principal)
     
@@ -67,12 +69,7 @@ export default function Output({
         <p>pending...</p>
       }
       {output.status === STATUS.complete && 
-        <ul>
-          <li>Principal: {output.principal}</li>
-          <li>Amortization (Years): {output.amortizationPeriod}</li>
-          <li>Payment Schedule: {output.paymentSchedule}</li>
-          <li>Payment: {output.payment}</li>
-        </ul>
+        <OutputSummary output={output}/>
       }
       {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails}/>}
     </div>

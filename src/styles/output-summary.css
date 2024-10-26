@@ -1,0 +1,43 @@
+.output-summary {
+  display: grid;
+  grid-template-areas: 
+    "principal rate schedule"
+    "payment payment payment";
+
+  border-radius: 4px;
+  background-color: white;
+  margin-bottom: 2em;
+  padding: 1em;
+}
+
+.output-summary-header {
+  font-size: 0.75rem;
+  padding-bottom: 0;
+  margin-bottom: 0.25em;
+  color: var(--charcoal);
+}
+
+.principal-wrapper {
+  grid-area: principal;
+}
+
+.rate-wrapper {
+  grid-area: rate;
+}
+
+.schedule-wrapper {
+  grid-area: schedule;
+}
+
+.payment-wrapper {
+  grid-area: payment;
+}
+
+.payment-wrapper p:first-child {
+  font-weight: bolder;
+  color: var(--turquoise);
+}
+
+.output-summary-payment {
+  font-size: 2rem;
+}

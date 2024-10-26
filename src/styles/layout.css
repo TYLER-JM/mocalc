@@ -1,6 +1,7 @@
 .mortgage-table {
   display: grid;
-  grid-gap: 5px;
+  grid-gap: 4px;
+  width: calc(100% - (6 - 1) * 4px); /*number of rows (6), and grid pag (4px)*/
   grid-auto-rows: auto;
   grid-auto-flow: row;
   grid-auto-columns: 20%;
