@@ -25,9 +25,26 @@
   font-weight: bolder;
   white-space: nowrap;
 }
+.sub-grid.yearly-summary-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+.yearly-summary-interest {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+.yearly-summary-principal {
+  grid-column: 2 /3;
+  grid-row: 2 / 3;
+}
+.yearly-summary-balance {
+  grid-column: 2 /3;
+  grid-row: 3 / 4;
+}
 .yearly-summary-header span:first-child {
   text-align: left;
-  grid-column: 1 / 4;
+  /* grid-column: 1 / 4; */
 }
 .yearly-summary-header span:not(:first-child) {
   font-family: monospace;

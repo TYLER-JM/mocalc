@@ -24,12 +24,12 @@ export default function MortgageScheduleYear({
   return (
     <>
         <div onClick={() => setCollapsed(prev => !prev)} className="t-row sub-grid yearly-summary-header">
-          <span>
+          <span className="yearly-summary-title">
             Year {index + 1} Summary:
           </span>
-          <span>{accounting.formatMoney(totalInterest)}</span>
-          <span>{accounting.formatMoney(totalPrincipal)}</span>
-          <span>{accounting.formatMoney(endingBalance)}</span>
+          <span className="yearly-summary-interest">interest paid this year: {accounting.formatMoney(totalInterest)}</span>
+          <span className="yearly-summary-principal">principal paid this year: {accounting.formatMoney(totalPrincipal)}</span>
+          <span className="yearly-summary-balance">end of year balance: {accounting.formatMoney(endingBalance)}</span>
         </div>
         <div key={Math.random().toString().split('.')[1]} className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>
           {payments.map(payment => (
