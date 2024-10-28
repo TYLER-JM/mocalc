@@ -1,3 +1,17 @@
+.mortgage-table {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  grid-auto-columns: 20%;
+
+  grid-template-columns: 5% repeat(5, 19%);
+  grid-template-rows: repeat(1, auto);
+  min-width: max-content;
+}
+.mortgage-table span {
+  padding:  0 0.5em 0 1em;
+}
+
 .mortgage-table-header {
   font-weight: bolder;
   background-color: white;
@@ -9,22 +23,14 @@
   cursor: pointer;
   background-color: var(--turquoise);
   font-weight: bolder;
-  margin-bottom: 0;
+  white-space: nowrap;
 }
 .yearly-summary-header span:first-child {
   text-align: left;
+  grid-column: 1 / 4;
 }
-
-.mortgage-table {
-  display: grid;
-  column-gap: 4px;
-  width: calc(100% - (6 - 1) * 4px); /*number of rows (6), and grid pag (4px)*/
-  grid-auto-rows: auto;
-  grid-auto-flow: row;
-  grid-auto-columns: 20%;
-
-  grid-template-columns: 5% repeat(5, 19%);
-  grid-template-rows: repeat(1, auto);
+.yearly-summary-header span:not(:first-child) {
+  font-family: monospace;
 }
 
 .mortgage-table-row {
@@ -55,10 +61,6 @@
   grid-template-rows: subgrid;
   grid-auto-flow: column;
   text-align: right;
-}
-
-.col-3 {
-  grid-column: 1 / 4;
 }
 .collapsed {
   height: 0;

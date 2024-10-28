@@ -50,18 +50,18 @@ export default function MortgageScheduleGrid({
   }
 
   return (
-    <div className="mortgage-table">
-      <div className="mortgage-table-header t-row sub-grid">
-        <span>#</span>
-        <span>Starting Balance</span>
-        <span>Total Payment</span>
-        <span>Interest</span>
-        <span>Principal</span>
-        <span>Ending Balance</span>
+    <div className="overflow">
+      <div className="mortgage-table">
+        <div className="mortgage-table-header t-row sub-grid">
+          <span>#</span>
+          <span>Starting Balance</span>
+          <span>Total Payment</span>
+          <span>Interest</span>
+          <span>Principal</span>
+          <span>Ending Balance</span>
+        </div>
+        {renderRows()}
       </div>
-
-      {renderRows()}
-      
     </div>
   )
 }
