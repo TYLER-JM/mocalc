@@ -8,6 +8,18 @@
   grid-template-rows: repeat(1, auto);
   min-width: max-content;
 }
+
+/*
+TODO: create --table, and --tabs layout for mortgage-schedule
+*/
+
+.mortgage-schedule--table {
+
+}
+
+.mortgage-schedule--tabs {
+
+}
 .mortgage-schedule span {
   padding:  0 0.5em 0 1em;
 }
@@ -25,6 +37,7 @@
   font-weight: bolder;
   white-space: nowrap;
 }
+/*TODO: will probably deprecate the .year-collapsed class and these layout alterations*/
 .year-collapsed.sub-grid.yearly-summary-header {
   display: grid;
   grid-template-columns: 1fr 2fr;

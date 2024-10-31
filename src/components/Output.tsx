@@ -5,6 +5,7 @@ import { PaymentSchedules, STATUS } from "../types/StringTypes"
 import MortgageScheduleGrid from "./MortgageScheduleGrid"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
+import {useState} from "react";
 
 interface OutputProps {
   rate: number,
@@ -23,6 +24,8 @@ export default function Output({
   paymentType,
   term
 }: OutputProps) {
+
+  const [layout, setLayout] = useState<'table' | 'tabs'>('table')
 
   const output: OutputValues = {
     status: STATUS.incomplete,
@@ -71,7 +74,12 @@ export default function Output({
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>
       }
-      {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails}/>}
+      <div>
+        <button onClick={() => setLayout('table')}>Table</button>
+        <button onClick={() => setLayout('tabs')}>Tabs</button>
+        <button disabled>Cards</button>
+      </div>
+      {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails} layout={layout}/>}
     </div>
   )
 }

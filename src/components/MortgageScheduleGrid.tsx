@@ -6,11 +6,13 @@ import '../styles/mortgage-schedule.css';
 import { paymentScheduleFrequencyMap } from "../utils/helpers";
 
 interface MortgagePaymentTableProps {
-  paymentDetails: PaymentDetails
+  paymentDetails: PaymentDetails,
+  layout: string
 }
 
 export default function MortgageScheduleGrid({
-  paymentDetails
+  paymentDetails,
+  layout,
 }: MortgagePaymentTableProps) {
   let remainingBalance = paymentDetails.principal
 
@@ -51,7 +53,7 @@ export default function MortgageScheduleGrid({
 
   return (
     <div className="overflow">
-      <div className="mortgage-schedule">
+      <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
         <div className="mortgage-schedule-header t-row sub-grid">
           <span>#</span>
           <span>Starting Balance</span>
