@@ -1,4 +1,4 @@
-.mortgage-table {
+.mortgage-schedule {
   display: grid;
   grid-auto-rows: auto;
   grid-auto-flow: row;
@@ -8,11 +8,11 @@
   grid-template-rows: repeat(1, auto);
   min-width: max-content;
 }
-.mortgage-table span {
+.mortgage-schedule span {
   padding:  0 0.5em 0 1em;
 }
 
-.mortgage-table-header {
+.mortgage-schedule-header {
   font-weight: bolder;
   background-color: white;
   border-top-left-radius: 4px;
@@ -25,40 +25,43 @@
   font-weight: bolder;
   white-space: nowrap;
 }
-.sub-grid.yearly-summary-header {
+.year-collapsed.sub-grid.yearly-summary-header {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: repeat(3, 1fr);
 }
-.yearly-summary-interest {
+.year-collapsed .yearly-summary-interest {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
 }
-.yearly-summary-principal {
+.year-collapsed .yearly-summary-principal {
   grid-column: 2 /3;
   grid-row: 2 / 3;
 }
-.yearly-summary-balance {
+.year-collapsed .yearly-summary-balance {
   grid-column: 2 /3;
   grid-row: 3 / 4;
 }
 .yearly-summary-header span:first-child {
   text-align: left;
-  /* grid-column: 1 / 4; */
+  grid-column: 1 / 4;
+}
+.year-collapsed.yearly-summary-header span:first-child {
+  grid-column: initial;
 }
 .yearly-summary-header span:not(:first-child) {
   font-family: monospace;
 }
 
-.mortgage-table-row {
+.mortgage-schedule-row {
   padding: 0.5em;
   font-family: monospace;
 }
-.mortgage-table-row span {
+.mortgage-schedule-row span {
   white-space: nowrap;
 }
 
-.mortgage-table-row:nth-child(odd) {
+.mortgage-schedule-row:nth-child(odd) {
   background-color: white;
 }
 

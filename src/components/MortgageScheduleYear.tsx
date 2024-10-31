@@ -23,13 +23,13 @@ export default function MortgageScheduleYear({
   //TODO: improve the method of determining the classes dynamically
   return (
     <>
-        <div onClick={() => setCollapsed(prev => !prev)} className="t-row sub-grid yearly-summary-header">
+        <div onClick={() => setCollapsed(prev => !prev)} className={collapsed ? "year-collapsed t-row sub-grid yearly-summary-header" : "t-row sub-grid yearly-summary-header"}>
           <span className="yearly-summary-title">
             Year {index + 1} Summary:
           </span>
-          <span className="yearly-summary-interest">interest paid this year: {accounting.formatMoney(totalInterest)}</span>
-          <span className="yearly-summary-principal">principal paid this year: {accounting.formatMoney(totalPrincipal)}</span>
-          <span className="yearly-summary-balance">end of year balance: {accounting.formatMoney(endingBalance)}</span>
+          <span className="yearly-summary-interest">{accounting.formatMoney(totalInterest)}</span>
+          <span className="yearly-summary-principal">{accounting.formatMoney(totalPrincipal)}</span>
+          <span className="yearly-summary-balance">{accounting.formatMoney(endingBalance)}</span>
         </div>
         <div key={Math.random().toString().split('.')[1]} className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>
           {payments.map(payment => (

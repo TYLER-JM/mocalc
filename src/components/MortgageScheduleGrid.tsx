@@ -28,7 +28,7 @@ export default function MortgageScheduleGrid({
 
       payments.push({
         mortgagePayment,
-        jsx: <div className="sub-grid mortgage-table-row" key={mortgagePayment.startingBalance.toString()}>
+        jsx: <div className="sub-grid mortgage-schedule-row" key={mortgagePayment.startingBalance.toString()}>
           <span>{i}</span>
           <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
           <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
@@ -51,8 +51,8 @@ export default function MortgageScheduleGrid({
 
   return (
     <div className="overflow">
-      <div className="mortgage-table">
-        <div className="mortgage-table-header t-row sub-grid">
+      <div className="mortgage-schedule">
+        <div className="mortgage-schedule-header t-row sub-grid">
           <span>#</span>
           <span>Starting Balance</span>
           <span>Total Payment</span>
