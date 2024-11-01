@@ -21,10 +21,9 @@ export default function MortgageScheduleYear({
   const endingBalance = payments[payments.length - 1].mortgagePayment.endingBalance
 
   //TODO: improve the method of determining the classes dynamically
-  // option: conditionally add .year-collapsed to give the collapsed yearly summary a different layout for the table view
   return (
     <>
-        <div onClick={() => setCollapsed(prev => !prev)} className={collapsed ? "t-row sub-grid yearly-summary-header" : "t-row sub-grid yearly-summary-header"}>
+        <div onClick={() => setCollapsed(prev => !prev)} className="t-row sub-grid yearly-summary-header">
           <span className="yearly-summary-title">
             Year {index + 1} Summary:
           </span>

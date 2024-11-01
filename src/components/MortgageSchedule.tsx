@@ -4,16 +4,16 @@ import MortgageScheduleYear from "./MortgageScheduleYear";
 
 import '../styles/mortgage-schedule.css';
 import { paymentScheduleFrequencyMap } from "../utils/helpers";
+import { useState } from "react";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails,
-  layout: string
 }
 
-export default function MortgageScheduleGrid({
+export default function MortgageSchedule({
   paymentDetails,
-  layout,
 }: MortgagePaymentTableProps) {
+  const [layout, setLayout] = useState<'table' | 'tabs'>('table')
   let remainingBalance = paymentDetails.principal
 
   const renderRows = () => {
@@ -52,18 +52,25 @@ export default function MortgageScheduleGrid({
   }
 
   return (
-    <div className="overflow">
-      <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
-        <div className="mortgage-schedule-header t-row sub-grid">
-          <span>#</span>
-          <span>Starting Balance</span>
-          <span>Total Payment</span>
-          <span>Interest</span>
-          <span>Principal</span>
-          <span>Ending Balance</span>
-        </div>
-        {renderRows()}
+    <>
+      <div>
+        <button onClick={() => setLayout('table')}>Table</button>
+        <button onClick={() => setLayout('tabs')}>Tabs</button>
+        <button disabled>Cards</button>
       </div>
-    </div>
+      <div className="overflow">
+        <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
+          <div className="mortgage-schedule-header t-row sub-grid">
+            <span>#</span>
+            <span>Starting Balance</span>
+            <span>Total Payment</span>
+            <span>Interest</span>
+            <span>Principal</span>
+            <span>Ending Balance</span>
+          </div>
+          {renderRows()}
+        </div>
+      </div>
+    </>
   )
 }

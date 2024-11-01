@@ -2,10 +2,9 @@ import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toPercentage } from "../utils/calculators"
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { PaymentSchedules, STATUS } from "../types/StringTypes"
-import MortgageScheduleGrid from "./MortgageScheduleGrid"
+import MortgageSchedule from "./MortgageSchedule.tsx"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
-import {useState} from "react";
 
 interface OutputProps {
   rate: number,
@@ -24,9 +23,6 @@ export default function Output({
   paymentType,
   term
 }: OutputProps) {
-
-  const [layout, setLayout] = useState<'table' | 'tabs'>('table')
-
   const output: OutputValues = {
     status: STATUS.incomplete,
   }
@@ -74,12 +70,7 @@ export default function Output({
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>
       }
-      <div>
-        <button onClick={() => setLayout('table')}>Table</button>
-        <button onClick={() => setLayout('tabs')}>Tabs</button>
-        <button disabled>Cards</button>
-      </div>
-      {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails} layout={layout}/>}
+      {paymentDetails && <MortgageSchedule paymentDetails={paymentDetails}/>}
     </div>
   )
 }

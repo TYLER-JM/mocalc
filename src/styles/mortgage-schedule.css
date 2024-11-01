@@ -1,5 +1,6 @@
 @layer components {
   .mortgage-schedule {
+    min-width: max-content;
     display: grid;
     grid-auto-rows: auto;
     grid-auto-flow: row;
@@ -7,7 +8,6 @@
 
     grid-template-columns: 5% repeat(5, 19%);
     grid-template-rows: repeat(1, auto);
-    min-width: max-content;
   }
 
   /*
@@ -16,20 +16,17 @@
 
   .mortgage-schedule--table {
 
+
+    .mortgage-schedule-header {
+      font-weight: bolder;
+      background-color: white;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
   }
 
   .mortgage-schedule--tabs {
-
-  }
-  .mortgage-schedule span {
-    padding:  0 0.5em 0 1em;
-  }
-
-  .mortgage-schedule-header {
-    font-weight: bolder;
-    background-color: white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border: 2px solid blue;
   }
 
   .yearly-summary-header {
@@ -46,6 +43,10 @@
 
   .yearly-summary-header span:not(:first-child) {
     font-family: monospace;
+  }
+
+  .mortgage-schedule span {
+    padding:  0 0.5em 0 1em;
   }
 
   .mortgage-schedule-row {
