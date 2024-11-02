@@ -2,7 +2,7 @@ import accounting from "accounting"
 import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toPercentage } from "../utils/calculators"
 import { OutputValues, PaymentDetails } from "../types/OutputTypes"
 import { PaymentSchedules, STATUS } from "../types/StringTypes"
-import MortgageScheduleGrid from "./MortgageScheduleGrid"
+import MortgageSchedule from "./MortgageSchedule.tsx"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
 
@@ -23,7 +23,6 @@ export default function Output({
   paymentType,
   term
 }: OutputProps) {
-
   const output: OutputValues = {
     status: STATUS.incomplete,
   }
@@ -71,7 +70,7 @@ export default function Output({
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>
       }
-      {paymentDetails && <MortgageScheduleGrid paymentDetails={paymentDetails}/>}
+      {paymentDetails && <MortgageSchedule paymentDetails={paymentDetails}/>}
     </div>
   )
 }

@@ -1,68 +1,85 @@
-.mortgage-table {
-  display: grid;
-  grid-auto-rows: auto;
-  grid-auto-flow: row;
-  grid-auto-columns: 20%;
+@layer components {
+  .mortgage-schedule {
+    min-width: max-content;
+    display: grid;
+    grid-auto-rows: auto;
+    grid-auto-flow: row;
+    grid-auto-columns: 20%;
 
-  grid-template-columns: 5% repeat(5, 19%);
-  grid-template-rows: repeat(1, auto);
-  min-width: max-content;
-}
-.mortgage-table span {
-  padding:  0 0.5em 0 1em;
-}
+    grid-template-columns: 5% repeat(5, 19%);
+    grid-template-rows: repeat(1, auto);
+  }
 
-.mortgage-table-header {
-  font-weight: bolder;
-  background-color: white;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
+  /*
+  TODO: create --table, and --tabs layout for mortgage-schedule
+  */
 
-.yearly-summary-header {
-  cursor: pointer;
-  background-color: var(--turquoise);
-  font-weight: bolder;
-  white-space: nowrap;
-}
-.yearly-summary-header span:first-child {
-  text-align: left;
-  grid-column: 1 / 4;
-}
-.yearly-summary-header span:not(:first-child) {
-  font-family: monospace;
-}
+  .mortgage-schedule--table {
 
-.mortgage-table-row {
-  padding: 0.5em;
-  font-family: monospace;
-}
-.mortgage-table-row span {
-  white-space: nowrap;
-}
 
-.mortgage-table-row:nth-child(odd) {
-  background-color: white;
-}
+    .mortgage-schedule-header {
+      font-weight: bolder;
+      background-color: white;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
 
-.t-row {
-  padding: 5px;
-}
+  .mortgage-schedule--tabs {
+    border: 2px solid blue;
+  }
 
-.sub-grid-wrapper {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-}
-.sub-grid {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-  grid-template-rows: subgrid;
-  grid-auto-flow: column;
-  text-align: right;
-}
-.collapsed {
-  height: 0;
-  visibility: hidden;
+  .yearly-summary-header {
+    cursor: pointer;
+    background-color: var(--turquoise);
+    font-weight: bolder;
+    white-space: nowrap;
+  }
+
+  .yearly-summary-header span:first-child {
+    text-align: left;
+    grid-column: 1 / 4;
+  }
+
+  .yearly-summary-header span:not(:first-child) {
+    font-family: monospace;
+  }
+
+  .mortgage-schedule span {
+    padding:  0 0.5em 0 1em;
+  }
+
+  .mortgage-schedule-row {
+    padding: 0.5em;
+    font-family: monospace;
+  }
+  .mortgage-schedule-row span {
+    white-space: nowrap;
+  }
+
+  .mortgage-schedule-row:nth-child(odd) {
+    background-color: white;
+  }
+
+  .t-row {
+    padding: 5px;
+  }
+
+  .sub-grid-wrapper {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+  .sub-grid {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-auto-flow: column;
+    text-align: right;
+  }
+  .collapsed {
+    height: 0;
+    visibility: hidden;
+  }
 }

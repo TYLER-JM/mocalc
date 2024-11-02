@@ -1,7 +1,4 @@
 import { Link, Outlet } from 'react-router-dom'
-import './Root.css'
-import './styles/layout.css'
-import './styles/variables.css'
 
 function Root() {
 
