@@ -1,6 +1,7 @@
 @layer components {
   .mortgage-schedule {
     min-width: max-content;
+
     display: grid;
     grid-auto-rows: auto;
     grid-auto-flow: row;
@@ -8,25 +9,41 @@
 
     grid-template-columns: 5% repeat(5, 19%);
     grid-template-rows: repeat(1, auto);
-  }
 
-  /*
-  TODO: create --table, and --tabs layout for mortgage-schedule
-  */
+  }
 
   .mortgage-schedule--table {
 
-
-    .mortgage-schedule-header {
-      font-weight: bolder;
-      background-color: white;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
-  }
+  } /* END .mortgage-schedule--table */
 
   .mortgage-schedule--tabs {
-    border: 2px solid blue;
+    .year-tab-wrapper {
+      grid-column: 1 / -1;
+      display: flex;
+    }
+    .year-tab {
+      cursor: pointer;
+      border: 2px solid var(--turquoise);
+      border-bottom: 0;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+
+      font-weight: bolder;
+
+    }
+    .year-tab.active {
+      background-color: var(--turquoise);
+    }
+    .year-tab:not(:first-child) {
+      margin-left: 4px;
+    }
+  } /* END .mortgage-schedule--tabs */
+
+  .mortgage-schedule-header {
+    font-weight: bolder;
+    background-color: white;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 
   .yearly-summary-header {
@@ -57,12 +74,8 @@
     white-space: nowrap;
   }
 
-  .mortgage-schedule-row:nth-child(odd) {
+  .mortgage-schedule-row:nth-child(even) {
     background-color: white;
-  }
-
-  .t-row {
-    padding: 5px;
   }
 
   .sub-grid-wrapper {
@@ -70,6 +83,7 @@
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
   }
+
   .sub-grid {
     display: grid;
     grid-column: 1 / -1;
