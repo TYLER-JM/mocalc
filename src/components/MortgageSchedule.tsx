@@ -5,6 +5,7 @@ import MortgageScheduleYear from "./MortgageScheduleYear";
 import '../styles/mortgage-schedule.css';
 import { paymentScheduleFrequencyMap } from "../utils/helpers";
 import { useState } from "react";
+import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails,
@@ -14,9 +15,19 @@ export default function MortgageSchedule({
   paymentDetails,
 }: MortgagePaymentTableProps) {
   const [layout, setLayout] = useState<'table' | 'tabs'>('table')
+  const [activeTab, setActiveTab] = useState<number | undefined>(undefined)
   let remainingBalance = paymentDetails.principal
 
-  const renderRows = () => {
+  function updateLayout(newLayout: 'table' | 'tabs'): void {
+    setLayout(newLayout)
+    if (newLayout === 'table') {
+      setActiveTab(undefined)
+    } else {
+      setActiveTab(1)
+    }
+  }
+
+  function getYears() {
     let payments: ScheduledPayment[] = []
     const years = []
 
@@ -48,18 +59,27 @@ export default function MortgageSchedule({
       }
     }
 
-    return years.map((payments, index) => <MortgageScheduleYear payments={payments} index={index} key={index}/>)
+    return years
   }
+
+  const yearsInTerm = getYears()
 
   return (
     <>
       <div>
-        <button onClick={() => setLayout('table')}>Table</button>
-        <button onClick={() => setLayout('tabs')}>Tabs</button>
+        <button onClick={() => updateLayout('table')}>Table</button>
+        <button onClick={() => updateLayout('tabs')}>Tabs</button>
         <button disabled>Cards</button>
       </div>
       <div className="overflow">
         <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
+          {layout === 'tabs' &&
+            <MortgageScheduleTabs
+              numberOfYears={yearsInTerm.length}
+              setActiveTab={setActiveTab}
+              activeTab={activeTab}
+            />
+          }
           <div className="mortgage-schedule-header sub-grid">
             <span>#</span>
             <span>Starting Balance</span>
@@ -68,7 +88,14 @@ export default function MortgageSchedule({
             <span>Principal</span>
             <span>Ending Balance</span>
           </div>
-          {renderRows()}
+          {yearsInTerm.map((payments, index) =>
+            <MortgageScheduleYear
+              payments={payments}
+              index={index}
+              key={index}
+              layout={layout}
+              activeTab={activeTab}
+            />)}
         </div>
       </div>
     </>
