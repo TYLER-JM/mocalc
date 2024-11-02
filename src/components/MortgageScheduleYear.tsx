@@ -23,7 +23,7 @@ export default function MortgageScheduleYear({
   //TODO: improve the method of determining the classes dynamically
   return (
     <>
-        <div onClick={() => setCollapsed(prev => !prev)} className="t-row sub-grid yearly-summary-header">
+        <div onClick={() => setCollapsed(prev => !prev)} className="sub-grid yearly-summary-header">
           <span className="yearly-summary-title">
             Year {index + 1} Summary:
           </span>

@@ -60,7 +60,7 @@ export default function MortgageSchedule({
       </div>
       <div className="overflow">
         <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
-          <div className="mortgage-schedule-header t-row sub-grid">
+          <div className="mortgage-schedule-header sub-grid">
             <span>#</span>
             <span>Starting Balance</span>
             <span>Total Payment</span>

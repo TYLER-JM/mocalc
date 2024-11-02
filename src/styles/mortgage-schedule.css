@@ -10,10 +10,6 @@
     grid-template-rows: repeat(1, auto);
   }
 
-  /*
-  TODO: create --table, and --tabs layout for mortgage-schedule
-  */
-
   .mortgage-schedule--table {
 
 
@@ -59,10 +55,6 @@
 
   .mortgage-schedule-row:nth-child(odd) {
     background-color: white;
-  }
-
-  .t-row {
-    padding: 5px;
   }
 
   .sub-grid-wrapper {
