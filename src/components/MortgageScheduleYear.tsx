@@ -24,6 +24,9 @@ export default function MortgageScheduleYear({
     }
   }, [activeTab])
 
+  const totalPayment = payments.reduce((total: number, payment: ScheduledPayment): number => {
+    return total + payment.mortgagePayment.totalPayment
+  }, 0)
   const totalInterest = payments.reduce((total: number, payment: ScheduledPayment): number => {
     return total + payment.mortgagePayment.interestPortion
   }, 0)
@@ -40,13 +43,13 @@ export default function MortgageScheduleYear({
         <span className="yearly-summary-title">
           Year {index + 1} Summary:
         </span>
+          <span className="yearly-summary-total">{accounting.formatMoney(totalPayment)}</span>
           <span className="yearly-summary-interest">{accounting.formatMoney(totalInterest)}</span>
           <span className="yearly-summary-principal">{accounting.formatMoney(totalPrincipal)}</span>
           <span className="yearly-summary-balance">{accounting.formatMoney(endingBalance)}</span>
         </div>
       }
-      <div key={Math.random().toString().split('.')[1]}
-           className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>
+      <div className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>
         {payments.map(payment => (
           payment.jsx
         ))}
