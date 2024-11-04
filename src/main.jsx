@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
 import Root from './Root.jsx'
-import App from './routes/app.tsx'
+import Calculator from './routes/Calculator.tsx'
 import About from './routes/about.jsx'
 import Help from './routes/help.jsx'
 
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "app",
-        element: <App />
+        element: <Calculator />
       },
       {
         path: "about",

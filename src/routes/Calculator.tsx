@@ -4,7 +4,9 @@ import Input from "../components/Input";
 import Output from "../components/Output";
 import { PaymentSchedules } from "../types/StringTypes";
 
-export default function App() {
+import '../styles/calculator.css';
+
+export default function Calculator() {
   const [rate, setRate] = useState(0)
   const [principal, setPrincipal] = useState(0)
   const [amortization, setAmortization] = useState(0)
@@ -12,8 +14,8 @@ export default function App() {
   const [term, setTerm] = useState<number>(5)
 
   return (
-    <>
-      <section>
+    <section className="calculator-wrapper">
+      <div>
         <Input 
           placeholder="total amount you'll be borrowing"
           setState={setPrincipal}
@@ -47,8 +49,8 @@ export default function App() {
         <Inputs 
           setPaymentType={setPaymentType}
         />
-      </section>
-      <section>
+      </div>
+      <div>
         <Output
           rate={rate / 100}
           principal={principal}
@@ -56,7 +58,7 @@ export default function App() {
           paymentType={paymentType}
           term={term}
         />
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
