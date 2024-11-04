@@ -6,7 +6,7 @@ function Root() {
     <>
       <nav>
         <ul>
-          <li><Link to="/app">Get Started</Link></li>
+          <li><Link to="/calculator">Get Started</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/help">Help</Link></li>
         </ul>
