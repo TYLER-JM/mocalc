@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
 import Root from './Root.jsx'
-import Calculator from './routes/Calculator.tsx'
 import About from './routes/about.jsx'
 import Help from './routes/help.jsx'
+import Calculators from "./routes/calculators.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "calculator",
-        element: <Calculator />
+        path: "calculators",
+        element: <Calculators />
       },
       {
         path: "about",

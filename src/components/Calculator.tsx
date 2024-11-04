@@ -1,12 +1,18 @@
 import { useState } from "react";
-import Inputs from "../components/Inputs";
-import Input from "../components/Input";
-import Output from "../components/Output";
-import { PaymentSchedules } from "../types/StringTypes";
+import Inputs from "./Inputs.tsx";
+import Input from "./Input.tsx";
+import Output from "./Output.tsx";
+import { PaymentSchedules } from "../types/StringTypes.ts";
 
-import '../styles/calculator.css';
+interface CalculatorProps {
+  setCalculators: (value: number[] | ((prevValue: number[]) => number[])) => void
+  id: number
+}
 
-export default function Calculator() {
+export default function Calculator({
+  setCalculators,
+  id
+}: CalculatorProps) {
   const [rate, setRate] = useState(0)
   const [principal, setPrincipal] = useState(0)
   const [amortization, setAmortization] = useState(0)
@@ -14,7 +20,14 @@ export default function Calculator() {
   const [term, setTerm] = useState<number>(5)
 
   return (
-    <section className="calculator-wrapper">
+    <div className="calculator">
+      <div>
+        <button
+          onClick={() => setCalculators((prev) => prev.filter(calcId => calcId !== id))}
+        >
+          Remove this calculator
+        </button>
+      </div>
       <div>
         <Input 
           placeholder="total amount you'll be borrowing"
@@ -59,6 +72,6 @@ export default function Calculator() {
           term={term}
         />
       </div>
-    </section>
+    </div>
   )
 }
