@@ -1,11 +1,12 @@
-import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/OutputTypes";
 import accounting from "accounting";
+import { useState } from "react";
+import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/OutputTypes";
+import { paymentScheduleFrequencyMap } from "../utils/helpers";
 import MortgageScheduleYear from "./MortgageScheduleYear";
+import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";
+import MortgageScheduleTabSummary from "./MortgageScheduleTabSummary.tsx";
 
 import '../styles/mortgage-schedule.css';
-import { paymentScheduleFrequencyMap } from "../utils/helpers";
-import { useState } from "react";
-import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails,
@@ -79,6 +80,11 @@ export default function MortgageSchedule({
               setActiveTab={setActiveTab}
               activeTab={activeTab}
             />
+          }
+          {layout === 'tabs' &&
+            yearsInTerm.map((payments, index) =>
+              <MortgageScheduleTabSummary payments={payments} index={index} activeTab={activeTab} key={index} />
+            )
           }
           <div className="mortgage-schedule-header sub-grid">
             <span>#</span>

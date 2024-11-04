@@ -40,9 +40,9 @@ export default function MortgageScheduleYear({
     <>
       {layout === 'table' &&
         <div onClick={() => setCollapsed(prev => !prev)} className="sub-grid yearly-summary-header">
-        <span className="yearly-summary-title">
-          Year {index + 1} Summary:
-        </span>
+          <span className="yearly-summary-title">
+            Year {index + 1} Summary:
+          </span>
           <span className="yearly-summary-total">{accounting.formatMoney(totalPayment)}</span>
           <span className="yearly-summary-interest">{accounting.formatMoney(totalInterest)}</span>
           <span className="yearly-summary-principal">{accounting.formatMoney(totalPrincipal)}</span>

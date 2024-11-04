@@ -45,6 +45,30 @@
     .year-tab:not(:first-child) {
       margin-left: 4px;
     }
+
+    .tab-summary {
+      grid-column: 1 / -1;
+      background-color: white;
+      margin: 0.5em 0;
+      border-radius: 4px;
+      display: none;
+      padding: 1em;
+    }
+    .tab-summary.active {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+    .tab-summary > div {
+      display: flex;
+      flex-direction: column;
+    }
+    .tab-summary .label {
+      font-size: 0.75rem;
+    }
+    .tab-summary span {
+      padding-left: 0;
+    }
   } /* END .mortgage-schedule--tabs */
 
   .mortgage-schedule-header {
