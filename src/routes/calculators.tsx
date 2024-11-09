@@ -9,9 +9,12 @@ export default function Calculators() {
 
 	return (
 		<>
-			<div className="add-calculator">
-				<button onClick={() => setCalculators((prev: number[]) => [...prev, prev.length])}>Add Calculator</button>
-			</div>
+			<button
+				className="add-calculator"
+				onClick={() => setCalculators((prev: number[]) => [...prev, prev.length])}
+			>
+				+
+			</button>
 			<section className="calculator-wrapper">
 				{calculators.map((calculator) =>
 					<Calculator key={calculator} id={calculator} setCalculators={setCalculators} />

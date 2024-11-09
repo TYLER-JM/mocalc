@@ -8,4 +8,22 @@
     .calculator {
         min-width: 45vw;
     }
+
+    .add-calculator {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        height: 1.5em;
+        width: 1.5em;
+        border: none;
+        border-radius: 100%;
+        font-size: 2rem;
+        opacity: 0.5;
+        transition: all 0.2s ease-in-out;
+        box-shadow: rgba(0,0,0,0.5) 4px 0px 30px;
+        background-color: white;
+    }
+    .add-calculator:hover {
+        opacity: 1;
+    }
 }

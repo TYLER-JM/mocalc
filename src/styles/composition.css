@@ -1,2 +1,25 @@
+nav {
 
+}
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: end;
+    gap: 1em;
+    margin: 0.5em;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: currentColor;
+}
+
+main {
+    min-height: 90vh;
+    position: relative;
+}
 
