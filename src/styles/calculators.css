@@ -20,10 +20,15 @@
         font-size: 2rem;
         opacity: 0.5;
         transition: all 0.2s ease-in-out;
-        box-shadow: rgba(0,0,0,0.5) 4px 0px 30px;
+        box-shadow: rgba(0,0,0,0.5) 4px 0 30px;
         background-color: white;
     }
     .add-calculator:hover {
         opacity: 1;
+    }
+    .add-calculator:active {
+        opacity: 1;
+        box-shadow: rgba(0,0,0,0.5) 2px 0 15px;
+        transform: translateY(2px);
     }
 }
