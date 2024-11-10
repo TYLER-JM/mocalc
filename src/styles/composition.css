@@ -5,13 +5,23 @@ nav ul {
     list-style-type: none;
     display: flex;
     justify-content: end;
-    gap: 1em;
     margin: 0.5em;
     padding: 0;
 }
 
+nav ul li {
+    padding: 0 0.5em;
+    border-bottom: 4px solid var(--turquoise);
+}
+nav ul li:hover {
+    background-color: var(--turquoise);
+    color: white;
+}
+
 nav a {
     text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
 }
 
 a:visited {
