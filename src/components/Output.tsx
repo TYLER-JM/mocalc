@@ -63,7 +63,7 @@ export default function Output({
   }
   
   return (
-    <div>
+    <div className="calculator-outputs">
       {output.status === STATUS.incomplete &&
         <p>pending...</p>
       }

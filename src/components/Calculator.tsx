@@ -27,7 +27,7 @@ export default function Calculator({
           Remove this calculator
         </button>
       </div>
-      <div>
+      <div className="calculator-inputs">
         <Input
           placeholder="total amount you'll be borrowing"
           setState={setPrincipal}
@@ -46,41 +46,35 @@ export default function Calculator({
           inputName="amortizationPeriod"
           setState={setAmortization}
         />
-        <div>
-          <label htmlFor="termLength">
-            Term Length (in years)
-            <select defaultValue={term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="paymentSchedule">
-            Payment Schedule
-            <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
-              <option value="monthly">Monthly</option>
-              <option value="accelerated_weekly">Accelerated weekly</option>
-              <option value="weekly">Weekly</option>
-              <option value="accelerated_biweekly">Accelerated Bi-weekly</option>
-              <option value="biweekly">Bi-weekly (every 2-weeks)</option>
-              <option value="semimonthly">Semi-monthly (24 payments a year)</option>
-            </select>
-          </label>
-        </div>
+        <label htmlFor="termLength">
+          Term Length (in years)
+          <select defaultValue={term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <label htmlFor="paymentSchedule">
+          Payment Schedule
+          <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
+            <option value="monthly">Monthly</option>
+            <option value="accelerated_weekly">Accelerated weekly</option>
+            <option value="weekly">Weekly</option>
+            <option value="accelerated_biweekly">Accelerated Bi-weekly</option>
+            <option value="biweekly">Bi-weekly (every 2-weeks)</option>
+            <option value="semimonthly">Semi-monthly (24 payments a year)</option>
+          </select>
+        </label>
       </div>
-      <div>
-        <Output
-          rate={rate / 100}
-          principal={principal}
-          amortization={amortization}
-          paymentType={paymentType}
-          term={term}
-        />
-      </div>
+      <Output
+        rate={rate / 100}
+        principal={principal}
+        amortization={amortization}
+        paymentType={paymentType}
+        term={term}
+      />
     </div>
   )
 }

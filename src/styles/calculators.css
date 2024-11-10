@@ -7,12 +7,24 @@
     }
     .calculator {
         min-width: 45vw;
+        margin: 0.5em;
+    }
+    .calculator > *:not(:last-child) {
+        margin-bottom: 1.5em;
+    }
+    .calculator-inputs {
+        display: flex;
+        flex-direction: column;
+    }
+    .calculator-inputs label {
+        display: flex;
+        flex-direction: column;
     }
 
     .add-calculator {
         position: absolute;
-        top: 4px;
-        right: 4px;
+        top: 8px;
+        right: 8px;
         height: 1.5em;
         width: 1.5em;
         border: none;
@@ -22,6 +34,9 @@
         transition: all 0.2s ease-in-out;
         box-shadow: rgba(0,0,0,0.5) 4px 0 30px;
         background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .add-calculator:hover {
         opacity: 1;
