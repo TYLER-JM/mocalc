@@ -70,7 +70,7 @@ export default function MortgageSchedule({
       <div>
         <button onClick={() => updateLayout('table')}>Table</button>
         <button onClick={() => updateLayout('tabs')}>Tabs</button>
-        <button disabled>Cards</button>
+        {/*<button disabled>Cards</button>*/}
       </div>
       <div className="overflow">
         <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
