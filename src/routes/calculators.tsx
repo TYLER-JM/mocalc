@@ -16,13 +16,13 @@ export default function Calculators() {
 
 	return (
 		<>
-			<button
+			<div
 				className="add-calculator"
 				data-calculators={calculators.length <= 0 ? 'empty' : true}
-				onClick={() => addCalculator()}
 			>
-				+
-			</button>
+				<button onClick={() => addCalculator()}>+</button>
+				<span>Click to add a calculator</span>
+			</div>
 			<section className="calculator-wrapper">
 				{calculators.map((calculator) =>
 					<Calculator key={calculator} id={calculator} setCalculators={setCalculators} />
