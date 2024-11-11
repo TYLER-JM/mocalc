@@ -7,11 +7,19 @@ import '../styles/calculators.css';
 export default function Calculators() {
 	const [calculators, setCalculators] = useState<number[]>([]);
 
+	function addCalculator() {
+		if (calculators.length >= 8) {
+			return
+		}
+		setCalculators((prev: number[]) => [...prev, prev.length])
+	}
+
 	return (
 		<>
 			<button
 				className="add-calculator"
-				onClick={() => setCalculators((prev: number[]) => [...prev, prev.length])}
+				data-calculators={calculators.length <= 0 ? 'empty' : true}
+				onClick={() => addCalculator()}
 			>
 				+
 			</button>
