@@ -6,6 +6,8 @@ import MortgageSchedule from "./MortgageSchedule.tsx"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
 
+import '../styles/output.css'
+
 interface OutputProps {
   rate: number,
   principal: number,
@@ -65,7 +67,7 @@ export default function Output({
   return (
     <div className="calculator-outputs">
       {output.status === STATUS.incomplete &&
-        <p>waiting...</p>
+        <p className="output-waiting">waiting...</p>
       }
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>

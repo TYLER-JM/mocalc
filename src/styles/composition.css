@@ -46,11 +46,32 @@ main {
         font-weight: 400;
         font-style: normal;
         font-size: 10rem;
-        color: var(--turquoise);
+        background: linear-gradient(
+                65deg,
+                var(--argentinian-blue),
+                var(--turquoise),
+                var(--argentinian-blue)
+        );
+        background-clip: text;
+        color: transparent;
     }
 }
 
 .about {
     min-height: 90vh;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    width: 100%;
+    background: linear-gradient(
+            65deg,
+            var(--turquoise),
+            var(--argentinian-blue),
+            var(--turquoise)
+    );
 }
 

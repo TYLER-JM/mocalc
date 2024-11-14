@@ -1,0 +1,25 @@
+@keyframes glide {
+    to {
+        background-position: 200% center;
+    }
+}
+.output-waiting {
+    font-size: 2rem;
+    font-weight: bolder;
+
+    background: linear-gradient(
+            65deg,
+            var(--turquoise),
+            var(--turquoise) 35%,
+            white,
+            var(--turquoise)
+    ) 0 center;
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glide 3s ease infinite;
+    @media (prefers-reduced-motion) {
+        animation: none;
+    }
+}

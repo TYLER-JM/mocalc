@@ -12,7 +12,7 @@ function Root() {
       <main>
         <Outlet />
       </main>
-      <footer></footer>
+      <footer>&#169; 2024</footer>
       
     </>
   )
