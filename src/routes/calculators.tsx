@@ -1,11 +1,11 @@
-import {useState} from "react";
 import Calculator from "../components/Calculator.tsx";
 
 import '../styles/calculators.css';
+import {useCalculators} from "../Root.tsx";
 
 
 export default function Calculators() {
-	const [calculators, setCalculators] = useState<number[]>([]);
+	const [calculators, setCalculators] = useCalculators();
 
 	function addCalculator() {
 		if (calculators.length >= 8) {

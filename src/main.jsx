@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
-import Root from './Root.jsx'
+import Root from './Root.tsx'
 import Help from './routes/help.jsx'
 import Calculators from "./routes/calculators.tsx";
 import Home from "./routes/home.tsx";
