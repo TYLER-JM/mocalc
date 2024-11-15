@@ -2,3 +2,31 @@
     overflow: auto;
 }
 
+.font-heading {
+    font-family: "Mochiy Pop One", sans-serif;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+.text-sm {
+    font-size: .85rem;
+}
+.text-lg {
+    font-size: 3rem;
+}
+.italic {
+    font-style: italic;
+}
+
+.text-gradiant {
+    background: linear-gradient(
+            65deg,
+            var(--turquoise),
+            var(--argentinian-blue)
+    ) 0 center;
+    background-size: 100% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
