@@ -4,7 +4,7 @@ import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/Outp
 import { paymentScheduleFrequencyMap } from "../utils/helpers";
 import MortgageScheduleYear from "./MortgageScheduleYear";
 import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";
-import MortgageScheduleTabSummary from "./MortgageScheduleTabSummary.tsx";
+import MortgageScheduleYearSummary from "./MortgageScheduleYearSummary.tsx";
 
 import '../styles/mortgage-schedule.css';
 
@@ -83,7 +83,7 @@ export default function MortgageSchedule({
           }
           {layout === 'tabs' &&
             yearsInTerm.map((payments, index) =>
-              <MortgageScheduleTabSummary payments={payments} index={index} activeTab={activeTab} key={index} />
+              <MortgageScheduleYearSummary payments={payments} index={index} activeTab={activeTab} key={index} />
             )
           }
           <div className="mortgage-schedule-header sub-grid">
