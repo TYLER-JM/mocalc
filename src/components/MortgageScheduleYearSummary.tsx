@@ -7,7 +7,7 @@ interface MortgageScheduleTabSummaryProps {
 	activeTab: number | undefined,
 }
 
-export default function MortgageScheduleTabSummary({
+export default function MortgageScheduleYearSummary({
 	payments,
 	index,
 	activeTab,

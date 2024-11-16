@@ -1,28 +1,54 @@
-import { useState } from "react";
 import Input from "./Input.tsx";
 import Output from "./Output.tsx";
 import { PaymentSchedules } from "../types/StringTypes.ts";
+import { CalculatorInputs } from "../types/CalculatorTypes.ts";
 
 interface CalculatorProps {
-  setCalculators: (value: number[] | ((prevValue: number[]) => number[])) => void
-  id: number
+  setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
+  calculator: CalculatorInputs
 }
 
 export default function Calculator({
   setCalculators,
-  id
+  calculator
 }: CalculatorProps) {
-  const [rate, setRate] = useState(0)
-  const [principal, setPrincipal] = useState(0)
-  const [amortization, setAmortization] = useState(0)
-  const [paymentType, setPaymentType] = useState<PaymentSchedules>('monthly')
-  const [term, setTerm] = useState<number>(5)
+  function updateCalculators(inputs: CalculatorInputs) {
+    setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
+      const filtered = prev.filter(calc => calc.id !== inputs.id)
+      return [...filtered, inputs]
+    })
+  }
+  function setPrincipal(val: number): void {
+    const updatedInputs = calculator
+    updatedInputs.principal = val
+    updateCalculators(updatedInputs)
+  }
+  function setRate(val: number): void {
+    const updatedInputs = calculator
+    updatedInputs.rate = val
+    updateCalculators(updatedInputs)
+  }
+  function setAmortization(val: number): void {
+    const updatedInputs = calculator
+    updatedInputs.amortization = val
+    updateCalculators(updatedInputs)
+  }
+  function setTerm(val: number): void {
+    const updatedInputs = calculator
+    updatedInputs.term = val
+    updateCalculators(updatedInputs)
+  }
+  function setPaymentType(val: PaymentSchedules): void {
+    const updatedInputs = calculator
+    updatedInputs.paymentType = val
+    updateCalculators(updatedInputs)
+  }
 
   return (
     <div className="calculator">
       <div>
         <button
-          onClick={() => setCalculators((prev) => prev.filter(calcId => calcId !== id))}
+          onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
         >
           Remove this calculator
         </button>
@@ -33,22 +59,25 @@ export default function Calculator({
           setState={setPrincipal}
           label="Mortgage Amount"
           inputName="mortgageAmount"
+          defaultValue={calculator.principal.toString()}
         />
         <Input
           label="Interest Rate"
           inputName="interestRate"
           placeholder="interest rate (in %)"
           setState={setRate}
+          defaultValue={calculator.rate.toString()}
         />
         <Input
           label="Amortization period (in years)"
           placeholder="25 years"
           inputName="amortizationPeriod"
           setState={setAmortization}
+          defaultValue={calculator.amortization.toString()}
         />
         <label htmlFor="termLength">
           Term Length (in years)
-          <select defaultValue={term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
+          <select defaultValue={calculator.term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -58,7 +87,7 @@ export default function Calculator({
         </label>
         <label htmlFor="paymentSchedule">
           Payment Schedule
-          <select name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
+          <select defaultValue={calculator.paymentType} name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
             <option value="monthly">Monthly</option>
             <option value="accelerated_weekly">Accelerated weekly</option>
             <option value="weekly">Weekly</option>
@@ -69,11 +98,11 @@ export default function Calculator({
         </label>
       </div>
       <Output
-        rate={rate / 100}
-        principal={principal}
-        amortization={amortization}
-        paymentType={paymentType}
-        term={term}
+        rate={calculator.rate / 100}
+        principal={calculator.principal}
+        amortization={calculator.amortization}
+        paymentType={calculator.paymentType}
+        term={calculator.term}
       />
     </div>
   )

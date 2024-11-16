@@ -1,10 +1,13 @@
 import {PaymentSchedules} from "./StringTypes.ts";
 
-export interface Calculator {
-	id: number;
-	principal: string,
-	rate: string,
-	amortization: string,
-	term: string,
-	paymentType: PaymentSchedules
+export class CalculatorInputs {
+	constructor(
+		public id: number,
+		public principal: number,
+		public rate: number,
+		public amortization: number,
+		public term: number,
+		public paymentType: PaymentSchedules
+	) {
+	}
 }
