@@ -1,4 +1,4 @@
-import { OutputValues } from "../types/OutputTypes"
+import { OutputValues } from "../definitions/OutputTypes"
 import "../styles/output-summary.css"
 
 

@@ -1,4 +1,4 @@
-import {ScheduledPayment} from "../types/OutputTypes.ts";
+import {ScheduledPayment} from "../definitions/OutputTypes.ts";
 import accounting from "accounting";
 
 interface MortgageScheduleTabSummaryProps {

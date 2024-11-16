@@ -2,8 +2,8 @@ import Calculator from "../components/Calculator.tsx";
 
 import '../styles/calculators.css';
 import {useCalculators} from "../Root.tsx";
-import {CalculatorInputs} from "../types/CalculatorTypes.ts";
-import {MONTHLY} from "../types/StringTypes.ts";
+import {CalculatorInputs} from "../definitions/CalculatorTypes.ts";
+import {MONTHLY} from "../definitions/StringTypes.ts";
 
 
 export default function Calculators() {

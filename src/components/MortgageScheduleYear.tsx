@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import { ScheduledPayment } from "../types/OutputTypes"
+import { ScheduledPayment } from "../definitions/OutputTypes"
 import accounting from "accounting"
 
 interface MortgageScheduleYearProps {

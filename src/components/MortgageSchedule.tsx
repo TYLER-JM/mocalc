@@ -1,6 +1,6 @@
 import accounting from "accounting";
 import { useState } from "react";
-import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../types/OutputTypes";
+import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../definitions/OutputTypes";
 import { paymentScheduleFrequencyMap } from "../utils/helpers";
 import MortgageScheduleYear from "./MortgageScheduleYear";
 import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";

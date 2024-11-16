@@ -1,6 +1,6 @@
 import {NavLink, Outlet, useOutletContext} from 'react-router-dom'
 import {useState} from "react";
-import {CalculatorInputs} from "./types/CalculatorTypes.ts";
+import {CalculatorInputs} from "./definitions/CalculatorTypes.ts";
 
 type ContextType = [
   calculators: CalculatorInputs[],

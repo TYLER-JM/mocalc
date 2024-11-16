@@ -1,5 +1,5 @@
 import accounting from "accounting"
-import { PaymentSchedules } from "../types/StringTypes"
+import { PaymentSchedules } from "../definitions/StringTypes"
 
 interface PaymentCalculationOptions {
   principal: number,

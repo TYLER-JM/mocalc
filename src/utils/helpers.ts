@@ -1,4 +1,4 @@
-import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, SEMIMONTHLY, WEEKLY } from "../types/StringTypes";
+import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, SEMIMONTHLY, WEEKLY } from "../definitions/StringTypes";
 
 export const paymentScheduleFrequencyMap = {
   [MONTHLY]: 12,
