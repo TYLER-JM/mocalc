@@ -14,8 +14,9 @@ export default function Calculator({
 }: CalculatorProps) {
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
-      const filtered = prev.filter(calc => calc.id !== inputs.id)
-      return [...filtered, inputs]
+      return prev.map(calc => {
+        return calc.id === inputs.id ? inputs : calc
+      })
     })
   }
   function setPrincipal(val: number): void {
