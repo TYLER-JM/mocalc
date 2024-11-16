@@ -2,6 +2,8 @@ import Calculator from "../components/Calculator.tsx";
 
 import '../styles/calculators.css';
 import {useCalculators} from "../Root.tsx";
+import {CalculatorInputs} from "../types/CalculatorTypes.ts";
+import {MONTHLY} from "../types/StringTypes.ts";
 
 
 export default function Calculators() {
@@ -11,7 +13,10 @@ export default function Calculators() {
 		if (calculators.length >= 8) {
 			return
 		}
-		setCalculators((prev: number[]) => [...prev, prev.length])
+		setCalculators((prev: CalculatorInputs[]) => {
+			const newCalc = new CalculatorInputs(prev.length, 0, 0, 0, 5, MONTHLY)
+			return [...prev, newCalc]
+		})
 	}
 
 	return (
@@ -25,7 +30,7 @@ export default function Calculators() {
 			</div>
 			<section className="calculator-wrapper">
 				{calculators.map((calculator) =>
-					<Calculator key={calculator} id={calculator} setCalculators={setCalculators} />
+					<Calculator key={calculator.id} calculator={calculator} setCalculators={setCalculators} />
 				)}
 			</section>
 		</>

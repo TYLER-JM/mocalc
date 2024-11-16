@@ -1,12 +1,13 @@
 import {NavLink, Outlet, useOutletContext} from 'react-router-dom'
 import {useState} from "react";
+import {CalculatorInputs} from "./types/CalculatorTypes.ts";
 
 type ContextType = [
-  calculators: number[],
-  setCalculators: (value: number[] | ((prevValue: number[]) => number[])) => void
+  calculators: CalculatorInputs[],
+  setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
 ]
 export default function Root() {
-  const [calculators, setCalculators] = useState<number[]>([]);
+  const [calculators, setCalculators] = useState<CalculatorInputs[]>([]);
 
   return (
     <>
