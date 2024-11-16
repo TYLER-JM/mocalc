@@ -1,7 +1,7 @@
 import Input from "./Input.tsx";
 import Output from "./Output.tsx";
 import { PaymentSchedules } from "../definitions/StringTypes.ts";
-import { CalculatorInputs } from "../definitions/CalculatorTypes.ts";
+import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void

@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import { ScheduledPayment } from "../definitions/OutputTypes"
 import accounting from "accounting"
+import {YearSummary} from "../definitions/CalculatorDefinitions.ts";
 
 interface MortgageScheduleYearProps {
   payments: ScheduledPayment[],
@@ -15,6 +16,7 @@ export default function MortgageScheduleYear({
   activeTab
 }: MortgageScheduleYearProps) {
   const [collapsed, setCollapsed] = useState<boolean>(false)
+  const yearSummary = new YearSummary(payments)
 
   useEffect(() => {
     if (activeTab === undefined) {
@@ -24,17 +26,6 @@ export default function MortgageScheduleYear({
     }
   }, [activeTab])
 
-  const totalPayment = payments.reduce((total: number, payment: ScheduledPayment): number => {
-    return total + payment.mortgagePayment.totalPayment
-  }, 0)
-  const totalInterest = payments.reduce((total: number, payment: ScheduledPayment): number => {
-    return total + payment.mortgagePayment.interestPortion
-  }, 0)
-  const totalPrincipal = payments.reduce((total: number, payment: ScheduledPayment): number => {
-    return total + payment.mortgagePayment.principalPortion
-  }, 0)
-  const endingBalance = payments[payments.length - 1].mortgagePayment.endingBalance
-
   //TODO: improve the method of determining the classes dynamically
   return (
     <>
@@ -43,10 +34,10 @@ export default function MortgageScheduleYear({
           <span className="yearly-summary-title">
             Year {index + 1} Summary:
           </span>
-          <span className="yearly-summary-total">{accounting.formatMoney(totalPayment)}</span>
-          <span className="yearly-summary-interest">{accounting.formatMoney(totalInterest)}</span>
-          <span className="yearly-summary-principal">{accounting.formatMoney(totalPrincipal)}</span>
-          <span className="yearly-summary-balance">{accounting.formatMoney(endingBalance)}</span>
+          <span className="yearly-summary-total">{accounting.formatMoney(yearSummary.totalPayment)}</span>
+          <span className="yearly-summary-interest">{accounting.formatMoney(yearSummary.totalInterest)}</span>
+          <span className="yearly-summary-principal">{accounting.formatMoney(yearSummary.totalPrincipal)}</span>
+          <span className="yearly-summary-balance">{accounting.formatMoney(yearSummary.endingBalance)}</span>
         </div>
       }
       <div className={collapsed ? "sub-grid-wrapper collapsed" : "sub-grid-wrapper"}>

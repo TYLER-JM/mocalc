@@ -2,7 +2,7 @@ import Calculator from "../components/Calculator.tsx";
 
 import '../styles/calculators.css';
 import {useCalculators} from "../Root.tsx";
-import {CalculatorInputs} from "../definitions/CalculatorTypes.ts";
+import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 import {MONTHLY} from "../definitions/StringTypes.ts";
 
 
