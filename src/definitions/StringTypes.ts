@@ -1,9 +1,9 @@
 export const MONTHLY = 'monthly'
-export const SEMIMONTHLY = 'semimonthly'
+export const SEMIMONTHLY = 'semi-monthly'
 export const WEEKLY = 'weekly'
-export const BIWEEKLY = 'biweekly'
+export const BIWEEKLY = 'bi-weekly'
 export const ACCELERATED_WEEKLY = 'accelerated_weekly'
-export const ACCELERATED_BIWEEKLY = 'accelerated_biweekly'
+export const ACCELERATED_BIWEEKLY = 'accelerated_bi-weekly'
 
 export type PaymentSchedules = 
   typeof MONTHLY | 

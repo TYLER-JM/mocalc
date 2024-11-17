@@ -1,6 +1,12 @@
 import Input from "./Input.tsx";
 import Output from "./Output.tsx";
-import { PaymentSchedules } from "../definitions/StringTypes.ts";
+import {
+  ACCELERATED_BIWEEKLY,
+  ACCELERATED_WEEKLY, BIWEEKLY,
+  MONTHLY,
+  PaymentSchedules, SEMIMONTHLY,
+  WEEKLY
+} from "../definitions/StringTypes.ts";
 import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
 
 interface CalculatorProps {
@@ -89,12 +95,12 @@ export default function Calculator({
         <label htmlFor="paymentSchedule">
           Payment Schedule
           <select defaultValue={calculator.paymentType} name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
-            <option value="monthly">Monthly</option>
-            <option value="accelerated_weekly">Accelerated weekly</option>
-            <option value="weekly">Weekly</option>
-            <option value="accelerated_biweekly">Accelerated Bi-weekly</option>
-            <option value="biweekly">Bi-weekly (every 2-weeks)</option>
-            <option value="semimonthly">Semi-monthly (24 payments a year)</option>
+            <option value={WEEKLY}>Weekly</option>
+            <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
+            <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
+            <option value={MONTHLY}>Monthly</option>
+            <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
+            <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
           </select>
         </label>
       </div>

@@ -1,5 +1,6 @@
 import { OutputValues } from "../definitions/OutputTypes"
 import "../styles/output-summary.css"
+import {convertToTitle} from "../utils/helpers.ts";
 
 
 interface OutputSummaryProps {
@@ -21,7 +22,7 @@ export default function OutputSummary({
       </div>
       <div className="schedule-wrapper">
         <p className="output-summary-header">payment schedule:</p>
-        <p>{output.paymentSchedule}</p>
+        <p>{output.paymentSchedule && convertToTitle(output.paymentSchedule)}</p>
       </div>
       <div className="payment-wrapper">
         <p className="output-summary-header">your total payment will be</p>
