@@ -25,7 +25,7 @@ export default function Calculators() {
 				className="add-calculator"
 				data-calculators={calculators.length <= 0 ? 'empty' : true}
 			>
-				<button onClick={() => addCalculator()}>+</button>
+				<button title="click to add a calculator" onClick={() => addCalculator()}>+</button>
 				<span>Click to add a calculator</span>
 			</div>
 			<section className="calculator-wrapper">
