@@ -57,12 +57,6 @@ main {
     }
 }
 
-.about {
-    p {
-        font-size: 1.2rem;
-    }
-}
-
 .description {
     background-color: white;
     max-width: 40rem;
@@ -70,6 +64,9 @@ main {
     padding: 2rem;
     box-shadow: #e5e5e5 2px 4px 20px 5px;
     border-radius: 4px;
+    p {
+        font-size: 1.2rem;
+    }
 }
 
 .link-button {
@@ -93,14 +90,14 @@ main {
 }
 
 .inline-button {
-    height: 1.75em;
-    width: 1.75em;
+    height: 2em;
+    width: 2em;
     color: var(--turquoise);
     border: 0.05em solid var(--turquoise);
     border-radius: 100%;
     font-family: monospace;
     transition: all 0.2s ease-in-out, height 0.5s ease-out, width 0.5s ease-out;
-    box-shadow: rgba(0,0,0,0.5) 4px 0 30px;
+    box-shadow: rgba(0,0,0,0.3) 2px 0 15px;
     background-color: white;
     display: inline-flex;
     align-items: center;
