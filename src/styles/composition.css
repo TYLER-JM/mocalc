@@ -23,10 +23,6 @@ nav a {
     padding: 0 0.5em;
 }
 
-a:visited {
-    color: currentColor;
-}
-
 main {
     min-height: calc(100vh - 2.25rem - 5vh);
     position: relative;
@@ -74,6 +70,49 @@ main {
     padding: 2rem;
     box-shadow: #e5e5e5 2px 4px 20px 5px;
     border-radius: 4px;
+}
+
+.link-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+.link-button a {
+    text-decoration: none;
+    color: var(--turquoise);
+}
+.link-button a span {
+    display: inline-block;
+    transform: translateX(-1px);
+    transition: all 0.2s;
+}
+.link-button:hover a span {
+    transform: translateX(2px);
+}
+
+.inline-button {
+    height: 1.75em;
+    width: 1.75em;
+    color: var(--turquoise);
+    border: 0.05em solid var(--turquoise);
+    border-radius: 100%;
+    font-family: monospace;
+    transition: all 0.2s ease-in-out, height 0.5s ease-out, width 0.5s ease-out;
+    box-shadow: rgba(0,0,0,0.5) 4px 0 30px;
+    background-color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.inline-button:hover {
+    transform: scale(1.1);
+}
+.inline-button:active {
+    opacity: 1;
+    box-shadow: rgba(0,0,0,0.5) 2px 0 15px;
+    transform: scale(1.1) translateY(2px);
 }
 
 footer {
