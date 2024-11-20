@@ -1,8 +1,8 @@
 export default function Help() {
   function addCalculatorAndRedirect() {
-    
-  }
 
+  }
+  
   return (
     <section className="section">
       <div className="description">

@@ -28,7 +28,7 @@ a:visited {
 }
 
 main {
-    min-height: calc(100vh - 2.25rem);
+    min-height: calc(100vh - 2.25rem - 5vh);
     position: relative;
     padding-top: 2.25rem
 }
