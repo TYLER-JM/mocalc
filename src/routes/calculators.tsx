@@ -1,23 +1,12 @@
 import Calculator from "../components/Calculator.tsx";
-
-import '../styles/calculators.css';
 import {useCalculators} from "../Root.tsx";
-import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
-import {MONTHLY} from "../definitions/StringTypes.ts";
+import useAddCalculator from "../hooks/useAddCalculator.tsx";
+import '../styles/calculators.css';
 
 
 export default function Calculators() {
 	const [calculators, setCalculators] = useCalculators();
-
-	function addCalculator() {
-		if (calculators.length >= 8) {
-			return
-		}
-		setCalculators((prev: CalculatorInputs[]) => {
-			const newCalc = new CalculatorInputs(prev.length, 0, 0, 0, 5, MONTHLY)
-			return [...prev, newCalc]
-		})
-	}
+	const addCalculator = useAddCalculator()
 
 	return (
 		<>
@@ -25,7 +14,7 @@ export default function Calculators() {
 				className="add-calculator"
 				data-calculators={calculators.length <= 0 ? 'empty' : true}
 			>
-				<button title="click to add a calculator" onClick={() => addCalculator()}>+</button>
+				<button title="click to add a calculator" onClick={addCalculator}>+</button>
 				<span>Click to add a calculator</span>
 			</div>
 			<section className="calculator-wrapper">

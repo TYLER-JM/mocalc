@@ -1,8 +1,14 @@
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import useAddCalculator from "../hooks/useAddCalculator.tsx";
 
 export default function Help() {
+  const addCalc = useAddCalculator()
+  const navigate = useNavigate();
+  
   function addCalculatorAndRedirect() {
-
+    addCalc()
+    navigate('/calculators')
   }
   
   return (
