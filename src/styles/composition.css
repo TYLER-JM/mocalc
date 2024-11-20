@@ -33,6 +33,10 @@ main {
     padding-top: 2.25rem
 }
 
+.section {
+    margin: 4rem 0;
+}
+
 .home {
     min-height: calc(100vh - 2.25rem);
     width: 100%;
@@ -58,13 +62,12 @@ main {
 }
 
 .about {
-    min-height: 90vh;
-
     p {
         font-size: 1.2rem;
     }
 }
-.about-description {
+
+.description {
     background-color: white;
     max-width: 40rem;
     margin: 0 auto;

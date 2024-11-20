@@ -12,9 +12,9 @@ export default function Root() {
   return (
     <>
       <nav>
-        <NavLink to="/calculators">Get Started</NavLink>
+        <NavLink to="/calculators">Calculators</NavLink>
         <NavLink to="/">About</NavLink>
-        <NavLink to="/help">Help</NavLink>
+        {/*<NavLink to="/help">Help</NavLink>*/}
       </nav>
       <main>
         <Outlet context={[calculators, setCalculators] satisfies ContextType} />
