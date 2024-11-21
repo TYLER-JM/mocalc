@@ -40,7 +40,7 @@ export default function Output({
     amortization: amortization * 12 // to get the months
   }
 
-  if (amortization > 0) {
+  if (amortization > 0 && rate > 0) {
     let monthlyPayment = getMonthlyPayment(paymentValues)
     let scheduleRate = getRateByFrequency(effectiveRate, paymentScheduleFrequencyMap[paymentType])
 

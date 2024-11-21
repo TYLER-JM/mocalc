@@ -69,7 +69,7 @@ export default function Calculator({
           defaultValue={calculator.principal.toString()}
         />
         <Input
-          label="Interest Rate"
+          label="Interest Rate (%)"
           inputName="interestRate"
           placeholder="interest rate (in %)"
           setState={setRate}
