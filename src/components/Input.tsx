@@ -46,7 +46,7 @@ export default function Input({
   
   return (
     <label htmlFor={inputName}>
-      {label}
+      <span>{label}</span>
       <input
         type="text"
         name={inputName}

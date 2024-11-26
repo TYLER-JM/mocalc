@@ -9,18 +9,13 @@
         margin: 0.5em;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        max-width: 50vw;
     }
     .calculator > *:not(:last-child) {
         margin-bottom: 1.5em;
     }
-    .calculator-inputs {
-        display: flex;
-        flex-direction: column;
-    }
-    .calculator-inputs label {
-        display: flex;
-        flex-direction: column;
+    .calculator-remove {
+        align-self: center;
     }
     .calculator-outputs {
         max-width: 100%;

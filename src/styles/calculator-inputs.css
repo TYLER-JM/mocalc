@@ -1,0 +1,23 @@
+@layer components {
+    .calculator-inputs {
+        display: flex;
+        flex-direction: column;
+        padding: 2em 1em;
+        background-color: white;
+        label {
+            display: flex;
+            flex-direction: column;
+            align-content: start;
+        }
+        label :nth-child(2) {
+            padding: 0.5em 0.5em;
+            border: 1px solid silver;
+            background-color: transparent;
+            border-radius: 6px;
+            max-width: 25vw;
+        }
+        label :last-child {
+            margin-bottom: 0.5em;
+        }
+    }
+}

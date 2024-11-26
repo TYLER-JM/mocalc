@@ -53,7 +53,7 @@ export default function Calculator({
 
   return (
     <div className="calculator">
-      <div>
+      <div className="calculator-remove">
         <button
           onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
         >
@@ -83,7 +83,7 @@ export default function Calculator({
           defaultValue={calculator.amortization.toString()}
         />
         <label htmlFor="termLength">
-          Term Length (in years)
+          <span>Term Length (in years)</span>
           <select defaultValue={calculator.term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -93,7 +93,7 @@ export default function Calculator({
           </select>
         </label>
         <label htmlFor="paymentSchedule">
-          Payment Schedule
+          <span>Payment Schedule</span>
           <select defaultValue={calculator.paymentType} name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
             <option value={WEEKLY}>Weekly</option>
             <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>

@@ -2,6 +2,7 @@ import Calculator from "../components/Calculator.tsx";
 import {useCalculators} from "../Root.tsx";
 import useAddCalculator from "../hooks/useAddCalculator.tsx";
 import '../styles/calculators.css';
+import '../styles/calculator-inputs.css';
 
 
 export default function Calculators() {
