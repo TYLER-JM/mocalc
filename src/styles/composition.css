@@ -24,7 +24,7 @@ nav a {
 }
 
 main {
-    min-height: calc(100vh - 2.25rem - 5vh);
+    min-height: calc(100vh - 2.25rem);
     position: relative;
     padding-top: 2.25rem
 }
