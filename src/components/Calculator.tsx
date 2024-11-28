@@ -85,7 +85,12 @@ export default function Calculator({
         />
         <label htmlFor="termLength">
           <span>Term Length (in years)</span>
-          <select defaultValue={calculator.term} name="termLength" onChange={(e) => setTerm(parseInt(e.target.value))}>
+          <select
+            className="form-input"
+            defaultValue={calculator.term}
+            name="termLength"
+            onChange={(e) => setTerm(parseInt(e.target.value))}
+          >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -95,7 +100,12 @@ export default function Calculator({
         </label>
         <label htmlFor="paymentSchedule">
           <span>Payment Schedule</span>
-          <select defaultValue={calculator.paymentType} name="paymentSchedule" onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}>
+          <select
+            className="form-input"
+            defaultValue={calculator.paymentType}
+            name="paymentSchedule"
+            onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
+          >
             <option value={WEEKLY}>Weekly</option>
             <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
             <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>

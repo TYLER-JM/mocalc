@@ -9,15 +9,25 @@
             flex-direction: column;
             align-content: start;
         }
-        label :nth-child(2) {
+        label .form-input {
             padding: 0.5em 0.5em;
             border: 1px solid silver;
             background-color: transparent;
             border-radius: 6px;
             max-width: 30em;
         }
-        label :last-child {
+        label .form-input[aria-invalid="true"] {
+            border: 1px solid red;
+        }
+        label .form-input[aria-invalid="true"]:focus {
+            outline: 1px solid red;
+        }
+        label .form-input:focus {
+            outline: 2px solid var(--turquoise);
+        }
+        label .input-feedback {
             margin-bottom: 0.5em;
+            color: red;
         }
     }
 }

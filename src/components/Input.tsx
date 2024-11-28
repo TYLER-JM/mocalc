@@ -48,6 +48,7 @@ export default function Input({
     <label htmlFor={inputName}>
       <span>{label}</span>
       <input
+        className="form-input"
         type="text"
         name={inputName}
         placeholder={placeholder}
@@ -55,7 +56,7 @@ export default function Input({
         value={value}
         aria-invalid={ariaInvalid}
       />
-      <small>{userFeedback}</small>
+      <small className="input-feedback">{userFeedback}</small>
     </label>
   )
 }

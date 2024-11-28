@@ -67,9 +67,9 @@ export default function MortgageSchedule({
 
   return (
     <>
-      <div>
-        <button title="view as table layout" onClick={() => updateLayout('table')}>Table</button>
-        <button title="view as tabbed layout" onClick={() => updateLayout('tabs')}>Tabs</button>
+      <div className="btn-group">
+        <button className="btn" title="view as table layout" onClick={() => updateLayout('table')}>Table</button>
+        <button className="btn" title="view as tabbed layout" onClick={() => updateLayout('tabs')}>Tabs</button>
         {/*<button disabled>Cards</button>*/}
       </div>
       <div className="overflow">
