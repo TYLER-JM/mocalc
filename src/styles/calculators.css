@@ -40,7 +40,8 @@
             color: var(--turquoise);
             opacity: 0.5;
             transition: all 0.2s ease-in-out, height 0.5s ease-out, width 0.5s ease-out;
-            box-shadow: rgba(0,0,0,0.5) 4px 0 30px;
+            /*box-shadow: rgba(0,0,0,0.5) 4px 0 30px;*/
+            box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.78);
             background-color: white;
             display: flex;
             align-items: center;
@@ -53,11 +54,15 @@
     }
     .add-calculator button:hover {
         opacity: 1;
+        transform: translateY(1px) translateX(1px);
+        box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.78);
     }
     .add-calculator button:active {
         opacity: 1;
-        box-shadow: rgba(0,0,0,0.5) 2px 0 15px;
-        transform: translateY(2px);
+        /*box-shadow: rgba(0,0,0,0.5) 2px 0 15px;*/
+        /*transform: translateY(2px);*/
+        transform: translateY(2px) translateX(2px);
+        box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.78);
     }
     .add-calculator[data-calculators="empty"] {
         top: 35%;

@@ -2,6 +2,7 @@
 @import "./styles/variables.css" layer(composition);
 @import "styles/composition.css" layer(composition);
 @import "./styles/utilities.css" layer(utility);
+@import "./styles/components.css" layer(components);
 
 
 @layer composition {

@@ -1,0 +1,20 @@
+.btn {
+    display: inline-block;
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 6px;
+    padding: 0.5em 0.5em;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.78);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(1px) translateX(1px);
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.78);
+}
+
+.btn:active {
+    transform: translateY(2px) translateX(2px);
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.78);
+}

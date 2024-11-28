@@ -55,6 +55,7 @@ export default function Calculator({
     <div className="calculator">
       <div className="calculator-remove">
         <button
+          className="btn"
           onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
         >
           Remove this calculator
