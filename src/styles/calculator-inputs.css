@@ -9,12 +9,28 @@
             flex-direction: column;
             align-content: start;
         }
+        .input-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            align-items: center;
+        }
+        .input-wrapper > * {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .input-icon {
+            height: 1.25em;
+            width: 1.25em;
+        }
+
         label .form-input {
             padding: 0.5em 0.5em;
+            padding-left: 1.75em;
             border: 1px solid silver;
             background-color: transparent;
             border-radius: 6px;
-            max-width: 30em;
+            width: 100%;
         }
         label .form-input[aria-invalid="true"] {
             border: 1px solid red;

@@ -46,16 +46,22 @@ export default function Input({
   
   return (
     <label htmlFor={inputName}>
+
       <span>{label}</span>
-      <input
-        className="form-input"
-        type="text"
-        name={inputName}
-        placeholder={placeholder}
-        onChange={handleInputChange}
-        value={value}
-        aria-invalid={ariaInvalid}
-      />
+      <div className="input-wrapper">
+        <svg className="input-icon">
+          <use xlinkHref="img/sprite.svg#icon-dollar-sign"></use>
+        </svg>
+        <input
+          className="form-input"
+          type="text"
+          name={inputName}
+          placeholder={placeholder}
+          onChange={handleInputChange}
+          value={value}
+          aria-invalid={ariaInvalid}
+        />
+      </div>
       <small className="input-feedback">{userFeedback}</small>
     </label>
   )
