@@ -12,6 +12,11 @@ export class CalculatorInputs {
 	) {}
 }
 
+export interface InputIconOptions {
+	placement: 'start' | 'end',
+	name: string,
+}
+
 export class YearSummary {
 	constructor(
 		public payments: ScheduledPayment[],

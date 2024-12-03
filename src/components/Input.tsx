@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react"
 import { debounce } from "../utils/debounce"
+import {InputIconOptions} from "../definitions/CalculatorDefinitions.ts";
 
 interface InputProps {
   label: string,
@@ -8,6 +9,7 @@ interface InputProps {
   defaultValue?: string,
   setState: (val: number) => void,
   formatter?: any
+  icon?: InputIconOptions
 }
 export default function Input({
   label,
@@ -15,7 +17,8 @@ export default function Input({
   placeholder,
   defaultValue,
   setState,
-  formatter
+  formatter,
+  icon
 }: InputProps) {
   const [userFeedback, setUserFeedback] = useState<string>('')
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
@@ -27,7 +30,6 @@ export default function Input({
       setAriaInvalid(undefined)
       return
     }
-    console.log('val from debound', val)
     const num = parseFloat(val)
     if (isNaN(num)) {
       setUserFeedback('Please enter a valid number')
@@ -64,9 +66,11 @@ export default function Input({
 
       <span>{label}</span>
       <div className="input-wrapper">
-        <svg className="input-icon">
-          <use xlinkHref="img/sprite.svg#icon-dollar-sign"></use>
-        </svg>
+        {icon &&
+          <svg className="input-icon">
+            <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>
+          </svg>
+        }
         <input
           className="form-input"
           type="text"

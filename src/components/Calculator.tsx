@@ -70,6 +70,7 @@ export default function Calculator({
           inputName="mortgageAmount"
           defaultValue={calculator.principal.toString()}
           formatter={currencyFormatter}
+          icon={{name: 'icon-dollar-sign', placement: 'start'}}
         />
         <Input
           label="Interest Rate (%)"
@@ -77,6 +78,7 @@ export default function Calculator({
           placeholder="interest rate (in %)"
           setState={setRate}
           defaultValue={calculator.rate.toString()}
+          icon={{name: 'icon-percent', placement: 'end'}}
         />
         <Input
           label="Amortization period (in years)"
