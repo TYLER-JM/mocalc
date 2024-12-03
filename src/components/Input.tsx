@@ -67,12 +67,14 @@ export default function Input({
       <span>{label}</span>
       <div className="input-wrapper">
         {icon &&
-          <svg className="input-icon">
-            <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>
-          </svg>
+          <div className={`icon-wrapper ${icon.placement}`}>
+            <svg className="input-icon">
+              <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>
+            </svg>
+          </div>
         }
         <input
-          className="form-input"
+          className={`form-input ${icon?.placement}`}
           type="text"
           name={inputName}
           placeholder={placeholder}
