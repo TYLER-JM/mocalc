@@ -6,14 +6,16 @@ interface InputProps {
   inputName: string,
   placeholder: string
   defaultValue?: string,
-  setState: (val: number) => void
+  setState: (val: number) => void,
+  formatter?: any
 }
 export default function Input({
   label,
   inputName,
   placeholder,
   defaultValue,
-  setState
+  setState,
+  formatter
 }: InputProps) {
   const [userFeedback, setUserFeedback] = useState<string>('')
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
@@ -25,7 +27,7 @@ export default function Input({
       setAriaInvalid(undefined)
       return
     }
-
+    console.log('val from debound', val)
     const num = parseFloat(val)
     if (isNaN(num)) {
       setUserFeedback('Please enter a valid number')
@@ -40,8 +42,21 @@ export default function Input({
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const val = e.target.value
-    setValue(val)
-    debounceStateUpdate(val)
+    if (formatter) {
+      const rawValue = formatter.removeFormatting(val)
+      if (rawValue === '') {
+        setValue('')
+        return
+      }
+      const numericValue = parseFloat(rawValue)
+      if (numericValue >= 0) {
+        setValue(formatter.format(numericValue))
+        debounceStateUpdate(rawValue)
+      }
+    } else {
+      setValue(val)
+      debounceStateUpdate(val)
+    }
   }
   
   return (

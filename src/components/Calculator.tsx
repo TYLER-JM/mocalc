@@ -8,6 +8,7 @@ import {
   WEEKLY
 } from "../definitions/StringTypes.ts";
 import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
+import { currencyFormatter } from "../utils/helpers.ts";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -68,6 +69,7 @@ export default function Calculator({
           label="Mortgage Amount"
           inputName="mortgageAmount"
           defaultValue={calculator.principal.toString()}
+          formatter={currencyFormatter}
         />
         <Input
           label="Interest Rate (%)"

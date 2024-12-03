@@ -1,4 +1,5 @@
 import { ACCELERATED_BIWEEKLY, ACCELERATED_WEEKLY, BIWEEKLY, MONTHLY, SEMIMONTHLY, WEEKLY } from "../definitions/StringTypes";
+import {FormatterInterface} from "../definitions/FormatterInterface.ts";
 
 export const paymentScheduleFrequencyMap = {
   [MONTHLY]: 12,
@@ -26,4 +27,17 @@ export function convertToTitle(string: string, options: Partial<ConversionOption
 
 export function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+const basicFormatter = new Intl.NumberFormat('en-US', {
+  style: 'decimal',
+  minimumFractionDigits: 0,
+})
+
+export const currencyFormatter: FormatterInterface = {
+  format: basicFormatter.format,
+  removeFormatting(value) {
+    return value.replace(/[^0-9]/g, '');
+  }
 }
