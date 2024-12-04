@@ -1,8 +1,13 @@
 @layer components {
+    .calculator-remove {
+        padding-bottom: 2em;
+    }
     .calculator-inputs {
+        max-width: 400px;
+        align-self: center;
         display: flex;
         flex-direction: column;
-        padding: 2em 1em;
+        padding: 1em;
         background-color: white;
         label {
             display: flex;

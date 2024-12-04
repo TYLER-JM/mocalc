@@ -10,18 +10,14 @@
         margin: 0.5em;
         display: flex;
         flex-direction: column;
-        max-width: 50vw;
-        min-width: 400px;
-        justify-self: center;
     }
     .calculator > *:not(:last-child) {
         margin-bottom: 1.5em;
     }
-    .calculator-remove {
-        align-self: center;
-    }
+
     .calculator-outputs {
         max-width: 100%;
+        align-self: center;
     }
 
     .add-calculator {

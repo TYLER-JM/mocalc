@@ -54,15 +54,15 @@ export default function Calculator({
 
   return (
     <div className="calculator">
-      <div className="calculator-remove">
-        <button
-          className="btn"
-          onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
-        >
-          Remove this calculator
-        </button>
-      </div>
       <div className="calculator-inputs">
+        <div className="calculator-remove">
+          <button
+            className="btn"
+            onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
+          >
+            Remove this calculator
+          </button>
+        </div>
         <Input
           placeholder="total amount you'll be borrowing"
           setState={setPrincipal}
