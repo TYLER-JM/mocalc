@@ -72,15 +72,15 @@ export default function MortgageSchedule({
         <button className="btn" title="view as tabbed layout" onClick={() => updateLayout('tabs')}>Tabs</button>
         {/*<button disabled>Cards</button>*/}
       </div>
+      {layout === 'tabs' &&
+        <MortgageScheduleTabs
+          numberOfYears={yearsInTerm.length}
+          setActiveTab={setActiveTab}
+          activeTab={activeTab}
+        />
+      }
       <div className="overflow">
         <div className={`mortgage-schedule mortgage-schedule--${layout}`}>
-          {layout === 'tabs' &&
-            <MortgageScheduleTabs
-              numberOfYears={yearsInTerm.length}
-              setActiveTab={setActiveTab}
-              activeTab={activeTab}
-            />
-          }
           {layout === 'tabs' &&
             yearsInTerm.map((payments, index) =>
               <MortgageScheduleYearSummary payments={payments} index={index} activeTab={activeTab} key={index} />

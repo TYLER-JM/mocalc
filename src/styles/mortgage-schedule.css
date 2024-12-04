@@ -25,31 +25,10 @@
   } /* END .mortgage-schedule--table */
 
   .mortgage-schedule--tabs {
-    .year-tab-wrapper {
-      grid-column: 1 / -1;
-      display: flex;
-    }
-    .year-tab {
-      cursor: pointer;
-      border: 2px solid var(--turquoise);
-      border-bottom: 0;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      background-color: white;
-      font-weight: bolder;
-      transition: all 0.4s ease;
-    }
-    .year-tab.active {
-      background-color: var(--turquoise);
-    }
-    .year-tab:not(:first-child) {
-      margin-left: 4px;
-    }
-
     .tab-summary {
       grid-column: 1 / -1;
       background-color: white;
-      margin: 0.5em 0;
+      margin: 0 0 0.5em 0;
       border-radius: 4px;
       display: none;
       padding: 1em;
@@ -76,6 +55,29 @@
     background-color: white;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+  }
+
+  .year-tab-wrapper {
+    grid-column: 1 / -1;
+    display: flex;
+    border-bottom: 2px solid var(--turquoise);
+  }
+  .year-tab {
+    cursor: pointer;
+    padding: 0 0.5em;
+    border: 2px solid var(--turquoise);
+    border-bottom: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: white;
+    font-weight: bolder;
+    transition: all 0.4s ease;
+  }
+  .year-tab.active {
+    background-color: var(--turquoise);
+  }
+  .year-tab:not(:first-child) {
+    margin-left: 4px;
   }
 
   .yearly-summary-header {
