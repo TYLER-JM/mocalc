@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import { debounce } from "../utils/debounce"
 import {InputIconOptions} from "../definitions/CalculatorDefinitions.ts";
 
@@ -23,6 +23,10 @@ export default function Input({
   const [userFeedback, setUserFeedback] = useState<string>('')
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
   const [value, setValue] = useState<string>(defaultValue || '')
+
+  useEffect(() => {
+    setValue(defaultValue || '')
+  }, [defaultValue])
 
   const debounceStateUpdate = useCallback(debounce((val: string) => {
     if (!val) {
