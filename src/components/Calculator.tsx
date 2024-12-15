@@ -11,7 +11,7 @@ import {
 } from "../definitions/StringTypes.ts";
 import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
 import { currencyFormatter } from "../utils/helpers.ts";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -22,7 +22,8 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-
+  const termLengthSelectRef = useRef<HTMLSelectElement>(null);
+  const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null);
   const [resetKey, setResetKey] = useState<number>(0)
 
   function updateCalculators(inputs: CalculatorInputs) {
@@ -69,6 +70,12 @@ export default function Calculator({
     }
     updateCalculators(updatedInputs)
     setResetKey(prev => prev + 1)
+    if (termLengthSelectRef.current) {
+      termLengthSelectRef.current.value = "5"
+    }
+    if (paymentScheduleSelectRef.current) {
+      paymentScheduleSelectRef.current.value = MONTHLY
+    }
   }
 
   return (
@@ -121,6 +128,7 @@ export default function Calculator({
         <label htmlFor="termLength">
           <span>Term Length (in years)</span>
           <select
+            ref={termLengthSelectRef}
             className="form-input"
             defaultValue={calculator.term}
             name="termLength"
@@ -136,6 +144,7 @@ export default function Calculator({
         <label htmlFor="paymentSchedule">
           <span>Payment Schedule</span>
           <select
+            ref={paymentScheduleSelectRef}
             className="form-input"
             defaultValue={calculator.paymentType}
             name="paymentSchedule"
