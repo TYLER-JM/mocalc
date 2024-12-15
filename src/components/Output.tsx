@@ -72,7 +72,7 @@ export default function Output({
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>
       }
-      {paymentDetails && <MortgageSchedule paymentDetails={paymentDetails}/>}
+      {(paymentDetails && paymentDetails.principal > 0) && <MortgageSchedule paymentDetails={paymentDetails}/>}
     </div>
   )
 }

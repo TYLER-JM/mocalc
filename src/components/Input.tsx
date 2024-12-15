@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, {useCallback, useState} from "react"
 import { debounce } from "../utils/debounce"
 import {InputIconOptions} from "../definitions/CalculatorDefinitions.ts";
 
@@ -24,10 +24,12 @@ export default function Input({
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
   const [value, setValue] = useState<string>(defaultValue || '')
 
+
   const debounceStateUpdate = useCallback(debounce((val: string) => {
     if (!val) {
       setUserFeedback('')
       setAriaInvalid(undefined)
+      setState(0)
       return
     }
     const num = parseFloat(val)
@@ -40,7 +42,7 @@ export default function Input({
     setState(num)
     setUserFeedback('')
     setAriaInvalid(false)
-  }, 400), [])
+  }, 750), [])
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const val = e.target.value
@@ -48,6 +50,7 @@ export default function Input({
       const rawValue = formatter.removeFormatting(val)
       if (rawValue === '') {
         setValue('')
+        debounceStateUpdate('0')
         return
       }
       const numericValue = parseFloat(rawValue)
@@ -84,6 +87,7 @@ export default function Input({
         />
       </div>
       <small className="input-feedback">{userFeedback}</small>
+
     </label>
   )
 }

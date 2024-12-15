@@ -2,13 +2,16 @@ import Input from "./Input.tsx";
 import Output from "./Output.tsx";
 import {
   ACCELERATED_BIWEEKLY,
-  ACCELERATED_WEEKLY, BIWEEKLY,
+  ACCELERATED_WEEKLY,
+  BIWEEKLY,
   MONTHLY,
-  PaymentSchedules, SEMIMONTHLY,
-  WEEKLY
+  SEMIMONTHLY,
+  WEEKLY,
+  PaymentSchedules
 } from "../definitions/StringTypes.ts";
 import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
 import { currencyFormatter } from "../utils/helpers.ts";
+import { useRef, useState } from "react";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -19,6 +22,10 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
+  const termLengthSelectRef = useRef<HTMLSelectElement>(null);
+  const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null);
+  const [resetKey, setResetKey] = useState<number>(0)
+
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
       return prev.map(calc => {
@@ -52,44 +59,76 @@ export default function Calculator({
     updateCalculators(updatedInputs)
   }
 
+  function resetCalculator() {
+    const updatedInputs: CalculatorInputs = {
+      id: calculator.id,
+      rate: 0,
+      term: 5,
+      paymentType: MONTHLY,
+      principal: 0,
+      amortization: 0,
+    }
+    updateCalculators(updatedInputs)
+    setResetKey(prev => prev + 1)
+    if (termLengthSelectRef.current) {
+      termLengthSelectRef.current.value = "5"
+    }
+    if (paymentScheduleSelectRef.current) {
+      paymentScheduleSelectRef.current.value = MONTHLY
+    }
+  }
+
   return (
     <div className="calculator">
       <div className="calculator-inputs">
-        <div className="calculator-remove">
+
+        <div className="calculator-remove btn-group">
           <button
             className="btn"
-            onClick={() => setCalculators((prev) => prev.filter(calc => calc.id !== calculator.id))}
+            onClick={
+              () => setCalculators(
+                (prev) => prev.filter(
+                  calc => calc.id !== calculator.id
+                )
+              )
+            }
           >
-            Remove this calculator
+            Remove
           </button>
+          <button className="btn" onClick={resetCalculator}>Reset</button>
         </div>
+
         <Input
+          key={`amount-${resetKey}`}
           placeholder="total amount you'll be borrowing"
           setState={setPrincipal}
           label="Mortgage Amount"
           inputName="mortgageAmount"
-          defaultValue={calculator.principal.toString()}
+          { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
           formatter={currencyFormatter}
           icon={{name: 'icon-dollar-sign', placement: 'start'}}
         />
         <Input
+          key={`interest-${resetKey}`}
           label="Interest Rate (%)"
           inputName="interestRate"
           placeholder="interest rate (in %)"
           setState={setRate}
-          defaultValue={calculator.rate.toString()}
+          { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
           icon={{name: 'icon-percent', placement: 'end'}}
         />
         <Input
+          key={`amortization-${resetKey}`}
           label="Amortization period (in years)"
           placeholder="25 years"
           inputName="amortizationPeriod"
           setState={setAmortization}
-          defaultValue={calculator.amortization.toString()}
+          { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
         />
         <label htmlFor="termLength">
           <span>Term Length (in years)</span>
           <select
+            ref={termLengthSelectRef}
             className="form-input"
             defaultValue={calculator.term}
             name="termLength"
@@ -105,6 +144,7 @@ export default function Calculator({
         <label htmlFor="paymentSchedule">
           <span>Payment Schedule</span>
           <select
+            ref={paymentScheduleSelectRef}
             className="form-input"
             defaultValue={calculator.paymentType}
             name="paymentSchedule"
@@ -118,7 +158,9 @@ export default function Calculator({
             <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
           </select>
         </label>
+
       </div>
+
       <Output
         rate={calculator.rate / 100}
         principal={calculator.principal}
@@ -126,6 +168,7 @@ export default function Calculator({
         paymentType={calculator.paymentType}
         term={calculator.term}
       />
+
     </div>
   )
 }

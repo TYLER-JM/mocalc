@@ -42,7 +42,7 @@ export default function MortgageSchedule({
 
       payments.push({
         mortgagePayment,
-        jsx: <div className="sub-grid mortgage-schedule-row" key={mortgagePayment.startingBalance.toString()}>
+        jsx: <div className="sub-grid mortgage-schedule-row" key={Math.random().toString()}>
           <span>{i}</span>
           <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
           <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
