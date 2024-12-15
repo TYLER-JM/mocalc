@@ -15,13 +15,14 @@ export default function Input({
   label,
   inputName,
   placeholder,
+  defaultValue,
   setState,
   formatter,
   icon
 }: InputProps) {
   const [userFeedback, setUserFeedback] = useState<string>('')
   const [ariaInvalid, setAriaInvalid] = useState<boolean | undefined>(undefined)
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>(defaultValue || '')
 
 
   const debounceStateUpdate = useCallback(debounce((val: string) => {
@@ -86,6 +87,7 @@ export default function Input({
         />
       </div>
       <small className="input-feedback">{userFeedback}</small>
+      
     </label>
   )
 }

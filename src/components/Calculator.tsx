@@ -11,7 +11,7 @@ import {
 } from "../definitions/StringTypes.ts";
 import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
 import { currencyFormatter } from "../utils/helpers.ts";
-import {MutableRefObject, useRef} from "react";
+import { useState } from "react";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -22,7 +22,8 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-  const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null)
+
+  const [resetKey, setResetKey] = useState<number>(0)
 
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
@@ -67,9 +68,7 @@ export default function Calculator({
       amortization: 0,
     }
     updateCalculators(updatedInputs)
-    if (formRef.current) {
-      formRef.current.reset()
-    }
+    setResetKey(prev => prev + 1)
   }
 
   return (
@@ -92,65 +91,67 @@ export default function Calculator({
           <button className="btn" onClick={resetCalculator}>Reset</button>
         </div>
 
-        <form ref={formRef}>
-          <Input
-            placeholder="total amount you'll be borrowing"
-            setState={setPrincipal}
-            label="Mortgage Amount"
-            inputName="mortgageAmount"
-            defaultValue={calculator.principal.toString()}
-            formatter={currencyFormatter}
-            icon={{name: 'icon-dollar-sign', placement: 'start'}}
-          />
-          <Input
-            label="Interest Rate (%)"
-            inputName="interestRate"
-            placeholder="interest rate (in %)"
-            setState={setRate}
-            defaultValue={calculator.rate.toString()}
-            icon={{name: 'icon-percent', placement: 'end'}}
-          />
-          <Input
-            label="Amortization period (in years)"
-            placeholder="25 years"
-            inputName="amortizationPeriod"
-            setState={setAmortization}
-            defaultValue={calculator.amortization.toString()}
-          />
-          <label htmlFor="termLength">
-            <span>Term Length (in years)</span>
-            <select
-              className="form-input"
-              defaultValue={calculator.term}
-              name="termLength"
-              onChange={(e) => setTerm(parseInt(e.target.value))}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </label>
-          <label htmlFor="paymentSchedule">
-            <span>Payment Schedule</span>
-            <select
-              className="form-input"
-              defaultValue={calculator.paymentType}
-              name="paymentSchedule"
-              onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
-            >
-              <option value={WEEKLY}>Weekly</option>
-              <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
-              <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
-              <option value={MONTHLY}>Monthly</option>
-              <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
-              <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
-            </select>
-          </label>
-        </form>
+        <Input
+          key={`amount-${resetKey}`}
+          placeholder="total amount you'll be borrowing"
+          setState={setPrincipal}
+          label="Mortgage Amount"
+          inputName="mortgageAmount"
+          { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
+          formatter={currencyFormatter}
+          icon={{name: 'icon-dollar-sign', placement: 'start'}}
+        />
+        <Input
+          key={`interest-${resetKey}`}
+          label="Interest Rate (%)"
+          inputName="interestRate"
+          placeholder="interest rate (in %)"
+          setState={setRate}
+          { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
+          icon={{name: 'icon-percent', placement: 'end'}}
+        />
+        <Input
+          key={`amortization-${resetKey}`}
+          label="Amortization period (in years)"
+          placeholder="25 years"
+          inputName="amortizationPeriod"
+          setState={setAmortization}
+          { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
+        />
+        <label htmlFor="termLength">
+          <span>Term Length (in years)</span>
+          <select
+            className="form-input"
+            defaultValue={calculator.term}
+            name="termLength"
+            onChange={(e) => setTerm(parseInt(e.target.value))}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <label htmlFor="paymentSchedule">
+          <span>Payment Schedule</span>
+          <select
+            className="form-input"
+            defaultValue={calculator.paymentType}
+            name="paymentSchedule"
+            onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
+          >
+            <option value={WEEKLY}>Weekly</option>
+            <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
+            <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
+            <option value={MONTHLY}>Monthly</option>
+            <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
+            <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
+          </select>
+        </label>
 
       </div>
+
       <Output
         rate={calculator.rate / 100}
         principal={calculator.principal}
@@ -158,6 +159,7 @@ export default function Calculator({
         paymentType={calculator.paymentType}
         term={calculator.term}
       />
+
     </div>
   )
 }
