@@ -41,7 +41,7 @@ export default function Input({
     setState(num)
     setUserFeedback('')
     setAriaInvalid(false)
-  }, 400), [])
+  }, 750), [])
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const val = e.target.value
