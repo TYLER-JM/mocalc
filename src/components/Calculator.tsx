@@ -100,28 +100,29 @@ export default function Calculator({
 
         <Input
           key={`amount-${resetKey}`}
-          placeholder="total amount you'll be borrowing"
-          setState={setPrincipal}
           label="Mortgage Amount"
+          placeholder="Amount to be borrowed"
           inputName="mortgageAmount"
-          { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
           formatter={currencyFormatter}
+          setState={setPrincipal}
           icon={{name: 'icon-dollar-sign', placement: 'start'}}
+          { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
         />
         <Input
           key={`interest-${resetKey}`}
-          label="Interest Rate (%)"
+          label="Interest Rate"
+          placeholder="3.4"
           inputName="interestRate"
-          placeholder="interest rate (in %)"
           setState={setRate}
-          { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
           icon={{name: 'icon-percent', placement: 'end'}}
+          { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
         />
         <Input
           key={`amortization-${resetKey}`}
-          label="Amortization period (in years)"
-          placeholder="25 years"
+          label="Amortization period"
+          placeholder="25"
           inputName="amortizationPeriod"
+          formatter={currencyFormatter}
           setState={setAmortization}
           { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
         />
