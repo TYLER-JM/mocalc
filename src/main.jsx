@@ -6,6 +6,7 @@ import Root from './Root.tsx'
 import Help from './routes/help.tsx'
 import Calculators from "./routes/calculators.tsx";
 import Home from "./routes/home.tsx";
+import Summary from "./routes/summary.tsx";
 import RouteError from "./components/RouteError.tsx";
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "help",
         element: <Help />
+      },
+      {
+        path: "summary",
+        element: <Summary />
       },
       {
         path: "*",

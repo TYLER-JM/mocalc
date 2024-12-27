@@ -12,6 +12,7 @@ export default function Root() {
   return (
     <>
       <nav>
+        <NavLink to="/summary">Summary</NavLink>
         <NavLink to="/calculators">Calculators</NavLink>
         <NavLink to="/">About</NavLink>
         {/*<NavLink to="/help">Help</NavLink>*/}
