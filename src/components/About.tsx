@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <section className="section about">
-      <div className="description">
+      <div className="description card">
         <p><span className="font-heading text-lg text-bold text-gradiant">Mo • Calc</span> <span className="text-sm italic">(n.)</span></p>
         <p>
           From <span className="italic text-gradiant">Mo</span>rtgage <span className="text-gradiant italic">Calc</span>ulator,

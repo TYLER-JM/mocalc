@@ -13,7 +13,7 @@ export default function Help() {
   
   return (
     <section className="section">
-      <div className="description">
+      <div className="description card">
         <p>
           Use the <button className="inline-button" title="click to add a calculator" onClick={addCalculatorAndRedirect}>+</button> button to add up to 8 calculators for easy comparison between various mortgage scenarios.</p>
         <p>
