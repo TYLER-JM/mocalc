@@ -10,11 +10,13 @@
   padding: 1em;
 }
 
-.output-summary-header {
+.summary-header {
   font-size: 0.75rem;
   padding-bottom: 0;
-  margin-bottom: 0.25em;
   color: var(--charcoal);
+}
+.summary-header.output {
+  margin-bottom: 0.25em;
 }
 
 .principal-wrapper {

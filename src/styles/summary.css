@@ -46,7 +46,10 @@
 .summary-bar.interest {
     background-color: var(--turquoise);
 }
-
+label.principal, label.interest {
+    display: flex;
+    flex-direction: column;
+}
 .principal.remaining {
     grid-area: remaining;
     text-align: right;
