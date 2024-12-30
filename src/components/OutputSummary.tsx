@@ -26,7 +26,7 @@ export default function OutputSummary({
       </div>
       <div className="payment-wrapper">
         <p className="output summary-header">your total payment will be</p>
-        <p className="output-summary-payment">{output.payment}</p>
+        <p className="summary-payment">{output.payment}</p>
       </div>
     </div>
   )

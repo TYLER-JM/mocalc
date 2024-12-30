@@ -5,12 +5,17 @@
     grid-auto-rows: 400px;
     margin: 2rem auto;
     max-width: 80vw;
-
     .card {
         margin: 2rem;
     }
 
-
+    .stats {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+    }
 }
 
 .principal-summary {
@@ -46,7 +51,7 @@
 .summary-bar.interest {
     background-color: var(--turquoise);
 }
-label.principal, label.interest {
+.label.principal, .label.interest {
     display: flex;
     flex-direction: column;
 }

@@ -12,21 +12,16 @@ export default function Summary() {
 			{calculators && calculators.map(calculator => (
 				<div className="card" key={calculator.id}>
 					<div>
-						<div className="payment-wrapper">
-							<p className="summary-header">your total payment will be</p>
-							<p className="output-summary-payment">$1,845</p>
+
+						<div className="stats">
+							<span>$350,000</span>
+							<span className="text-sm">@</span>
+							<span>4.35%</span>
 						</div>
-						<div className="principal-wrapper">
-							<p className="summary-header">amount borrowed:</p>
-							<p>$350,000</p>
-						</div>
-						<div className="rate-wrapper">
-							<p className="summary-header">interest rate:</p>
-							<p>4.35%</p>
-						</div>
-						<div className="schedule-wrapper">
-							<p className="summary-header">payment schedule:</p>
-							<p>Monthly</p>
+
+						<div className="mb-2">
+							<p className="h4 text-sm">accelerated bi-weekly payment:</p>
+							<p className="m-0 summary-payment">$1,845</p>
 						</div>
 
 						<div className="payment summary">
@@ -47,7 +42,10 @@ export default function Summary() {
 
 							<div className="interest-summary">
 								<div style={dynamicStyles} className="summary-bar interest"></div>
-								<div className="label interest paid">$72,000</div>
+								<div className="label interest paid">
+									<span className="summary-header">interest paid:</span>
+									<span>$72,000</span>
+								</div>
 							</div>
 						</div>
 
