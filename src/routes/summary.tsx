@@ -20,11 +20,14 @@ export default function Summary() {
 						</div>
 
 						<div className="mb-2">
-							<p className="h4 text-sm">accelerated bi-weekly payment:</p>
+							<p className="h4 text-primary text-sm">accelerated bi-weekly payment:</p>
 							<p className="m-0 summary-payment">$1,845</p>
 						</div>
 
 						<div className="payment summary">
+							<p className="h4 text-primary">
+								End of term:
+							</p>
 							<div className="principal-summary">
 								<div className="summary-bar wrapper">
 									<div className="summary-bar total"></div>

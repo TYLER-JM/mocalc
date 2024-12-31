@@ -40,5 +40,11 @@
 
 .h4 {
     font-weight: bolder;
+}
+
+.text-primary {
     color: var(--turquoise);
+}
+.text-dark {
+    color: var(--charcoal);
 }

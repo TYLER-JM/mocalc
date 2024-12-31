@@ -13,7 +13,6 @@
 .summary-header {
   font-size: 0.75rem;
   padding-bottom: 0;
-  color: var(--charcoal);
 }
 .summary-header.output {
   margin-bottom: 0.25em;
@@ -33,11 +32,6 @@
 
 .payment-wrapper {
   grid-area: payment;
-}
-
-.payment-wrapper p:first-child {
-  font-weight: bolder;
-  color: var(--turquoise);
 }
 
 .summary-payment {
