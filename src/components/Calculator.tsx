@@ -168,6 +168,7 @@ export default function Calculator({
         amortization={calculator.amortization}
         paymentType={calculator.paymentType}
         term={calculator.term}
+        calculatorId={calculator.id}
       />
 
     </div>

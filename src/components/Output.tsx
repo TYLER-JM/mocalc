@@ -1,19 +1,20 @@
-import accounting from "accounting"
-import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toPercentage } from "../utils/calculators"
-import { OutputValues, PaymentDetails } from "../definitions/OutputTypes"
+import { getEffectiveRate, getMonthlyPayment, getRateByFrequency } from "../utils/calculators"
+import { PaymentDetails } from "../definitions/OutputTypes"
 import { PaymentSchedules, STATUS } from "../definitions/StringTypes"
 import MortgageSchedule from "./MortgageSchedule.tsx"
 import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
 
 import '../styles/output.css'
+import useOutputValuesFromCalculator from "../hooks/useOutputValuesFromCalculator.ts";
 
 interface OutputProps {
   rate: number,
   principal: number,
   amortization: number,
   paymentType: PaymentSchedules,
-  term: number
+  term: number,
+  calculatorId: number
 }
 
 
@@ -23,11 +24,11 @@ export default function Output({
   principal,
   amortization,
   paymentType,
-  term
+  term,
+  calculatorId
 }: OutputProps) {
-  const output: OutputValues = {
-    status: STATUS.incomplete,
-  }
+
+  const output = useOutputValuesFromCalculator(calculatorId)
 
   let paymentDetails: PaymentDetails | undefined = undefined
 
@@ -51,17 +52,6 @@ export default function Output({
       monthlyPayment,
       termLength: term
     }
-    
-    let customPayment = getPaymentByType(monthlyPayment, paymentType)
-    let customToString = accounting.formatMoney(customPayment, {precision: 2})
-    output.amortizationPeriod = amortization
-    output.payment = customToString
-    output.paymentSchedule = paymentType
-    output.interestRate = toPercentage(rate, 2)
-    output.effectiveRate = toPercentage(effectiveRate, 4)
-    output.principal = accounting.formatMoney(principal)
-    
-    output.status = STATUS.complete
   }
   
   return (
