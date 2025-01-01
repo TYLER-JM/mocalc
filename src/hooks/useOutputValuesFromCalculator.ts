@@ -9,7 +9,6 @@ import {
 	toPercentage
 } from "../utils/calculators.ts";
 import accounting from "accounting";
-// import {paymentScheduleFrequencyMap} from "../utils/helpers.ts";
 
 export default function useOutputValuesFromCalculator(calculatorId: number): OutputValues {
 	const [calculators] = useCalculators()
@@ -30,11 +29,9 @@ export default function useOutputValuesFromCalculator(calculatorId: number): Out
 		}
 
 		let monthlyPayment = getMonthlyPayment(paymentValues)
-		// let scheduleRate = getRateByFrequency(effectiveRate, paymentScheduleFrequencyMap[calculator.paymentType])
-
-
 		let customPayment = getPaymentByType(monthlyPayment, calculator.paymentType)
 		let customToString = accounting.formatMoney(customPayment, {precision: 2})
+
 		output.amortizationPeriod = calculator.amortization
 		output.payment = customToString
 		output.paymentSchedule = calculator.paymentType

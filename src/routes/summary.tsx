@@ -16,7 +16,7 @@ export default function Summary() {
 						<div className="stats">
 							<span>$350,000</span>
 							<span className="text-sm">@</span>
-							<span>4.35%</span>
+							<span className="text-sm">4.35%</span>
 						</div>
 
 						<div className="mb-2">
