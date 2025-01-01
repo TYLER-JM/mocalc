@@ -1,5 +1,4 @@
-import React from "react";
-import { 
+import {
   ACCELERATED_BIWEEKLY,
   ACCELERATED_WEEKLY,
   BIWEEKLY,
@@ -13,6 +12,7 @@ export interface OutputValues {
   status: OutputValuesStatus,
   paymentSchedule?: string,
   principal?: string,
+  principalRaw?: number,
   interestRate?: string,
   effectiveRate?: string,
   monthlyRate?: string,
@@ -30,8 +30,8 @@ export interface PaymentDetails {
 }
 
 export interface ScheduledPayment {
-  jsx: React.ReactNode,
   mortgagePayment: MortgagePayment
+  year: number
 }
 
 export class MortgagePayment {

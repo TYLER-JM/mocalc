@@ -1,0 +1,64 @@
+.section.summary {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(400px, min-content));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-auto-rows: 400px;
+    margin: 2rem auto;
+    max-width: 80vw;
+    .card {
+        margin: 2rem;
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+}
+
+.principal-summary {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+            "summary summary"
+            "paid remaining";
+
+    margin-bottom: 1rem;
+}
+
+.summary-bar.wrapper {
+    grid-area: summary;
+}
+.summary-bar {
+    height: 0.5rem;
+    width: 100%;
+    border-radius: 2rem;
+}
+.summary-bar.total {
+    background-color: silver;
+    position: absolute;
+    z-index: 0;
+}
+.summary-bar.remaining {
+    background-color: var(--argentinian-blue);
+    position: relative;
+    z-index: 10;
+    border-radius: 0 2rem 2rem 0;
+    margin: 0 0 0 auto; /* to right-justify the bar */
+}
+.summary-bar.interest {
+    background-color: var(--turquoise);
+}
+.label.principal, .label.interest {
+    display: flex;
+    flex-direction: column;
+}
+.principal.remaining {
+    grid-area: remaining;
+    text-align: right;
+}
+.principal.paid {
+    grid-area: paid;
+}

@@ -57,16 +57,18 @@ main {
     }
 }
 
-.description {
+.card {
     background-color: white;
     max-width: 40rem;
-    margin: 0 auto;
     padding: 2rem;
     box-shadow: #e5e5e5 2px 4px 20px 5px;
     border-radius: 4px;
     p {
         font-size: 1.2rem;
     }
+}
+.description {
+    margin: 0 auto;
 }
 
 .link-button {

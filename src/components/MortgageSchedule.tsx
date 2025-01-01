@@ -1,12 +1,11 @@
-import accounting from "accounting";
 import { useState } from "react";
-import { MortgagePayment, PaymentDetails, ScheduledPayment } from "../definitions/OutputTypes";
-import { paymentScheduleFrequencyMap } from "../utils/helpers";
+import { PaymentDetails } from "../definitions/OutputTypes";
 import MortgageScheduleYear from "./MortgageScheduleYear";
 import MortgageScheduleTabs from "./MortgageScheduleTabs.tsx";
 import MortgageScheduleYearSummary from "./MortgageScheduleYearSummary.tsx";
 
 import '../styles/mortgage-schedule.css';
+import getYearlySummariesFromPaymentDetails from "../utils/getYearlySummariesFromPaymentDetails.ts";
 
 interface MortgagePaymentTableProps {
   paymentDetails: PaymentDetails,
@@ -17,7 +16,6 @@ export default function MortgageSchedule({
 }: MortgagePaymentTableProps) {
   const [layout, setLayout] = useState<'table' | 'tabs'>('table')
   const [activeTab, setActiveTab] = useState<number | undefined>(undefined)
-  let remainingBalance = paymentDetails.principal
 
   function updateLayout(newLayout: 'table' | 'tabs'): void {
     setLayout(newLayout)
@@ -28,42 +26,7 @@ export default function MortgageSchedule({
     }
   }
 
-  function getYears() {
-    let payments: ScheduledPayment[] = []
-    const years = []
-
-    for (let i = 1; i <= paymentDetails.termLength * paymentScheduleFrequencyMap[paymentDetails.schedule]; i++) {
-      const mortgagePayment = new MortgagePayment(
-        remainingBalance,
-        paymentDetails.scheduleRate,
-        paymentDetails.schedule,
-        paymentDetails.monthlyPayment
-      )
-
-      payments.push({
-        mortgagePayment,
-        jsx: <div className="sub-grid mortgage-schedule-row" key={Math.random().toString()}>
-          <span>{i}</span>
-          <span>{accounting.formatMoney(mortgagePayment.startingBalance)}</span>
-          <span>{accounting.formatMoney(mortgagePayment.totalPayment)}</span>
-          <span>{accounting.formatMoney(mortgagePayment.interestPortion)}</span>
-          <span>{accounting.formatMoney(mortgagePayment.principalPortion)}</span>
-          <span>{accounting.formatMoney(mortgagePayment.endingBalance)}</span>
-        </div>
-      })
-
-      remainingBalance = mortgagePayment.endingBalance
-
-      if (i % paymentScheduleFrequencyMap[paymentDetails.schedule] === 0) {
-        years.push(payments)
-        payments = []
-      }
-    }
-
-    return years
-  }
-
-  const yearsInTerm = getYears()
+  const yearsInTerm = getYearlySummariesFromPaymentDetails(paymentDetails)
 
   return (
     <>

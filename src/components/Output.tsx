@@ -1,68 +1,21 @@
-import accounting from "accounting"
-import { getEffectiveRate, getMonthlyPayment, getPaymentByType, getRateByFrequency, toPercentage } from "../utils/calculators"
-import { OutputValues, PaymentDetails } from "../definitions/OutputTypes"
-import { PaymentSchedules, STATUS } from "../definitions/StringTypes"
+import { PaymentDetails } from "../definitions/OutputTypes"
+import { STATUS } from "../definitions/StringTypes"
 import MortgageSchedule from "./MortgageSchedule.tsx"
-import { paymentScheduleFrequencyMap } from "../utils/helpers"
 import OutputSummary from "./OutputSummary"
-
+import getOutputValuesFromCalculator from "../utils/getOutputValuesFromCalculator.ts";
+import getPaymentDetailsFromCalculator from "../utils/getPaymentDetailsFromCalculator.ts";
+import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 import '../styles/output.css'
 
 interface OutputProps {
-  rate: number,
-  principal: number,
-  amortization: number,
-  paymentType: PaymentSchedules,
-  term: number
+  calculator: CalculatorInputs
 }
-
-
-
 export default function Output({
-  rate,
-  principal,
-  amortization,
-  paymentType,
-  term
+  calculator
 }: OutputProps) {
-  const output: OutputValues = {
-    status: STATUS.incomplete,
-  }
 
-  let paymentDetails: PaymentDetails | undefined = undefined
-
-  const effectiveRate = getEffectiveRate(rate)
-  const monthlyRate = getRateByFrequency(effectiveRate, 12)
-
-  const paymentValues = {
-    principal,
-    rate: monthlyRate,
-    amortization: amortization * 12 // to get the months
-  }
-
-  if (amortization > 0 && rate > 0) {
-    let monthlyPayment = getMonthlyPayment(paymentValues)
-    let scheduleRate = getRateByFrequency(effectiveRate, paymentScheduleFrequencyMap[paymentType])
-
-    paymentDetails = {
-      principal,
-      schedule: paymentType,
-      scheduleRate,
-      monthlyPayment,
-      termLength: term
-    }
-    
-    let customPayment = getPaymentByType(monthlyPayment, paymentType)
-    let customToString = accounting.formatMoney(customPayment, {precision: 2})
-    output.amortizationPeriod = amortization
-    output.payment = customToString
-    output.paymentSchedule = paymentType
-    output.interestRate = toPercentage(rate, 2)
-    output.effectiveRate = toPercentage(effectiveRate, 4)
-    output.principal = accounting.formatMoney(principal)
-    
-    output.status = STATUS.complete
-  }
+  const output = getOutputValuesFromCalculator(calculator)
+  const paymentDetails: PaymentDetails | undefined = getPaymentDetailsFromCalculator(calculator)
   
   return (
     <div className="calculator-outputs">
