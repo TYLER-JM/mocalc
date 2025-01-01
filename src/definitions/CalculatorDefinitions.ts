@@ -17,7 +17,7 @@ export interface InputIconOptions {
 	name: string,
 }
 
-export class YearSummary {
+export class Summary {
 	constructor(
 		public payments: ScheduledPayment[],
 	) {}
@@ -44,3 +44,5 @@ export class YearSummary {
 		return this.payments[this.payments.length - 1].mortgagePayment.endingBalance
 	}
 }
+
+export class YearSummary extends Summary {}
