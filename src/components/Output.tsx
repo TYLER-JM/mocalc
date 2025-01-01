@@ -2,25 +2,20 @@ import { PaymentDetails } from "../definitions/OutputTypes"
 import { STATUS } from "../definitions/StringTypes"
 import MortgageSchedule from "./MortgageSchedule.tsx"
 import OutputSummary from "./OutputSummary"
-
-import '../styles/output.css'
 import getOutputValuesFromCalculator from "../utils/getOutputValuesFromCalculator.ts";
 import getPaymentDetailsFromCalculator from "../utils/getPaymentDetailsFromCalculator.ts";
 import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
+import '../styles/output.css'
 
 interface OutputProps {
   calculator: CalculatorInputs
 }
-
-
-
 export default function Output({
   calculator
 }: OutputProps) {
 
   const output = getOutputValuesFromCalculator(calculator)
-
-  let paymentDetails: PaymentDetails | undefined = getPaymentDetailsFromCalculator(calculator)
+  const paymentDetails: PaymentDetails | undefined = getPaymentDetailsFromCalculator(calculator)
   
   return (
     <div className="calculator-outputs">
