@@ -1,5 +1,5 @@
 import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
-import useOutputValuesFromCalculator from "../hooks/useOutputValuesFromCalculator.ts";
+import getOutputValuesFromCalculator from "../utils/getOutputValuesFromCalculator.ts";
 import {STATUS} from "../definitions/StringTypes.ts";
 import {convertToTitle} from "../utils/helpers.ts";
 
@@ -13,7 +13,7 @@ export default function CalculatorSummary({
 		width: `${50 + 25}%`
 	}
 
-	const output = useOutputValuesFromCalculator(calculator.id)
+	const output = getOutputValuesFromCalculator(calculator)
 	return (
 		<div className="card">
 			<div>

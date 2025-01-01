@@ -1,18 +1,17 @@
 import {OutputValues} from "../definitions/OutputTypes.ts";
 import {STATUS} from "../definitions/StringTypes.ts";
-import {useCalculators} from "../Root.tsx";
+// import {useCalculators} from "../Root.tsx";
 import {
 	getEffectiveRate,
 	getMonthlyPayment,
 	getPaymentByType,
 	getRateByFrequency,
 	toPercentage
-} from "../utils/calculators.ts";
+} from "./calculators.ts";
 import accounting from "accounting";
+import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 
-export default function useOutputValuesFromCalculator(calculatorId: number): OutputValues {
-	const [calculators] = useCalculators()
-	const calculator = calculators.find((calculator) => calculator.id === calculatorId);
+export default function getOutputValuesFromCalculator(calculator: CalculatorInputs): OutputValues {
 
 	const output: OutputValues = {
 		status: STATUS.incomplete,

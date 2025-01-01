@@ -30,7 +30,7 @@ export interface PaymentDetails {
 }
 
 export interface ScheduledPayment {
-  jsx: React.ReactNode,
+  jsx?: React.ReactNode,
   mortgagePayment: MortgagePayment
 }
 

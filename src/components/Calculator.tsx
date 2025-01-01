@@ -163,12 +163,7 @@ export default function Calculator({
       </div>
 
       <Output
-        rate={calculator.rate / 100}
-        principal={calculator.principal}
-        amortization={calculator.amortization}
-        paymentType={calculator.paymentType}
-        term={calculator.term}
-        calculatorId={calculator.id}
+        calculator={calculator}
       />
 
     </div>
