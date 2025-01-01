@@ -25,7 +25,7 @@ export default function OutputSummary({
         <p>{output.paymentSchedule && convertToTitle(output.paymentSchedule)}</p>
       </div>
       <div className="payment-wrapper">
-        <p className="h4 output summary-header text-primary">your total payment will be</p>
+        <p className="font-bold output summary-header text-primary">your total payment will be</p>
         <p className="summary-payment">{output.payment}</p>
       </div>
     </div>

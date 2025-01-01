@@ -5,10 +5,6 @@
 .font-heading {
     font-family: "Mochiy Pop One", sans-serif;
 }
-
-.text-bold {
-    font-weight: bold;
-}
 .text-sm {
     font-size: .85rem;
 }
@@ -38,10 +34,12 @@
     margin-bottom: 2rem;
 }
 
-.h4 {
-    font-weight: bolder;
+.font-bold {
+    font-weight: bold;
 }
-
+.font-light {
+    font-weight: lighter;
+}
 .text-primary {
     color: var(--turquoise);
 }

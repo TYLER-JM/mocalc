@@ -37,6 +37,7 @@ export default function getOutputValuesFromCalculator(calculator: CalculatorInpu
 		output.interestRate = toPercentage((calculator.rate / 100), 2)
 		output.effectiveRate = toPercentage(effectiveRate, 4)
 		output.principal = accounting.formatMoney(calculator.principal)
+		output.principalRaw = calculator.principal
 
 		output.status = STATUS.complete
 	}

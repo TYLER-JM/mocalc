@@ -13,25 +13,37 @@ interface CalculatorSummaryProps {
 export default function CalculatorSummary({
 		calculator
 }: CalculatorSummaryProps) {
-	const dynamicStyles = {
-		width: `${50 + 25}%`
+	const dynamicRemainingBalanceStyles = {
+		width: `100%`
+	}
+	const dynamicInterestPaidStyles = {
+		width: `100%`
 	}
 
 	const output = getOutputValuesFromCalculator(calculator)
 	const paymentDetails = getPaymentDetailsFromCalculator(calculator)
 	let yearsInTerm: ScheduledPayment[][] | undefined = undefined
-	let termSummary = undefined
+	let termSummary: Summary | undefined = undefined
 
 	if (paymentDetails) {
 		yearsInTerm = getYearlySummariesFromPaymentDetails(paymentDetails)
 	}
 
-	if (yearsInTerm) {
+	if (yearsInTerm && output.principalRaw && output.principalRaw > 0) {
 		let allPayments: ScheduledPayment[] = yearsInTerm.reduce((prev, curr) => {
 			return [...prev, ...curr]
 		}, [])
 
 		termSummary = new Summary(allPayments)
+
+		const percentRemaining = Math.round(termSummary.endingBalance / output.principalRaw * 100)
+		dynamicRemainingBalanceStyles.width = `${percentRemaining}%`
+
+		// calculate the width of the interest bar by
+		// comparing it to the width of the bar associated to the total principal paid
+		const percentInterest = termSummary.totalInterest / termSummary.totalPayment
+		const interestRelativeToPrincipal = Math.round((100 - percentRemaining) * (1 + percentInterest))
+		dynamicInterestPaidStyles.width = `${interestRelativeToPrincipal}%`
 	}
 
 	return (
@@ -46,7 +58,7 @@ export default function CalculatorSummary({
 						</div>
 
 						<div className="mb-2">
-						<p className="h4 text-primary text-sm">{output.paymentSchedule && convertToTitle(output.paymentSchedule)} payment:</p>
+						<p className="font-bold text-primary text-sm">{output.paymentSchedule && convertToTitle(output.paymentSchedule)} payment:</p>
 						<p className="m-0 summary-payment">{output.payment}</p>
 						</div>
 					</>
@@ -55,14 +67,15 @@ export default function CalculatorSummary({
 			{termSummary &&
         <div className="payment summary">
 
-          <p className="h4 text-primary">
+          <p className="font-bold text-primary">
             End of term:
+						<span className="text-sm text-dark font-light"> ({output.amortizationPeriod} years)</span>
           </p>
 
           <div className="principal-summary">
             <div className="summary-bar wrapper">
               <div className="summary-bar total"></div>
-              <div style={dynamicStyles} className="summary-bar remaining"></div>
+              <div style={dynamicRemainingBalanceStyles} className="summary-bar remaining"></div>
             </div>
             <div className="label principal remaining">
               <span className="summary-header">remaining balance:</span>
@@ -75,7 +88,7 @@ export default function CalculatorSummary({
           </div>
 
           <div className="interest-summary">
-            <div style={dynamicStyles} className="summary-bar interest"></div>
+            <div style={dynamicInterestPaidStyles} className="summary-bar interest"></div>
             <div className="label interest paid">
               <span className="summary-header">interest paid:</span>
               <span>{accounting.formatMoney(termSummary.totalInterest)}</span>
