@@ -69,7 +69,7 @@ export default function CalculatorSummary({
 
           <p className="font-bold text-primary">
             End of term:
-						<span className="text-sm text-dark font-light"> ({output.amortizationPeriod} years)</span>
+						<span className="text-sm text-dark font-light"> ({yearsInTerm?.length} years)</span>
           </p>
 
           <div className="principal-summary">
@@ -77,13 +77,13 @@ export default function CalculatorSummary({
               <div className="summary-bar total"></div>
               <div style={dynamicRemainingBalanceStyles} className="summary-bar remaining"></div>
             </div>
-            <div className="label principal remaining">
-              <span className="summary-header">remaining balance:</span>
-              <span>{accounting.formatMoney(termSummary.endingBalance)}</span>
-            </div>
             <div className="label principal paid">
               <span className="summary-header">principal paid:</span>
               <span>{accounting.formatMoney(termSummary.totalPrincipal)}</span>
+            </div>
+            <div className="label principal remaining">
+              <span className="summary-header">remaining balance:</span>
+              <span>{accounting.formatMoney(termSummary.endingBalance)}</span>
             </div>
           </div>
 
