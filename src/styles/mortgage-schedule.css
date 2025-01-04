@@ -42,12 +42,6 @@
       display: flex;
       flex-direction: column;
     }
-    .tab-summary .label {
-      font-size: 0.75rem;
-    }
-    .tab-summary span {
-      padding-left: 0;
-    }
   } /* END .mortgage-schedule--tabs */
 
   .mortgage-schedule-header {
@@ -96,10 +90,6 @@
     font-family: monospace;
   }
 
-  .mortgage-schedule span {
-    padding:  0 0.5em 0 1em;
-  }
-
   .mortgage-schedule-row {
     padding: 0.5em;
     font-family: monospace;
@@ -130,6 +120,10 @@
     grid-template-rows: subgrid;
     grid-auto-flow: column;
     text-align: right;
+
+    span {
+      padding:  0 0.5em 0 1em;
+    }
   }
   .mortgage-schedule .collapsed {
     max-height: 0;

@@ -54,7 +54,7 @@ export default function CalculatorSummary({
 						<div className="stats">
 							<span>{output.principal}</span>
 							<span className="text-sm">@</span>
-							<span className="text-sm">{output.interestRate}</span>
+							<span className="text-xs">{output.interestRate}</span>
 						</div>
 
 						<div className="mb-2">
@@ -69,7 +69,7 @@ export default function CalculatorSummary({
 
           <p className="font-bold text-primary">
             End of term:
-						<span className="text-sm text-dark font-light"> ({yearsInTerm?.length} years)</span>
+						<span className="text-xs text-dark font-light"> ({yearsInTerm?.length} years)</span>
           </p>
 
           <div className="principal-summary">
@@ -78,11 +78,11 @@ export default function CalculatorSummary({
               <div style={dynamicRemainingBalanceStyles} className="summary-bar remaining"></div>
             </div>
             <div className="label principal paid">
-              <span className="summary-header">principal paid:</span>
+              <span className="text-xs">principal paid:</span>
               <span>{accounting.formatMoney(termSummary.totalPrincipal)}</span>
             </div>
             <div className="label principal remaining">
-              <span className="summary-header">remaining balance:</span>
+              <span className="text-xs">remaining balance:</span>
               <span>{accounting.formatMoney(termSummary.endingBalance)}</span>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function CalculatorSummary({
           <div className="interest-summary">
             <div style={dynamicInterestPaidStyles} className="summary-bar interest"></div>
             <div className="label interest paid">
-              <span className="summary-header">interest paid:</span>
+              <span className="text-xs">interest paid:</span>
               <span>{accounting.formatMoney(termSummary.totalInterest)}</span>
             </div>
           </div>

@@ -10,14 +10,6 @@
   padding: 1em;
 }
 
-.summary-header {
-  font-size: 0.75rem;
-  padding-bottom: 0;
-}
-.summary-header.output {
-  margin-bottom: 0.25em;
-}
-
 .principal-wrapper {
   grid-area: principal;
 }

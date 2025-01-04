@@ -5,8 +5,11 @@
 .font-heading {
     font-family: "Mochiy Pop One", sans-serif;
 }
+.text-xs {
+    font-size: .75rem;
+}
 .text-sm {
-    font-size: .85rem;
+    font-size: .875rem;
 }
 .text-lg {
     font-size: 3rem;
@@ -32,6 +35,10 @@
 }
 .mb-2 {
     margin-bottom: 2rem;
+}
+
+.p-0 {
+    padding: 0;
 }
 
 .font-bold {

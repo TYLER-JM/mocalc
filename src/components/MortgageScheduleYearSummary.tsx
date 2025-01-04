@@ -18,19 +18,19 @@ export default function MortgageScheduleYearSummary({
 	return (
 		<div className={activeTab === index + 1 ? 'active tab-summary' : `tab-summary`}>
 			<div>
-				<span className="label">{`Total paid in Year ${index + 1}`}</span>
+				<span className="text-xs">{`Total paid in Year ${index + 1}`}</span>
 				<span>{accounting.formatMoney(yearSummary.totalPayment)}</span>
 			</div>
 			<div>
-				<span className="label">{`interest paid in Year ${index + 1}`}</span>
+				<span className="text-xs">{`interest paid in Year ${index + 1}`}</span>
 				<span>{accounting.formatMoney(yearSummary.totalInterest)}</span>
 			</div>
 			<div>
-				<span className="label">{`remaining principal after Year ${index + 1}`}</span>
+				<span className="text-xs">{`remaining principal after Year ${index + 1}`}</span>
 				<span>{accounting.formatMoney(yearSummary.endingBalance)}</span>
 			</div>
 			<div>
-				<span className="label">{`principal paid in Year ${index + 1}`}</span>
+				<span className="text-xs">{`principal paid in Year ${index + 1}`}</span>
 				<span>{accounting.formatMoney(yearSummary.totalPrincipal)}</span>
 			</div>
 		</div>
