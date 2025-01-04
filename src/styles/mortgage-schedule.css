@@ -86,14 +86,15 @@
     grid-column: 1 / 3;
   }
 
-  .yearly-summary-header span:not(:first-child) {
+  .yearly-summary-header span:not(:first-child), .mortgage-schedule-row {
     font-family: monospace;
+    margin: auto 0;
   }
 
-  .mortgage-schedule-row {
+  .yearly-summary-header, .mortgage-schedule-row {
     padding: 0.5em;
-    font-family: monospace;
   }
+  
   .mortgage-schedule-row span {
     white-space: nowrap;
   }
