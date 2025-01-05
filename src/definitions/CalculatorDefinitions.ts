@@ -1,5 +1,6 @@
-import {PaymentSchedules} from "./StringTypes.ts";
+import {PaymentSchedules, PrepaymentFrequencyOptions} from "./StringTypes.ts";
 import {ScheduledPayment} from "./OutputTypes.ts";
+import accounting from "accounting";
 
 export class CalculatorInputs {
 	constructor(
@@ -8,9 +9,35 @@ export class CalculatorInputs {
 		public rate: number,
 		public amortization: number,
 		public term: number,
-		public paymentType: PaymentSchedules
+		public paymentType: PaymentSchedules,
+		public prepaymentOptions: PrepaymentOptions
 	) {}
 }
+
+export class PrepaymentOptions {
+	valid: boolean = false;
+	frequency: PrepaymentFrequencyOptions | undefined;
+	amount: number | undefined;
+	constructor() {
+		this.valid = false;
+		this.frequency = undefined;
+		this.amount = undefined
+	}
+
+	isValid(): boolean {
+		return this.valid;
+	}
+
+	formattedAmount(): string {
+		return accounting.formatMoney(this.amount || 0)
+	}
+}
+
+// export interface PrepaymentOptionsInterface {
+// 	valid: boolean;
+// 	amount: number | undefined;
+// 	frequency: 'yearly' | 'once' | 'regular' | undefined;
+// }
 
 export interface InputIconOptions {
 	placement: 'start' | 'end',

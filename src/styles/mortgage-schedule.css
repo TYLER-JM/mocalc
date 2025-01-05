@@ -113,6 +113,10 @@
 
     transition: all 0.4s ease;
   }
+  .sub-grid-wrapper.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
 
   .sub-grid {
     display: grid;
@@ -125,9 +129,5 @@
     span {
       padding:  0 0.5em 0 1em;
     }
-  }
-  .mortgage-schedule .collapsed {
-    max-height: 0;
-    opacity: 0;
   }
 }

@@ -1,5 +1,5 @@
 import {useCalculators} from "../Root.tsx";
-import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
+import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefinitions.ts";
 import {MONTHLY} from "../definitions/StringTypes.ts";
 
 export default function useAddCalculator() {
@@ -10,7 +10,8 @@ export default function useAddCalculator() {
 			return
 		}
 		setCalculators((prev: CalculatorInputs[]) => {
-			const newCalc = new CalculatorInputs(prev.length, 0, 0, 0, 5, MONTHLY)
+			const prepaymentOptions = new PrepaymentOptions()
+			const newCalc = new CalculatorInputs(prev.length, 0, 0, 0, 5, MONTHLY, prepaymentOptions)
 			return [...prev, newCalc]
 		})
 	}

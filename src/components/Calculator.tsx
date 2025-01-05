@@ -7,11 +7,12 @@ import {
   MONTHLY,
   SEMIMONTHLY,
   WEEKLY,
-  PaymentSchedules
+  PaymentSchedules, PrepaymentFrequencyOptions
 } from "../definitions/StringTypes.ts";
-import { CalculatorInputs } from "../definitions/CalculatorDefinitions.ts";
+import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefinitions.ts";
 import { currencyFormatter } from "../utils/helpers.ts";
 import { useRef, useState } from "react";
+import PrepaymentInputs from "./PrepaymentInputs.tsx";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -59,6 +60,17 @@ export default function Calculator({
     updateCalculators(updatedInputs)
   }
 
+  function setPrepaymentAmount(val: number): void {
+    const updatedInputs = calculator
+    updatedInputs.prepaymentOptions.amount = val
+    updateCalculators(updatedInputs)
+  }
+  function setPrepaymentFrequency(val: PrepaymentFrequencyOptions): void {
+    const updatedInputs = calculator
+    updatedInputs.prepaymentOptions.frequency = val
+    updateCalculators(updatedInputs)
+  }
+
   function resetCalculator() {
     const updatedInputs: CalculatorInputs = {
       id: calculator.id,
@@ -67,13 +79,14 @@ export default function Calculator({
       paymentType: MONTHLY,
       principal: 0,
       amortization: 0,
+      prepaymentOptions: new PrepaymentOptions()
     }
     updateCalculators(updatedInputs)
     setResetKey(prev => prev + 1)
     if (termLengthSelectRef.current) {
       termLengthSelectRef.current.value = "5"
     }
-    if (paymentScheduleSelectRef.current) {
+      if (paymentScheduleSelectRef.current) {
       paymentScheduleSelectRef.current.value = MONTHLY
     }
   }
@@ -159,6 +172,11 @@ export default function Calculator({
             <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
           </select>
         </label>
+
+        <PrepaymentInputs
+          setPrepaymentAmount={setPrepaymentAmount}
+          setPrepaymentFrequency={setPrepaymentFrequency}
+        />
 
       </div>
 
