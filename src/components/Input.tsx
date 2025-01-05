@@ -65,7 +65,7 @@ export default function Input({
   }
   
   return (
-    <label htmlFor={inputName}>
+    <label htmlFor={inputName} className="form-label">
 
       <span>{label}</span>
       <div className="input-wrapper">

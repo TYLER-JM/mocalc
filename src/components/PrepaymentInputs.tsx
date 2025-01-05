@@ -18,7 +18,7 @@ export default function PrepaymentInputs({
 				placeholder=""
 				setState={setPrepaymentAmount}
 			/>
-			<label>
+			<label htmlFor="prepaymentFrequency" className="form-label">
 				<span>Prepayment Frequency</span>
 				<select
 					name="prepaymentFrequency"
@@ -30,6 +30,7 @@ export default function PrepaymentInputs({
 					<option value={REGULAR}>Same as regular payment</option>
 				</select>
 			</label>
+
 		</>
 	)
 }

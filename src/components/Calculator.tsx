@@ -139,7 +139,7 @@ export default function Calculator({
           setState={setAmortization}
           { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
         />
-        <label htmlFor="termLength">
+        <label htmlFor="termLength" className="form-label">
           <span>Term Length (in years)</span>
           <select
             ref={termLengthSelectRef}
@@ -155,7 +155,7 @@ export default function Calculator({
             <option value="5">5</option>
           </select>
         </label>
-        <label htmlFor="paymentSchedule">
+        <label htmlFor="paymentSchedule" className="form-label">
           <span>Payment Schedule</span>
           <select
             ref={paymentScheduleSelectRef}

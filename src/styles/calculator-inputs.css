@@ -39,7 +39,9 @@
             height: 1.25em;
             width: 1.25em;
         }
-
+        .form-label {
+            margin-bottom: 0.25em;
+        }
         label .form-input {
             padding: 0.5em 0.5em;
             border: 1px solid silver;
@@ -63,7 +65,6 @@
             outline: 2px solid var(--turquoise);
         }
         label .input-feedback {
-            margin-bottom: 0.5em;
             color: red;
         }
     }
