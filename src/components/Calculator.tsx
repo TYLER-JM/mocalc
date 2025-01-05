@@ -95,83 +95,85 @@ export default function Calculator({
     <div className="calculator">
       <div className="calculator-inputs">
 
-        <div className="calculator-remove btn-group">
-          <button
-            className="btn"
-            onClick={
-              () => setCalculators(
-                (prev) => prev.filter(
-                  calc => calc.id !== calculator.id
+        <div className="calculator-inputs--group">
+          <div className="calculator-remove btn-group">
+            <button
+              className="btn"
+              onClick={
+                () => setCalculators(
+                  (prev) => prev.filter(
+                    calc => calc.id !== calculator.id
+                  )
                 )
-              )
-            }
-          >
-            Remove
-          </button>
-          <button className="btn" onClick={resetCalculator}>Reset</button>
-        </div>
+              }
+            >
+              Remove
+            </button>
+            <button className="btn" onClick={resetCalculator}>Reset</button>
+          </div>
 
-        <Input
-          key={`amount-${resetKey}`}
-          label="Mortgage Amount"
-          placeholder="Amount to be borrowed"
-          inputName="mortgageAmount"
-          formatter={currencyFormatter}
-          setState={setPrincipal}
-          icon={{name: 'icon-dollar-sign', placement: 'start'}}
-          { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
-        />
-        <Input
-          key={`interest-${resetKey}`}
-          label="Interest Rate"
-          placeholder="3.4"
-          inputName="interestRate"
-          setState={setRate}
-          icon={{name: 'icon-percent', placement: 'end'}}
-          { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
-        />
-        <Input
-          key={`amortization-${resetKey}`}
-          label="Amortization period"
-          placeholder="25"
-          inputName="amortizationPeriod"
-          formatter={currencyFormatter}
-          setState={setAmortization}
-          { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
-        />
-        <label htmlFor="termLength" className="form-label">
-          <span>Term Length (in years)</span>
-          <select
-            ref={termLengthSelectRef}
-            className="form-input"
-            defaultValue={calculator.term}
-            name="termLength"
-            onChange={(e) => setTerm(parseInt(e.target.value))}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </label>
-        <label htmlFor="paymentSchedule" className="form-label">
-          <span>Payment Schedule</span>
-          <select
-            ref={paymentScheduleSelectRef}
-            className="form-input"
-            defaultValue={calculator.paymentType}
-            name="paymentSchedule"
-            onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
-          >
-            <option value={WEEKLY}>Weekly</option>
-            <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
-            <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
-            <option value={MONTHLY}>Monthly</option>
-            <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
-            <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
-          </select>
-        </label>
+          <Input
+            key={`amount-${resetKey}`}
+            label="Mortgage Amount"
+            placeholder="Amount to be borrowed"
+            inputName="mortgageAmount"
+            formatter={currencyFormatter}
+            setState={setPrincipal}
+            icon={{name: 'icon-dollar-sign', placement: 'start'}}
+            { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
+          />
+          <Input
+            key={`interest-${resetKey}`}
+            label="Interest Rate"
+            placeholder="3.4"
+            inputName="interestRate"
+            setState={setRate}
+            icon={{name: 'icon-percent', placement: 'end'}}
+            { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
+          />
+          <Input
+            key={`amortization-${resetKey}`}
+            label="Amortization period"
+            placeholder="25"
+            inputName="amortizationPeriod"
+            formatter={currencyFormatter}
+            setState={setAmortization}
+            { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
+          />
+          <label htmlFor="termLength" className="form-label">
+            <span>Term Length (in years)</span>
+            <select
+              ref={termLengthSelectRef}
+              className="form-input"
+              defaultValue={calculator.term}
+              name="termLength"
+              onChange={(e) => setTerm(parseInt(e.target.value))}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <label htmlFor="paymentSchedule" className="form-label">
+            <span>Payment Schedule</span>
+            <select
+              ref={paymentScheduleSelectRef}
+              className="form-input"
+              defaultValue={calculator.paymentType}
+              name="paymentSchedule"
+              onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
+            >
+              <option value={WEEKLY}>Weekly</option>
+              <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
+              <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
+              <option value={MONTHLY}>Monthly</option>
+              <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
+              <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
+            </select>
+          </label>
+        </div>
 
         <PrepaymentInputs
           setPrepaymentAmount={setPrepaymentAmount}
