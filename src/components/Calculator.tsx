@@ -23,8 +23,9 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-  const termLengthSelectRef = useRef<HTMLSelectElement>(null);
-  const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null);
+  const termLengthSelectRef = useRef<HTMLSelectElement>(null)
+  const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null)
+  const prepaymentFrequencyRef = useRef<HTMLSelectElement>(null)
   const [resetKey, setResetKey] = useState<number>(0)
 
   function updateCalculators(inputs: CalculatorInputs) {
@@ -86,8 +87,11 @@ export default function Calculator({
     if (termLengthSelectRef.current) {
       termLengthSelectRef.current.value = "5"
     }
-      if (paymentScheduleSelectRef.current) {
+    if (paymentScheduleSelectRef.current) {
       paymentScheduleSelectRef.current.value = MONTHLY
+    }
+    if (prepaymentFrequencyRef.current) {
+      prepaymentFrequencyRef.current.value = ""
     }
   }
 
@@ -178,6 +182,8 @@ export default function Calculator({
         <PrepaymentInputs
           setPrepaymentAmount={setPrepaymentAmount}
           setPrepaymentFrequency={setPrepaymentFrequency}
+          prepaymentFrequencyRef={prepaymentFrequencyRef}
+          resetKey={resetKey}
         />
 
       </div>
