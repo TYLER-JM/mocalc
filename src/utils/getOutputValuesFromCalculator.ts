@@ -38,6 +38,7 @@ export default function getOutputValuesFromCalculator(calculator: CalculatorInpu
 		output.effectiveRate = toPercentage(effectiveRate, 4)
 		output.principal = accounting.formatMoney(calculator.principal)
 		output.principalRaw = calculator.principal
+		output.prepaymentOptions = calculator.prepaymentOptions
 
 		output.status = STATUS.complete
 	}

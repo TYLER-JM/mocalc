@@ -23,7 +23,8 @@ export default function getPaymentDetailsFromCalculator(calculator: CalculatorIn
 			schedule: calculator.paymentType,
 			scheduleRate,
 			monthlyPayment,
-			termLength: calculator.term
+			termLength: calculator.term,
+			prepaymentOptions: calculator.prepaymentOptions,
 		} satisfies PaymentDetails
 	}
 

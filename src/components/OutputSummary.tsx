@@ -10,6 +10,7 @@ interface OutputSummaryProps {
 export default function OutputSummary({
   output
 }: OutputSummaryProps) {
+
   return (
     <div className="output-summary">
       <div className="principal-wrapper">
@@ -25,9 +26,16 @@ export default function OutputSummary({
         <p>{output.paymentSchedule && convertToTitle(output.paymentSchedule)}</p>
       </div>
       <div className="payment-wrapper">
-        <p className="font-bold text-sm text-primary">your total payment will be</p>
+        <p className="font-bold text-sm text-primary">your Regular payment will be</p>
         <p className="summary-payment">{output.payment}</p>
       </div>
+      {
+        output.prepaymentOptions?.isValid() &&
+        <div className="prepayment-wrapper">
+          <p className="font-bold text-sm text-primary">your Prepayment is</p>
+          <p className="summary-payment">{output.prepaymentOptions?.formattedAmount()}</p>
+        </div>
+      }
     </div>
   )
 }

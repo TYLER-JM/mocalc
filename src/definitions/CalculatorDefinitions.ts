@@ -15,29 +15,21 @@ export class CalculatorInputs {
 }
 
 export class PrepaymentOptions {
-	valid: boolean = false;
 	frequency: PrepaymentFrequencyOptions | undefined;
 	amount: number | undefined;
 	constructor() {
-		this.valid = false;
 		this.frequency = undefined;
 		this.amount = undefined
 	}
 
 	isValid(): boolean {
-		return this.valid;
+		return (this.frequency !== undefined && this.frequency.length > 0) && this.amount !== undefined;
 	}
 
 	formattedAmount(): string {
 		return accounting.formatMoney(this.amount || 0)
 	}
 }
-
-// export interface PrepaymentOptionsInterface {
-// 	valid: boolean;
-// 	amount: number | undefined;
-// 	frequency: 'yearly' | 'once' | 'regular' | undefined;
-// }
 
 export interface InputIconOptions {
 	placement: 'start' | 'end',

@@ -7,6 +7,7 @@ import {
   OutputValuesStatus,
   PaymentSchedules
 } from "./StringTypes"
+import {PrepaymentOptions} from "./CalculatorDefinitions.ts";
 
 export interface OutputValues {
   status: OutputValuesStatus,
@@ -18,7 +19,8 @@ export interface OutputValues {
   monthlyRate?: string,
   amortizationPeriod?: number,
   monthlyPayment?: string,
-  payment?: string
+  payment?: string,
+  prepaymentOptions?: PrepaymentOptions
 }
 
 export interface PaymentDetails {
@@ -26,7 +28,8 @@ export interface PaymentDetails {
   scheduleRate: number,
   schedule: PaymentSchedules,
   monthlyPayment: number,
-  termLength: number
+  termLength: number,
+  prepaymentOptions: PrepaymentOptions
 }
 
 export interface ScheduledPayment {
