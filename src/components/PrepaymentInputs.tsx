@@ -1,4 +1,4 @@
-import {ONCE, PrepaymentFrequencyOptions, REGULAR, YEARLY} from "../definitions/StringTypes.ts";
+import {PrepaymentFrequencyOptions, REGULAR, YEARLY} from "../definitions/StringTypes.ts";
 import Input from "./Input.tsx";
 import {Ref, useState} from "react";
 import {currencyFormatter} from "../utils/helpers.ts";
@@ -40,9 +40,9 @@ export default function PrepaymentInputs({
 						className="form-input"
 						onChange={(e) => setPrepaymentFrequency(e.target.value as PrepaymentFrequencyOptions)}
 					>
-						<option value="" disabled>Select One...</option>
+						<option value="">None</option>
 						<option value={YEARLY}>Once a year</option>
-						<option value={ONCE}>One time</option>
+						{/*<option value={ONCE}>One time</option>*/}
 						<option value={REGULAR}>Same as regular payment</option>
 					</select>
 				</label>
