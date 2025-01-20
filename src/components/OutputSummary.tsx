@@ -28,31 +28,39 @@ export default function OutputSummary({
         <p>{output.paymentSchedule && convertToTitle(output.paymentSchedule)}</p>
       </div>
       <div className="payment-wrapper">
-        {(output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === REGULAR)
-          ?
-          <>
-            <p className="font-bold text-sm text-primary">your regular payment (including prepayment) will be</p>
-            <p className="summary-payment">
-              {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}
-            </p>
-          </>
-          :
+        {(output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === REGULAR) &&
           <>
             <p className="font-bold text-sm text-primary">your regular payment will be</p>
-            <p className="summary-payment">{output.payment}</p>
+            <p className="summary-payment mb-0">
+              {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}
+            </p>
+            <p className="text-xs text-dark m-0 italic">
+              this includes the <span className="font-bold">{output.prepaymentOptions.formattedAmount()}</span> prepayment
+            </p>
           </>
-      }
+        }
 
-    </div>
-{
-  (output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === YEARLY) &&
-        <div className="prepayment-wrapper">
-          <p className="font-bold text-sm text-primary">the last payment of every year will be</p>
-          <p className="summary-payment">
-            {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}
-          </p>
-        </div>
-      }
+        {(output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === YEARLY) &&
+          <>
+            <p className="font-bold text-sm text-primary">your regular payment will be</p>
+            <p className="summary-payment mb-0">
+              {output.payment}
+            </p>
+            <p className="text-xs text-dark m-0 italic">
+              the last payment of every year will be
+              <span className="font-bold"> {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}</span>
+            </p>
+          </>
+        }
+
+        {(!output.prepaymentOptions?.isValid()) &&
+          <>
+            <p className="font-bold text-sm text-primary">your regular payment will be</p>
+            <p className="summary-payment mb-0">{output.payment}</p>
+          </>
+        }
+      </div>
     </div>
   )
+
 }
