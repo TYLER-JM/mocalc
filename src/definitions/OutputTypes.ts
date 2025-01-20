@@ -82,9 +82,6 @@ export class MortgagePayment {
   }
 
   get endingBalance() {
-    if (this.prepaymentAmount) {
-      return this.startingBalance - (this.prepaymentAmount + this.principalPortion)
-    }
     return this.startingBalance - this.principalPortion
   }
 }
