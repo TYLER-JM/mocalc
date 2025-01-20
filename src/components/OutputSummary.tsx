@@ -28,18 +28,24 @@ export default function OutputSummary({
         <p>{output.paymentSchedule && convertToTitle(output.paymentSchedule)}</p>
       </div>
       <div className="payment-wrapper">
-        <p className="font-bold text-sm text-primary">your regular payment will be</p>
-        {
-          (output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === REGULAR)
-            ? <p className="summary-payment">
-                {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}
+        {(output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === REGULAR)
+          ?
+          <>
+            <p className="font-bold text-sm text-primary">your regular payment (including prepayment) will be</p>
+            <p className="summary-payment">
+              {accounting.formatMoney((output.prepaymentOptions.amount || 0) + (output.paymentRaw || 0))}
             </p>
-            : <p className="summary-payment">{output.payment}</p>
-        }
+          </>
+          :
+          <>
+            <p className="font-bold text-sm text-primary">your regular payment will be</p>
+            <p className="summary-payment">{output.payment}</p>
+          </>
+      }
 
-      </div>
-      {
-        (output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === YEARLY) &&
+    </div>
+{
+  (output.prepaymentOptions?.isValid() && output.prepaymentOptions?.frequency === YEARLY) &&
         <div className="prepayment-wrapper">
           <p className="font-bold text-sm text-primary">the last payment of every year will be</p>
           <p className="summary-payment">
