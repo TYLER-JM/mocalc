@@ -1,5 +1,5 @@
 import accounting from "accounting"
-import { PaymentSchedules } from "../definitions/StringTypes"
+import {ACCELERATED_BIWEEKLY, BIWEEKLY, PaymentSchedules, SEMIMONTHLY} from "../definitions/StringTypes"
 
 interface PaymentCalculationOptions {
   principal: number,
@@ -28,21 +28,22 @@ export function getMonthlyPayment(values: PaymentCalculationOptions) {
   return (values.rate * values.principal) / denominator
 }
 
-export function getPaymentByType(monthlyPayment: number, type: PaymentSchedules) {
+export function getPaymentByType(monthlyPayment: number, type: PaymentSchedules): number {
   let p;
   switch (type) {
-    case 'semimonthly':
-    case 'accelerated_biweekly':
-      p = accounting.formatMoney(monthlyPayment / 2, {precision: 2})
+    case SEMIMONTHLY :
+    case ACCELERATED_BIWEEKLY:
+      p = monthlyPayment / 2
       break;
-    case 'biweekly':
-      p = accounting.formatMoney((monthlyPayment * 12) / 26, {precision: 2})
+    case BIWEEKLY:
+      p = (monthlyPayment * 12) / 26
       break;
     case 'weekly':
       p = accounting.formatMoney((monthlyPayment * 12) / 52, {precision: 2})
+      p = (monthlyPayment * 12) / 52
       break;
     case 'accelerated_weekly':
-      p = accounting.formatMoney(monthlyPayment / 4, {precision: 2})
+      p = monthlyPayment / 4
       break;
     default:
       p = monthlyPayment

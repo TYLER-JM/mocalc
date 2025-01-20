@@ -7,6 +7,7 @@ import {
   OutputValuesStatus,
   PaymentSchedules
 } from "./StringTypes"
+import {PrepaymentOptions} from "./CalculatorDefinitions.ts";
 
 export interface OutputValues {
   status: OutputValuesStatus,
@@ -18,7 +19,9 @@ export interface OutputValues {
   monthlyRate?: string,
   amortizationPeriod?: number,
   monthlyPayment?: string,
-  payment?: string
+  payment?: string,
+  paymentRaw?: number,
+  prepaymentOptions?: PrepaymentOptions
 }
 
 export interface PaymentDetails {
@@ -26,7 +29,8 @@ export interface PaymentDetails {
   scheduleRate: number,
   schedule: PaymentSchedules,
   monthlyPayment: number,
-  termLength: number
+  termLength: number,
+  prepaymentOptions: PrepaymentOptions
 }
 
 export interface ScheduledPayment {
@@ -39,7 +43,8 @@ export class MortgagePayment {
     public startingBalance: number,
     public interestRate: number,
     public schedule: PaymentSchedules,
-    public monthlyPayment: number
+    public monthlyPayment: number,
+    public prepaymentAmount?: number
   ) {}
 
   get totalPayment(): number {
@@ -61,6 +66,9 @@ export class MortgagePayment {
       default:
         p = this.monthlyPayment
         break;
+    }
+    if (this.prepaymentAmount) {
+      return p + this.prepaymentAmount
     }
     return p
   }

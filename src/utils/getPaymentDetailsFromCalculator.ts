@@ -1,12 +1,9 @@
 import {PaymentDetails} from "../definitions/OutputTypes.ts";
-// import {useCalculators} from "../Root.tsx";
 import {getEffectiveRate, getMonthlyPayment, getRateByFrequency} from "./calculators.ts";
 import {paymentScheduleFrequencyMap} from "./helpers.ts";
 import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 
 export default function getPaymentDetailsFromCalculator(calculator: CalculatorInputs): PaymentDetails | undefined {
-	// const [calculators] = useCalculators()
-	// const calculator = calculators.find((calculator) => calculator.id === calculatorId);
 
 	if (calculator && calculator.amortization > 0 && (calculator.rate / 100 > 0)) {
 		const effectiveRate = getEffectiveRate(calculator.rate / 100)
@@ -26,7 +23,8 @@ export default function getPaymentDetailsFromCalculator(calculator: CalculatorIn
 			schedule: calculator.paymentType,
 			scheduleRate,
 			monthlyPayment,
-			termLength: calculator.term
+			termLength: calculator.term,
+			prepaymentOptions: calculator.prepaymentOptions,
 		} satisfies PaymentDetails
 	}
 
