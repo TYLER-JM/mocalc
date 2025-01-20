@@ -2,19 +2,22 @@ import {PrepaymentFrequencyOptions, REGULAR, YEARLY} from "../definitions/String
 import Input from "./Input.tsx";
 import {Ref, useState} from "react";
 import {currencyFormatter} from "../utils/helpers.ts";
+import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 
 interface PrepaymentInputProps {
 	setPrepaymentAmount: (amount: number) => void;
 	setPrepaymentFrequency: (frequency: PrepaymentFrequencyOptions) => void;
 	prepaymentFrequencyRef: Ref<HTMLSelectElement>;
-	resetKey: number
+	resetKey: number;
+	calculator: CalculatorInputs;
 }
 
 export default function PrepaymentInputs({
 	setPrepaymentAmount,
 	setPrepaymentFrequency,
 	prepaymentFrequencyRef,
-	resetKey
+	resetKey,
+	calculator
 }: PrepaymentInputProps) {
 	const [collapsed, setCollapsed] = useState<boolean>(true)
 	return (
@@ -31,11 +34,13 @@ export default function PrepaymentInputs({
 					icon={{name: 'icon-dollar-sign', placement: 'start'}}
 					placeholder="0"
 					setState={setPrepaymentAmount}
+					{ ...(calculator.prepaymentOptions.isValid() ? {defaultValue: calculator.prepaymentOptions.amount?.toString()} : {}) }
 				/>
 				<label htmlFor="prepaymentFrequency" className="form-label">
 					<span>Prepayment Frequency</span>
 					<select
 						ref={prepaymentFrequencyRef}
+						defaultValue={calculator.prepaymentOptions?.frequency}
 						name="prepaymentFrequency"
 						className="form-input"
 						onChange={(e) => setPrepaymentFrequency(e.target.value as PrepaymentFrequencyOptions)}

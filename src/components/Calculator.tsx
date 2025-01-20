@@ -184,6 +184,7 @@ export default function Calculator({
           setPrepaymentFrequency={setPrepaymentFrequency}
           prepaymentFrequencyRef={prepaymentFrequencyRef}
           resetKey={resetKey}
+          calculator={calculator}
         />
 
       </div>
