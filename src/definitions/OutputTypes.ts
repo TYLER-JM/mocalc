@@ -73,13 +73,6 @@ export class MortgagePayment {
     return p
   }
 
-  get paymentPlusPrepayment(): number {
-    if (this.prepaymentAmount) {
-      return this.prepaymentAmount + this.totalPayment
-    }
-    return this.totalPayment
-  }
-
   get interestPortion() {
     return this.interestRate * this.startingBalance
   }
