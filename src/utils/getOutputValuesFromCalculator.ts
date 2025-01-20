@@ -39,6 +39,7 @@ export default function getOutputValuesFromCalculator(calculator: CalculatorInpu
 		output.principal = accounting.formatMoney(calculator.principal)
 		output.principalRaw = calculator.principal
 		output.prepaymentOptions = calculator.prepaymentOptions
+		output.paymentRaw = customPayment
 
 		output.status = STATUS.complete
 	}

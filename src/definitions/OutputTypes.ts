@@ -20,6 +20,7 @@ export interface OutputValues {
   amortizationPeriod?: number,
   monthlyPayment?: string,
   payment?: string,
+  paymentRaw?: number,
   prepaymentOptions?: PrepaymentOptions
 }
 
@@ -42,7 +43,8 @@ export class MortgagePayment {
     public startingBalance: number,
     public interestRate: number,
     public schedule: PaymentSchedules,
-    public monthlyPayment: number
+    public monthlyPayment: number,
+    public prepaymentAmount?: number
   ) {}
 
   get totalPayment(): number {
@@ -65,7 +67,17 @@ export class MortgagePayment {
         p = this.monthlyPayment
         break;
     }
+    if (this.prepaymentAmount) {
+      return p + this.prepaymentAmount
+    }
     return p
+  }
+
+  get paymentPlusPrepayment(): number {
+    if (this.prepaymentAmount) {
+      return this.prepaymentAmount + this.totalPayment
+    }
+    return this.totalPayment
   }
 
   get interestPortion() {
@@ -77,6 +89,9 @@ export class MortgagePayment {
   }
 
   get endingBalance() {
+    if (this.prepaymentAmount) {
+      return this.startingBalance - (this.prepaymentAmount + this.principalPortion)
+    }
     return this.startingBalance - this.principalPortion
   }
 }
