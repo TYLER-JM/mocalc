@@ -13,6 +13,7 @@ import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefi
 import { currencyFormatter } from "../utils/helpers.ts";
 import { useRef, useState } from "react";
 import PrepaymentInputs from "./PrepaymentInputs.tsx";
+import { Button, Flex } from "@radix-ui/themes";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -100,21 +101,20 @@ export default function Calculator({
       <div className="calculator-inputs">
 
         <div className="calculator-inputs--group">
-          <div className="calculator-remove btn-group">
-            <button
-              className="btn"
-              onClick={
-                () => setCalculators(
-                  (prev) => prev.filter(
-                    calc => calc.id !== calculator.id
-                  )
+          <Flex pb="4" gap="2">
+            <Button
+              size="2"
+              variant="soft"
+              onClick={() => setCalculators(
+                (prev) => prev.filter(
+                  calc => calc.id !== calculator.id
                 )
-              }
+              )}
             >
               Remove
-            </button>
-            <button className="btn" onClick={resetCalculator}>Reset</button>
-          </div>
+            </Button>
+            <Button size="2" variant="soft" onClick={resetCalculator}>Reset</Button>
+          </Flex>
 
           <Input
             key={`amount-${resetKey}`}

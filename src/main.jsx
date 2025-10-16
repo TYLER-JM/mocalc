@@ -1,6 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import { Theme } from '@radix-ui/themes'
+
 import './main.css'
 import Root from './Root.tsx'
 import Help from './routes/help.tsx'
@@ -40,6 +43,13 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Theme
+      appearance="light"
+      accentColor="teal"
+      radius="medium"
+      scaling="100%"
+    >
+      <RouterProvider router={router} />
+    </Theme>
   </StrictMode>,
 )

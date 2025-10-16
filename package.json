@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/themes": "^3.2.1",
     "@types/accounting": "^0.4.5",
     "accounting": "^0.4.1",
     "react": "^18.3.1",

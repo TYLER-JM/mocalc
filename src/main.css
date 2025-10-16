@@ -1,9 +1,14 @@
+@import "@radix-ui/themes/styles.css";
+
+/*
+
 @layer composition, utility, components;
 @import "./styles/variables.css" layer(composition);
 @import "styles/composition.css" layer(composition);
 @import "./styles/utilities.css" layer(utility);
 @import "./styles/components.css" layer(components);
 
+*/
 
 @layer composition {
   body {
@@ -16,7 +21,6 @@
 
     color-scheme: light dark;
     background-color: #f7f7f7;
-    /*background: linear-gradient(192deg, #fff, #eaeaea);*/
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
