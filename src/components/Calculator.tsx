@@ -13,7 +13,7 @@ import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefi
 import { currencyFormatter } from "../utils/helpers.ts";
 import { useRef, useState } from "react";
 import PrepaymentInputs from "./PrepaymentInputs.tsx";
-import { Button, Flex } from "@radix-ui/themes";
+import { Button, Flex, Select, Text } from "@radix-ui/themes";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -24,10 +24,10 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-  const termLengthSelectRef = useRef<HTMLSelectElement>(null)
   const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null)
   const prepaymentFrequencyRef = useRef<HTMLSelectElement>(null)
   const [resetKey, setResetKey] = useState<number>(0)
+  const [termLength, setTermLength] = useState<string>(calculator.term.toString())
 
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
@@ -55,6 +55,7 @@ export default function Calculator({
     const updatedInputs = calculator
     updatedInputs.term = val
     updateCalculators(updatedInputs)
+    setTermLength(val.toString())
   }
   function setPaymentType(val: PaymentSchedules): void {
     const updatedInputs = calculator
@@ -83,11 +84,11 @@ export default function Calculator({
       amortization: 0,
       prepaymentOptions: new PrepaymentOptions()
     }
+
     updateCalculators(updatedInputs)
     setResetKey(prev => prev + 1)
-    if (termLengthSelectRef.current) {
-      termLengthSelectRef.current.value = "5"
-    }
+    setTermLength("5")
+
     if (paymentScheduleSelectRef.current) {
       paymentScheduleSelectRef.current.value = MONTHLY
     }
@@ -144,22 +145,26 @@ export default function Calculator({
             setState={setAmortization}
             { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
           />
-          <label htmlFor="termLength" className="form-label">
-            <span>Term Length (in years)</span>
-            <select
-              ref={termLengthSelectRef}
-              className="form-input"
-              defaultValue={calculator.term}
-              name="termLength"
-              onChange={(e) => setTerm(parseInt(e.target.value))}
+
+          <Flex width="100%" gap="1" direction="column">
+            <Text as="label">Term Length (in years)</Text>
+            <Select.Root
+              defaultValue={termLength}
+              value={termLength}
+              onValueChange={(val) => setTerm(parseInt(val))}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </label>
+              <Select.Trigger placeholder="Term Length" />
+
+              <Select.Content>
+                <Select.Item value="1">1</Select.Item>
+                <Select.Item value="2">2</Select.Item>
+                <Select.Item value="3">3</Select.Item>
+                <Select.Item value="4">4</Select.Item>
+                <Select.Item value="5">5</Select.Item>
+              </Select.Content>
+            </Select.Root>
+          </Flex>
+
           <label htmlFor="paymentSchedule" className="form-label">
             <span>Payment Schedule</span>
             <select

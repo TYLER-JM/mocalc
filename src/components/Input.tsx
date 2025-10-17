@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from "react"
 import { debounce } from "../utils/debounce"
 import {InputIconOptions} from "../definitions/CalculatorDefinitions.ts";
+import {TextField} from "@radix-ui/themes";
 
 interface InputProps {
   label: string,
@@ -69,22 +70,35 @@ export default function Input({
 
       <span>{label}</span>
       <div className="input-wrapper">
-        {icon &&
-          <div className={`icon-wrapper ${icon.placement}`}>
-            <svg className="input-icon">
-              <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>
-            </svg>
-          </div>
-        }
-        <input
-          className={`form-input ${icon?.placement}`}
-          type="text"
-          name={inputName}
-          placeholder={placeholder}
-          onChange={handleInputChange}
-          value={value}
-          aria-invalid={ariaInvalid}
-        />
+        {/*{icon &&*/}
+        {/*  <div className={`icon-wrapper ${icon.placement}`}>*/}
+        {/*    <svg className="input-icon">*/}
+        {/*      <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>*/}
+        {/*    </svg>*/}
+        {/*  </div>*/}
+        {/*}*/}
+
+        <TextField.Root placeholder={placeholder} onChange={handleInputChange} value={value} aria-invalid={ariaInvalid}>
+          <TextField.Slot>
+            {icon &&
+              <div className={`icon-wrapper ${icon.placement}`}>
+                <svg className="input-icon">
+                  <use xlinkHref={`img/sprite.svg#${icon.name}`}></use>
+                </svg>
+              </div>
+            }
+          </TextField.Slot>
+        </TextField.Root>
+
+        {/*<input*/}
+        {/*  className={`form-input ${icon?.placement}`}*/}
+        {/*  type="text"*/}
+        {/*  name={inputName}*/}
+        {/*  placeholder={placeholder}*/}
+        {/*  onChange={handleInputChange}*/}
+        {/*  value={value}*/}
+        {/*  aria-invalid={ariaInvalid}*/}
+        {/*/>*/}
       </div>
       <small className="input-feedback">{userFeedback}</small>
 
