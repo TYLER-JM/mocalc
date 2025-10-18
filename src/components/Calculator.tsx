@@ -24,10 +24,10 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-  const paymentScheduleSelectRef = useRef<HTMLSelectElement>(null)
   const prepaymentFrequencyRef = useRef<HTMLSelectElement>(null)
   const [resetKey, setResetKey] = useState<number>(0)
   const [termLength, setTermLength] = useState<string>(calculator.term.toString())
+  const [paymentSchedule, setPaymentSchedule] = useState<string>(calculator.paymentType as string)
 
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
@@ -61,6 +61,7 @@ export default function Calculator({
     const updatedInputs = calculator
     updatedInputs.paymentType = val
     updateCalculators(updatedInputs)
+    setPaymentSchedule(val)
   }
 
   function setPrepaymentAmount(val: number): void {
@@ -88,10 +89,8 @@ export default function Calculator({
     updateCalculators(updatedInputs)
     setResetKey(prev => prev + 1)
     setTermLength("5")
+    setPaymentSchedule(MONTHLY)
 
-    if (paymentScheduleSelectRef.current) {
-      paymentScheduleSelectRef.current.value = MONTHLY
-    }
     if (prepaymentFrequencyRef.current) {
       prepaymentFrequencyRef.current.value = ""
     }
@@ -102,6 +101,7 @@ export default function Calculator({
       <div className="calculator-inputs">
 
         <div className="calculator-inputs--group">
+
           <Flex pb="4" gap="2">
             <Button
               size="2"
@@ -154,7 +154,6 @@ export default function Calculator({
               onValueChange={(val) => setTerm(parseInt(val))}
             >
               <Select.Trigger placeholder="Term Length" />
-
               <Select.Content>
                 <Select.Item value="1">1</Select.Item>
                 <Select.Item value="2">2</Select.Item>
@@ -165,23 +164,25 @@ export default function Calculator({
             </Select.Root>
           </Flex>
 
-          <label htmlFor="paymentSchedule" className="form-label">
-            <span>Payment Schedule</span>
-            <select
-              ref={paymentScheduleSelectRef}
-              className="form-input"
-              defaultValue={calculator.paymentType}
-              name="paymentSchedule"
-              onChange={(e) => setPaymentType(e.target.value as PaymentSchedules)}
+          <Flex gap="1" direction="column">
+            <Text as="label">Payment Schedule</Text>
+            <Select.Root
+              defaultValue={paymentSchedule}
+              value={paymentSchedule}
+              onValueChange={(val) => setPaymentType(val as PaymentSchedules)}
             >
-              <option value={WEEKLY}>Weekly</option>
-              <option value={BIWEEKLY}>Bi-weekly (every 2-weeks)</option>
-              <option value={SEMIMONTHLY}>Semi-monthly (Twice a month)</option>
-              <option value={MONTHLY}>Monthly</option>
-              <option value={ACCELERATED_WEEKLY}>Accelerated weekly</option>
-              <option value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</option>
-            </select>
-          </label>
+              <Select.Trigger placeholder="Payment Schedule" />
+              <Select.Content>
+                <Select.Item value={WEEKLY}>Weekly</Select.Item>
+                <Select.Item value={BIWEEKLY}>Bi-weekly (every 2-weeks)</Select.Item>
+                <Select.Item value={SEMIMONTHLY}>Semi-monthly (Twice a month)</Select.Item>
+                <Select.Item value={MONTHLY}>Monthly</Select.Item>
+                <Select.Item value={ACCELERATED_WEEKLY}>Accelerated weekly</Select.Item>
+                <Select.Item value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</Select.Item>
+              </Select.Content>
+            </Select.Root>
+          </Flex>
+
         </div>
 
         <PrepaymentInputs
