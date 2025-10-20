@@ -11,9 +11,9 @@ import {
 } from "../definitions/StringTypes.ts";
 import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefinitions.ts";
 import { currencyFormatter } from "../utils/helpers.ts";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PrepaymentInputs from "./PrepaymentInputs.tsx";
-import { Button, Flex, Select, Text } from "@radix-ui/themes";
+import {Box, Button, Flex, Select, Text} from "@radix-ui/themes";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -24,10 +24,10 @@ export default function Calculator({
   setCalculators,
   calculator
 }: CalculatorProps) {
-  const prepaymentFrequencyRef = useRef<HTMLSelectElement>(null)
   const [resetKey, setResetKey] = useState<number>(0)
   const [termLength, setTermLength] = useState<string>(calculator.term.toString())
   const [paymentSchedule, setPaymentSchedule] = useState<string>(calculator.paymentType as string)
+  const [prepaymentFrequencyState, setPrepaymentFrequencyState] = useState<string | undefined>(calculator.prepaymentOptions.frequency as string)
 
   function updateCalculators(inputs: CalculatorInputs) {
     setCalculators((prev: CalculatorInputs[]): CalculatorInputs[] => {
@@ -73,6 +73,7 @@ export default function Calculator({
     const updatedInputs = calculator
     updatedInputs.prepaymentOptions.frequency = val
     updateCalculators(updatedInputs)
+    setPrepaymentFrequencyState(val)
   }
 
   function resetCalculator() {
@@ -90,17 +91,17 @@ export default function Calculator({
     setResetKey(prev => prev + 1)
     setTermLength("5")
     setPaymentSchedule(MONTHLY)
+    setPrepaymentFrequencyState("")
 
-    if (prepaymentFrequencyRef.current) {
-      prepaymentFrequencyRef.current.value = ""
-    }
   }
 
   return (
     <div className="calculator">
       <div className="calculator-inputs">
 
-        <div className="calculator-inputs--group">
+        {/*<div className="calculator-inputs--group">*/}
+
+        <Box py="2">
 
           <Flex pb="4" gap="2">
             <Button
@@ -183,12 +184,16 @@ export default function Calculator({
             </Select.Root>
           </Flex>
 
-        </div>
+        </Box>
+
+
+        {/*</div> */}
 
         <PrepaymentInputs
           setPrepaymentAmount={setPrepaymentAmount}
           setPrepaymentFrequency={setPrepaymentFrequency}
-          prepaymentFrequencyRef={prepaymentFrequencyRef}
+          prepaymentFrequencyState={prepaymentFrequencyState as PrepaymentFrequencyOptions}
+          // prepaymentFrequencyRef={prepaymentFrequencyRef}
           resetKey={resetKey}
           calculator={calculator}
         />
