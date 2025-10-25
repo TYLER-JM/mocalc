@@ -3,11 +3,11 @@
         padding-bottom: 2em;
     }
     .calculator-inputs {
-        max-width: 400px;
-        align-self: center;
-        display: flex;
-        flex-direction: column;
-        background-color: white;
+        /*max-width: 400px;*/
+        /*align-self: center;*/
+        /*display: flex;*/
+        /*flex-direction: column;*/
+        /*background-color: white;*/
         label {
             display: flex;
             flex-direction: column;
@@ -84,7 +84,6 @@
     }
     .prepayment-options--inputs.collapsed {
         max-height: 0;
-        padding: 0 1em;
         opacity: 0;
     }
 }

@@ -34,7 +34,7 @@ export default function PrepaymentInputs({
 
 			{/*<div className={`calculator-inputs--group prepayment-options--inputs ${collapsed ? 'collapsed' : ''}`}>*/}
 
-				<Box className={`prepayment-options--inputs ${collapsed ? 'collapsed' : ''}`}>
+				<Box py="2" className={`prepayment-options--inputs ${collapsed ? 'collapsed' : ''}`}>
 
 					<Input
 						key={`prepayment-amount-${resetKey}`}

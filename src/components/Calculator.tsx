@@ -13,7 +13,7 @@ import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefi
 import { currencyFormatter } from "../utils/helpers.ts";
 import { useState } from "react";
 import PrepaymentInputs from "./PrepaymentInputs.tsx";
-import {Box, Button, Flex, Select, Text} from "@radix-ui/themes";
+import {Button, Container, Flex, Select, Text} from "@radix-ui/themes";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -96,12 +96,12 @@ export default function Calculator({
   }
 
   return (
-    <div className="calculator">
+    <Container align="center">
+    {/*<div className="calculator">*/}
+
       <div className="calculator-inputs">
 
         {/*<div className="calculator-inputs--group">*/}
-
-        <Box py="2">
 
           <Flex pb="4" gap="2">
             <Button
@@ -184,9 +184,6 @@ export default function Calculator({
             </Select.Root>
           </Flex>
 
-        </Box>
-
-
         {/*</div> */}
 
         <PrepaymentInputs
@@ -204,6 +201,8 @@ export default function Calculator({
         calculator={calculator}
       />
 
-    </div>
+    {/*</div>*/}
+    </Container>
+
   )
 }
