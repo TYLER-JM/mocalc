@@ -2,6 +2,24 @@
     .calculator-remove {
         padding-bottom: 2em;
     }
+
+    .icon-wrapper {
+        display: flex;
+    }
+    .icon-wrapper.end {
+        justify-self: end;
+        margin-right: 0.25em;
+    }
+    .icon-wrapper.start {
+        justify-self: start;
+        margin-left: 0.25em;
+    }
+    .input-icon {
+        height: 1.25em;
+        width: 1.25em;
+    }
+
+    /* DEPRECATED, class is no longer used */
     .calculator-inputs {
         /*max-width: 400px;*/
         /*align-self: center;*/

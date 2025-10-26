@@ -13,7 +13,7 @@ import {CalculatorInputs, PrepaymentOptions} from "../definitions/CalculatorDefi
 import { currencyFormatter } from "../utils/helpers.ts";
 import { useState } from "react";
 import PrepaymentInputs from "./PrepaymentInputs.tsx";
-import {Button, Container, Flex, Select, Text} from "@radix-ui/themes";
+import {Box, Button, Card, Flex, Select, Text} from "@radix-ui/themes";
 
 interface CalculatorProps {
   setCalculators: (value: CalculatorInputs[] | ((prevValue: CalculatorInputs[]) => CalculatorInputs[])) => void
@@ -96,113 +96,121 @@ export default function Calculator({
   }
 
   return (
-    <Container align="center">
-    {/*<div className="calculator">*/}
+    <Box flexGrow="1">
+      <Card size="2">
+      {/*<div className="calculator">*/}
 
-      <div className="calculator-inputs">
+        {/*<div className="calculator-inputs">*/}
 
-        {/*<div className="calculator-inputs--group">*/}
+          {/*<div className="calculator-inputs--group">*/}
 
-          <Flex pb="4" gap="2">
-            <Button
-              size="2"
-              variant="soft"
-              onClick={() => setCalculators(
-                (prev) => prev.filter(
-                  calc => calc.id !== calculator.id
-                )
-              )}
-            >
-              Remove
-            </Button>
-            <Button size="2" variant="soft" onClick={resetCalculator}>Reset</Button>
-          </Flex>
+            <Flex pb="4" gap="2">
+              <Button
+                size="2"
+                variant="soft"
+                onClick={() => setCalculators(
+                  (prev) => prev.filter(
+                    calc => calc.id !== calculator.id
+                  )
+                )}
+              >
+                Remove
+              </Button>
+              <Button size="2" variant="soft" onClick={resetCalculator}>Reset</Button>
+            </Flex>
 
-          <Input
-            key={`amount-${resetKey}`}
-            label="Mortgage Amount"
-            placeholder="Amount to be borrowed"
-            inputName="mortgageAmount"
-            formatter={currencyFormatter}
-            setState={setPrincipal}
-            icon={{name: 'icon-dollar-sign', placement: 'start'}}
-            { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
-          />
-          <Input
-            key={`interest-${resetKey}`}
-            label="Interest Rate"
-            placeholder="3.4"
-            inputName="interestRate"
-            setState={setRate}
-            icon={{name: 'icon-percent', placement: 'end'}}
-            { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
-          />
-          <Input
-            key={`amortization-${resetKey}`}
-            label="Amortization period"
-            placeholder="25"
-            inputName="amortizationPeriod"
-            formatter={currencyFormatter}
-            setState={setAmortization}
-            { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
-          />
+            <Flex direction="column" minWidth="50%"> {/* new wrapper for inputs only */}
 
-          <Flex width="100%" gap="1" direction="column">
-            <Text as="label">Term Length (in years)</Text>
-            <Select.Root
-              defaultValue={termLength}
-              value={termLength}
-              onValueChange={(val) => setTerm(parseInt(val))}
-            >
-              <Select.Trigger placeholder="Term Length" />
-              <Select.Content>
-                <Select.Item value="1">1</Select.Item>
-                <Select.Item value="2">2</Select.Item>
-                <Select.Item value="3">3</Select.Item>
-                <Select.Item value="4">4</Select.Item>
-                <Select.Item value="5">5</Select.Item>
-              </Select.Content>
-            </Select.Root>
-          </Flex>
+              <Input
+                key={`amount-${resetKey}`}
+                label="Mortgage Amount"
+                placeholder="Amount to be borrowed"
+                inputName="mortgageAmount"
+                formatter={currencyFormatter}
+                setState={setPrincipal}
+                icon={{name: 'icon-dollar-sign', placement: 'start'}}
+                { ...(calculator.principal === 0 ? {} : {defaultValue: calculator.principal.toString()}) }
+              />
+              <Input
+                key={`interest-${resetKey}`}
+                label="Interest Rate"
+                placeholder="3.4"
+                inputName="interestRate"
+                setState={setRate}
+                icon={{name: 'icon-percent', placement: 'end'}}
+                { ...(calculator.rate === 0 ? {} : {defaultValue: calculator.rate.toString()}) }
+              />
+              <Input
+                key={`amortization-${resetKey}`}
+                label="Amortization period"
+                placeholder="25"
+                inputName="amortizationPeriod"
+                formatter={currencyFormatter}
+                setState={setAmortization}
+                { ...(calculator.amortization === 0 ? {} : {defaultValue: calculator.amortization.toString()}) }
+              />
 
-          <Flex gap="1" direction="column">
-            <Text as="label">Payment Schedule</Text>
-            <Select.Root
-              defaultValue={paymentSchedule}
-              value={paymentSchedule}
-              onValueChange={(val) => setPaymentType(val as PaymentSchedules)}
-            >
-              <Select.Trigger placeholder="Payment Schedule" />
-              <Select.Content>
-                <Select.Item value={WEEKLY}>Weekly</Select.Item>
-                <Select.Item value={BIWEEKLY}>Bi-weekly (every 2-weeks)</Select.Item>
-                <Select.Item value={SEMIMONTHLY}>Semi-monthly (Twice a month)</Select.Item>
-                <Select.Item value={MONTHLY}>Monthly</Select.Item>
-                <Select.Item value={ACCELERATED_WEEKLY}>Accelerated weekly</Select.Item>
-                <Select.Item value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</Select.Item>
-              </Select.Content>
-            </Select.Root>
-          </Flex>
+              <Flex width="100%" gap="1" direction="column">
+                <Text as="label">Term Length (in years)</Text>
+                <Select.Root
+                  defaultValue={termLength}
+                  value={termLength}
+                  onValueChange={(val) => setTerm(parseInt(val))}
+                >
+                  <Select.Trigger placeholder="Term Length" />
+                  <Select.Content>
+                    <Select.Item value="1">1</Select.Item>
+                    <Select.Item value="2">2</Select.Item>
+                    <Select.Item value="3">3</Select.Item>
+                    <Select.Item value="4">4</Select.Item>
+                    <Select.Item value="5">5</Select.Item>
+                  </Select.Content>
+                </Select.Root>
+              </Flex>
 
-        {/*</div> */}
+              <Flex gap="1" direction="column">
+                <Text as="label">Payment Schedule</Text>
+                <Select.Root
+                  defaultValue={paymentSchedule}
+                  value={paymentSchedule}
+                  onValueChange={(val) => setPaymentType(val as PaymentSchedules)}
+                >
+                  <Select.Trigger placeholder="Payment Schedule" />
+                  <Select.Content>
+                    <Select.Item value={WEEKLY}>Weekly</Select.Item>
+                    <Select.Item value={BIWEEKLY}>Bi-weekly (every 2-weeks)</Select.Item>
+                    <Select.Item value={SEMIMONTHLY}>Semi-monthly (Twice a month)</Select.Item>
+                    <Select.Item value={MONTHLY}>Monthly</Select.Item>
+                    <Select.Item value={ACCELERATED_WEEKLY}>Accelerated weekly</Select.Item>
+                    <Select.Item value={ACCELERATED_BIWEEKLY}>Accelerated Bi-weekly</Select.Item>
+                  </Select.Content>
+                </Select.Root>
+              </Flex>
 
-        <PrepaymentInputs
-          setPrepaymentAmount={setPrepaymentAmount}
-          setPrepaymentFrequency={setPrepaymentFrequency}
-          prepaymentFrequencyState={prepaymentFrequencyState as PrepaymentFrequencyOptions}
-          // prepaymentFrequencyRef={prepaymentFrequencyRef}
-          resetKey={resetKey}
+              {/*</div> */}
+
+            </Flex>  {/* new wrapper for all inputs */}
+
+            <Box my="4">
+              <PrepaymentInputs
+                setPrepaymentAmount={setPrepaymentAmount}
+                setPrepaymentFrequency={setPrepaymentFrequency}
+                prepaymentFrequencyState={prepaymentFrequencyState as PrepaymentFrequencyOptions}
+                // prepaymentFrequencyRef={prepaymentFrequencyRef}
+                resetKey={resetKey}
+                calculator={calculator}
+              />
+            </Box>
+
+        {/*</div>*/}
+
+        <Output
           calculator={calculator}
         />
 
-      </div>
-
-      <Output
-        calculator={calculator}
-      />
-
-    {/*</div>*/}
-    </Container>
+      {/*</div>*/}
+      </Card>
+    </Box>
 
   )
 }

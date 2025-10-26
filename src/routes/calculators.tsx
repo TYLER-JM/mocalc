@@ -3,7 +3,7 @@ import {useCalculators} from "../Root.tsx";
 import useAddCalculator from "../hooks/useAddCalculator.tsx";
 import '../styles/calculators.css';
 import '../styles/calculator-inputs.css';
-import {Flex, Section} from "@radix-ui/themes";
+import {Container, Flex, Section} from "@radix-ui/themes";
 
 
 export default function Calculators() {
@@ -22,11 +22,13 @@ export default function Calculators() {
 
 			{/*<section className="calculator-wrapper">*/}
 			<Section>
-				<Flex wrap="wrap" gap="6" mx="8" justify="center">
-					{calculators.map((calculator) =>
-						<Calculator key={calculator.id} calculator={calculator} setCalculators={setCalculators} />
-					)}
-				</Flex>
+				<Container>
+					<Flex wrap="wrap" gap="6" mx="8" justify="center">
+						{calculators.map((calculator) =>
+							<Calculator key={calculator.id} calculator={calculator} setCalculators={setCalculators} />
+						)}
+					</Flex>
+				</Container>
 			</Section>
 			{/*</section>*/}
 		</>
