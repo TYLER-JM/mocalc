@@ -7,6 +7,8 @@ import getPaymentDetailsFromCalculator from "../utils/getPaymentDetailsFromCalcu
 import {CalculatorInputs} from "../definitions/CalculatorDefinitions.ts";
 import '../styles/output.css'
 
+import {Text} from '@radix-ui/themes'
+
 interface OutputProps {
   calculator: CalculatorInputs
 }
@@ -20,7 +22,7 @@ export default function Output({
   return (
     <div className="calculator-outputs">
       {output.status === STATUS.incomplete &&
-        <p className="output-waiting">waiting...</p>
+        <Text className="output-waiting" my="2">waiting...</Text>
       }
       {output.status === STATUS.complete && 
         <OutputSummary output={output}/>

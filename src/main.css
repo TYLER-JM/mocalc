@@ -10,6 +10,8 @@
 
 */
 
+@import "./styles/variables.css" layer(composition);
+
 @layer composition {
   body {
     margin: 0;

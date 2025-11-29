@@ -96,7 +96,7 @@ export default function Calculator({
   }
 
   return (
-    <Box flexGrow="1">
+    <Box>
       <Card size="2">
       {/*<div className="calculator">*/}
 
@@ -191,7 +191,7 @@ export default function Calculator({
 
             </Flex>  {/* new wrapper for all inputs */}
 
-            <Box my="4">
+            <Box mt="4">
               <PrepaymentInputs
                 setPrepaymentAmount={setPrepaymentAmount}
                 setPrepaymentFrequency={setPrepaymentFrequency}
