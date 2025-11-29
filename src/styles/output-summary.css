@@ -3,8 +3,7 @@
   grid-template-areas: 
     "principal rate schedule"
     "payment payment payment";
-
-  border-radius: 4px;
+  
   background-color: white;
   margin-bottom: 2em;
 }
